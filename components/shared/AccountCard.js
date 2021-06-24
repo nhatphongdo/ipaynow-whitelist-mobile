@@ -1,78 +1,78 @@
-import React from "react";
-import { Image } from "react-native";
-import { connect } from "react-redux";
-import { connectStyle, View } from "native-base";
-import Modal from "react-native-modal";
-import QRCode from "react-native-qrcode-svg";
-import ThemeService from "../../services/ThemeService";
-import StyledText from "./StyledText";
-import { translate } from "../../constants/Languages";
-import { formatCurrency, formatTimeTo, formatUserId } from "../../common/helper";
-import Button from "./Button";
-import { getWalletInfo } from "../../stores/wallet/actions";
-import Blockie from "./Blockie";
-import { getRewardInfo } from "../../stores/rewards/actions";
-import { convertRateSync } from "../../stores/rates/actions";
-import { SUPPORTED_CURRENCIES, HDN, ETH, REWARD } from "../../stores/rates/constants";
-import Eye from "../../assets/images/Eye";
-import NoEye from "../../assets/images/NoEye";
-import { setSetting } from "../../stores/settings/actions";
+import React from 'react'
+import { Image } from 'react-native'
+import { connect } from 'react-redux'
+import { connectStyle, View } from 'native-base'
+import Modal from 'react-native-modal'
+import QRCode from 'react-native-qrcode-svg'
+import ThemeService from '../../services/ThemeService'
+import StyledText from './StyledText'
+import { translate } from '../../constants/Languages'
+import { formatCurrency, formatTimeTo, formatUserId } from '../../common/helper'
+import Button from './Button'
+import { getWalletInfo } from '../../stores/wallet/actions'
+import Blockie from './Blockie'
+import { getRewardInfo } from '../../stores/rewards/actions'
+import { convertRateSync } from '../../stores/rates/actions'
+import { SUPPORTED_CURRENCIES, HDN, ETH, REWARD } from '../../stores/rates/constants'
+import Eye from '../../assets/images/Eye'
+import NoEye from '../../assets/images/NoEye'
+import { setSetting } from '../../stores/settings/actions'
 
 class AccountCard extends React.Component {
-  _isMounted = false;
+  _isMounted = false
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      qrShowing: false
-    };
+      qrShowing: false,
+    }
   }
 
   componentDidMount() {
-    this._isMounted = true;
-    setTimeout(this._bootstrap, 100);
+    this._isMounted = true
+    setTimeout(this._bootstrap, 100)
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
+    this._isMounted = false
   }
 
   _bootstrap = async () => {
     if (!this._isMounted) {
-      return;
+      return
     }
 
     // Load crypto balance
-    await this.props.getWalletInfo();
+    await this.props.getWalletInfo()
 
     // Load reward info
-    await this.props.getRewardInfo();
-  };
+    await this.props.getRewardInfo()
+  }
 
   toggleVisible = async () => {
     await this.props.setSetting({
-      visibleWallet: !this.props.settings.visibleWallet
-    });
-  };
+      visibleWallet: !this.props.settings.visibleWallet,
+    })
+  }
 
   render() {
-    const { small, hideToken, hideReward, hideWallet } = this.props;
-    const styles = this.props.style;
-    const Background = View; //ThemeService.getThemeStyle().variables.primaryBackground;
-    const IdIcon = ThemeService.getThemeStyle().variables.idIcon;
-    const LockIcon = ThemeService.getThemeStyle().variables.lockIcon;
-    const TimerIcon = ThemeService.getThemeStyle().variables.timerIcon;
-    const ScanQrIcon = ThemeService.getThemeStyle().variables.scanQrIcon;
-    const QrBox = ThemeService.getThemeStyle().variables.qrBox;
-    const QrLabel = ThemeService.getThemeStyle().variables.qrLabel;
+    const { small, hideToken, hideReward, hideWallet } = this.props
+    const styles = this.props.style
+    const Background = View //ThemeService.getThemeStyle().variables.primaryBackground;
+    const IdIcon = ThemeService.getThemeStyle().variables.idIcon
+    const LockIcon = ThemeService.getThemeStyle().variables.lockIcon
+    const TimerIcon = ThemeService.getThemeStyle().variables.timerIcon
+    const ScanQrIcon = ThemeService.getThemeStyle().variables.scanQrIcon
+    const QrBox = ThemeService.getThemeStyle().variables.qrBox
+    const QrLabel = ThemeService.getThemeStyle().variables.qrLabel
 
-    const token = HDN;
-    const tokenBalance = this.props.wallet.tokenBalance;
+    const token = HDN
+    const tokenBalance = this.props.wallet.tokenBalance
 
     const shadow =
-      ThemeService.getThemeStyle().name === "colorful-dark" || ThemeService.getThemeStyle().name === "simple-dark"
-        ? require("../../assets/images/shadow-light.png")
-        : require("../../assets/images/shadow.png");
+      ThemeService.getThemeStyle().name === 'colorful-dark' || ThemeService.getThemeStyle().name === 'simple-dark'
+        ? require('../../assets/images/shadow-light.png')
+        : require('../../assets/images/shadow.png')
 
     return (
       <View style={styles.container}>
@@ -81,7 +81,7 @@ class AccountCard extends React.Component {
           <View style={styles.left}>
             {!hideToken && (
               <View style={styles.row}>
-                <StyledText style={styles.label}>{translate("Wallet")}</StyledText>
+                <StyledText style={styles.label}>{translate('Wallet')}</StyledText>
                 <Button smallSpaceLeft style={styles.eye} onPress={this.toggleVisible}>
                   {this.props.settings.visibleWallet && <NoEye />}
                   {!this.props.settings.visibleWallet && <Eye />}
@@ -89,9 +89,9 @@ class AccountCard extends React.Component {
               </View>
             )}
             {!hideToken && (
-              <StyledText h3 bold="medium" style={styles.value} adjustsFontSizeToFit numberOfLines={1}>
+              <StyledText h3 bold='medium' style={styles.value} adjustsFontSizeToFit numberOfLines={1}>
                 {!this.props.settings.visibleWallet
-                  ? "❉ ❉ ❉ ❉ ❉ ❉"
+                  ? '❉ ❉ ❉ ❉ ❉ ❉'
                   : formatCurrency(
                       convertRateSync(this.props.rates.rates, token, this.props.settings.currency, tokenBalance),
                       this.props.settings.culture,
@@ -108,23 +108,23 @@ class AccountCard extends React.Component {
             )}
             {!hideReward && (
               <StyledText smallSpaceTop style={styles.label}>
-                {translate("Reward")}
+                {translate('Reward')}
               </StyledText>
             )}
             {!hideReward && (
-              <StyledText h3 bold="medium" style={styles.value} adjustsFontSizeToFit numberOfLines={1}>
+              <StyledText h3 bold='medium' style={styles.value} adjustsFontSizeToFit numberOfLines={1}>
                 {formatCurrency(this.props.reward.balance, this.props.settings.culture, REWARD, false, false)}
               </StyledText>
             )}
             {!hideWallet && (
               <StyledText smallSpaceTop style={styles.label}>
-                {translate("Gas Fee")}
+                {translate('Gas Fee')}
               </StyledText>
             )}
             {!hideWallet && (
-              <StyledText h3 bold="medium" style={styles.value} adjustsFontSizeToFit numberOfLines={1}>
+              <StyledText h3 bold='medium' style={styles.value} adjustsFontSizeToFit numberOfLines={1}>
                 {!this.props.settings.visibleWallet
-                  ? "❉ ❉ ❉ ❉ ❉ ❉"
+                  ? '❉ ❉ ❉ ❉ ❉ ❉'
                   : formatCurrency(
                       convertRateSync(this.props.rates.rates, ETH, this.props.settings.currency, this.props.wallet.ethBalance),
                       this.props.settings.culture,
@@ -167,8 +167,8 @@ class AccountCard extends React.Component {
             {this.props.account.membership && (
               <View style={styles.membership}>
                 <StyledText adjustsFontSizeToFit numberOfLines={1}>{`<color ${ThemeService.getThemeStyle().variables.membershipLabel}><b>${translate(
-                  "Member"
-                )}: </b></color> <color ${"#fff"}><strong>${this.props.account.membership}</strong></color>`}</StyledText>
+                  'Member'
+                )}: </b></color> <color ${'#fff'}><strong>${this.props.account.membership}</strong></color>`}</StyledText>
               </View>
             )}
             <StyledText
@@ -189,8 +189,8 @@ class AccountCard extends React.Component {
         )}
         <Modal
           isVisible={this.state.qrShowing}
-          animationIn="bounceIn"
-          animationOut="bounceOut"
+          animationIn='bounceIn'
+          animationOut='bounceOut'
           animationInTiming={600}
           animationOutTiming={600}
           backdropTransitionInTiming={600}
@@ -210,78 +210,78 @@ class AccountCard extends React.Component {
             <View style={styles.qrLabel}>
               <QrLabel />
               <StyledText h4 white style={[styles.absolute, styles.qrLabelText]}>
-                {translate("Scan me")}
+                {translate('Scan me')}
               </StyledText>
             </View>
             <StyledText success spaceTop h4>
-              {`${translate("My referral ID")}: <strong>${formatUserId(this.props.account.accountNumber)}</strong>`}
+              {`${translate('My referral ID')}: <strong>${formatUserId(this.props.account.accountNumber)}</strong>`}
             </StyledText>
           </View>
         </Modal>
       </View>
-    );
+    )
   }
 }
 
 const styles = {
   shadow: {
     flex: 1,
-    resizeMode: "contain",
-    position: "absolute",
-    zIndex: 0
+    resizeMode: 'contain',
+    position: 'absolute',
+    zIndex: 0,
   },
   container: {
     flex: 0,
-    overflow: "hidden"
+    overflow: 'hidden',
   },
   left: {
     flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "flex-start"
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
   },
   right: {
     flex: 1,
-    alignItems: "flex-end",
-    justifyContent: "flex-start"
+    alignItems: 'flex-end',
+    justifyContent: 'flex-start',
   },
   row: {
-    flexDirection: "row",
-    alignItems: "center"
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   center: {
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   absolute: {
-    position: "absolute"
+    position: 'absolute',
   },
   qrBox: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#fff",
-    padding: 20
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    padding: 20,
   },
   qrLabel: {
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   qrLabelText: {
     top: 15,
-    lineHeight: 40
-  }
-};
+    lineHeight: 40,
+  },
+}
 
-const mapStateToProps = state => {
-  const { settings, wallet, reward, account, rates } = state;
-  return { settings, wallet, reward, account, rates };
-};
+const mapStateToProps = (state) => {
+  const { settings, wallet, reward, account, rates } = state
+  return { settings, wallet, reward, account, rates }
+}
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getWalletInfo: () => dispatch(getWalletInfo()),
     getRewardInfo: () => dispatch(getRewardInfo()),
-    setSetting: settings => dispatch(setSetting(settings))
-  };
-};
+    setSetting: (settings) => dispatch(setSetting(settings)),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(connectStyle("iPayNow.AccountCard", styles)(AccountCard));
+export default connect(mapStateToProps, mapDispatchToProps)(connectStyle('iPayNow.AccountCard', styles)(AccountCard))

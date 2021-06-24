@@ -1,57 +1,57 @@
-import React from "react";
-import { Image } from "react-native";
-import { connect } from "react-redux";
-import { connectStyle, Container, Content, View, Spinner } from "native-base";
-import ThemeService from "../../services/ThemeService";
-import { translate } from "../../constants/Languages";
-import Screen from "../shared/Screen";
-import Button from "../shared/Button";
-import StyledText from "../shared/StyledText";
-import { createCryptoWallet } from "../../stores/wallet/actions";
-import DropdownAlertService from "../../services/DropdownAlertService";
+import React from 'react'
+import { Image } from 'react-native'
+import { connect } from 'react-redux'
+import { connectStyle, Container, Content, View, Spinner } from 'native-base'
+import ThemeService from '../../services/ThemeService'
+import { translate } from '../../constants/Languages'
+import Screen from '../shared/Screen'
+import Button from '../shared/Button'
+import StyledText from '../shared/StyledText'
+import { createCryptoWallet } from '../../stores/wallet/actions'
+import DropdownAlertService from '../../services/DropdownAlertService'
 
 class CreateWalletScreen extends React.Component {
   state = {
-    verifying: this.props.navigation.getParam("verifying", false),
+    verifying: this.props.route.params?.verifying || false,
     creating: true,
-    words: Array(12).fill("")
-  };
+    words: Array(12).fill(''),
+  }
 
   componentDidMount() {
-    setTimeout(this._bootstrap, 100);
+    setTimeout(this._bootstrap, 100)
   }
 
   _bootstrap = async () => {
     if (this.state.verifying) {
-      const words = this.props.wallet.cryptoMnemonic.split(" ");
-      this.setState({ creating: false, words: words });
+      const words = this.props.wallet.cryptoMnemonic.split(' ')
+      this.setState({ creating: false, words: words })
     } else {
-      const wallet = await this.props.createCryptoWallet();
+      const wallet = await this.props.createCryptoWallet()
       if (wallet === null) {
         DropdownAlertService.show(
           DropdownAlertService.ERROR,
-          translate("Error"),
-          translate("Cannot create crypto wallet right now Please try again after a moment")
-        );
-        this.props.navigation.goBack();
-        return;
+          translate('Error'),
+          translate('Cannot create crypto wallet right now Please try again after a moment')
+        )
+        this.props.navigation.goBack()
+        return
       }
-      this.setState({ creating: false, words: wallet.mnemonic.split(" ") });
+      this.setState({ creating: false, words: wallet.mnemonic.split(' ') })
     }
-  };
+  }
 
   onConfirm = () => {
     if (this.state.verifying) {
-      this.props.navigation.navigate("ConfirmVerifyWallet", {
-        verifying: true
-      });
+      this.props.navigation.navigate('ConfirmVerifyWallet', {
+        verifying: true,
+      })
     } else {
-      this.props.navigation.navigate("ConfirmWallet");
+      this.props.navigation.navigate('ConfirmWallet')
     }
-  };
+  }
 
   render() {
-    const styles = this.props.style;
+    const styles = this.props.style
 
     return (
       <Screen disableTopBackground disableHeader>
@@ -75,44 +75,44 @@ class CreateWalletScreen extends React.Component {
             )}
             {!this.state.creating && (
               <Button primary full veryLargeSpaceTop onPress={this.onConfirm}>
-                {translate("NEXT")}
+                {translate('NEXT')}
               </Button>
             )}
           </Content>
         </Container>
       </Screen>
-    );
+    )
   }
 }
 
 const styles = {
   container: {
-    flex: 1
+    flex: 1,
   },
   contentContainer: {
     flex: 0,
-    alignItems: "center"
+    alignItems: 'center',
   },
   logo: {
-    resizeMode: "contain"
+    resizeMode: 'contain',
   },
   list: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-};
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+}
 
-const mapStateToProps = state => {
-  const { wallet } = state;
-  return { wallet };
-};
+const mapStateToProps = (state) => {
+  const { wallet } = state
+  return { wallet }
+}
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    createCryptoWallet: options => dispatch(createCryptoWallet(options))
-  };
-};
+    createCryptoWallet: (options) => dispatch(createCryptoWallet(options)),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(connectStyle("iPayNow.CreateWallet", styles)(CreateWalletScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(connectStyle('iPayNow.CreateWallet', styles)(CreateWalletScreen))

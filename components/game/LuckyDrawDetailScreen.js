@@ -32,7 +32,7 @@ class LuckyDrawDetailScreen extends React.Component {
 
   _bootstrapAsync = async () => {
     // Get game
-    const game = await this.props.getGame(this.props.navigation.getParam('id', 0))
+    const game = await this.props.getGame(this.props.route.params?.id || 0)
     this.setState({ game })
     if (game.state === FINISHED || (game.result && game.result.winningNumber)) {
       this.props.navigation.goBack()
@@ -45,7 +45,7 @@ class LuckyDrawDetailScreen extends React.Component {
       })
       return
     }
-    const luckyNumbers = await this.props.getLuckyNumbers(this.props.navigation.getParam('id', 0))
+    const luckyNumbers = await this.props.getLuckyNumbers(this.props.route.params?.id || 0)
     if (luckyNumbers.error) {
       DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate(luckyNumbers.error))
     } else {

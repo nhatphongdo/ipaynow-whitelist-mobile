@@ -1,17 +1,17 @@
-import React from "react";
-import { Platform } from "react-native";
-import { connectStyle, View, Thumbnail } from "native-base";
-import ThemeService from "../../services/ThemeService";
-import StyledText from "./StyledText";
-import Button from "./Button";
-import { translate } from "../../constants/Languages";
-import Blockie from "./Blockie";
-import BoxShadow from "./BoxShadow";
+import React from 'react'
+import { Platform } from 'react-native'
+import { connectStyle, View, Thumbnail } from 'native-base'
+import ThemeService from '../../services/ThemeService'
+import StyledText from './StyledText'
+import Button from './Button'
+import { translate } from '../../constants/Languages'
+import Blockie from './Blockie'
+import BoxShadow from './BoxShadow'
 
 class ListItem extends React.Component {
   static DefaultFloatBar(item, buttonCallback) {
-    const Hexagon = ThemeService.getThemeStyle().variables.hexagon;
-    const StarIcon = ThemeService.getThemeStyle().variables.starIcon;
+    const Hexagon = ThemeService.getThemeStyle().variables.hexagon
+    const StarIcon = ThemeService.getThemeStyle().variables.starIcon
 
     return (
       <View row>
@@ -24,12 +24,12 @@ class ListItem extends React.Component {
               height: 36,
               minHeight: 36,
               borderRadius: 18,
-              backgroundColor: "#fff",
-              alignSelf: "center"
+              backgroundColor: '#fff',
+              alignSelf: 'center',
             }}
             onPress={() => buttonCallback && buttonCallback(0, item)}
           >
-            <StarIcon width={24} fill={item.featured ? "url(#prefix__a)" : "none"} />
+            <StarIcon width={24} fill={item.featured ? 'url(#prefix__a)' : 'none'} />
           </Button>
         )}
         <Button
@@ -37,7 +37,7 @@ class ListItem extends React.Component {
           small
           // shadow={Platform.OS === "ios"}
           style={{
-            alignSelf: "center"
+            alignSelf: 'center',
           }}
           onPress={() => buttonCallback && buttonCallback(0, item)}
         >
@@ -51,27 +51,27 @@ class ListItem extends React.Component {
             //   fontFamily: ThemeService.getThemeStyle().variables.fontFamilyBold
             // }}
           >
-            {translate("BUY")}
+            {translate('BUY')}
           </StyledText>
         </Button>
       </View>
-    );
+    )
   }
 
   state = {
     width: null,
-    height: null
-  };
+    height: null,
+  }
 
   onLayout(event) {
     if (this.state.width && this.state.height) {
-      return;
+      return
     }
 
     this.setState({
       width: event.nativeEvent.layout.width,
-      height: event.nativeEvent.layout.height
-    });
+      height: event.nativeEvent.layout.height,
+    })
   }
 
   render() {
@@ -96,30 +96,30 @@ class ListItem extends React.Component {
       subText,
       number,
       star,
-      floatBar
-    } = this.props;
-    const styles = this.props.style;
-    const Hexagon = ThemeService.getThemeStyle().variables.hexagon;
-    const StarIcon = ThemeService.getThemeStyle().variables.starIcon;
+      floatBar,
+    } = this.props
+    const styles = this.props.style
+    const Hexagon = ThemeService.getThemeStyle().variables.hexagon
+    const StarIcon = ThemeService.getThemeStyle().variables.starIcon
     let shadowOpt = {
       width: this.state.width,
       height: this.state.height,
-      color: ThemeService.getThemeStyle()["NativeBase.ViewNB"][".shadow"].shadowColor,
-      border: ThemeService.getThemeStyle()["NativeBase.ViewNB"][".shadow"].shadowRadius,
+      color: ThemeService.getThemeStyle()['NativeBase.ViewNB']['.shadow'].shadowColor,
+      border: ThemeService.getThemeStyle()['NativeBase.ViewNB']['.shadow'].shadowRadius,
       opacity: 0.2,
-      x: ThemeService.getThemeStyle()["NativeBase.ViewNB"][".shadow"].shadowOffset.width,
-      y: ThemeService.getThemeStyle()["NativeBase.ViewNB"][".shadow"].shadowOffset.height,
+      x: ThemeService.getThemeStyle()['NativeBase.ViewNB']['.shadow'].shadowOffset.width,
+      y: ThemeService.getThemeStyle()['NativeBase.ViewNB']['.shadow'].shadowOffset.height,
       radius: ThemeService.getThemeStyle().variables.borderRadiusBase,
       style: {
-        position: "absolute"
-      }
-    };
+        position: 'absolute',
+      },
+    }
 
     // Predefined style
-    const itemRight = number ? { width: 44 } : star !== undefined ? { width: 30 } : {};
+    const itemRight = number ? { width: 44 } : star !== undefined ? { width: 30 } : {}
 
-    const Container = clickable ? Button : View;
-    let Wrapper = props => (
+    const Container = clickable ? Button : View
+    let Wrapper = (props) => (
       <Container
         // shadow
         tinySpaceBottom
@@ -128,10 +128,10 @@ class ListItem extends React.Component {
       >
         {props.children}
       </Container>
-    );
-    if (Platform.OS === "android") {
+    )
+    if (Platform.OS === 'android') {
       if (clickable) {
-        Wrapper = props => (
+        Wrapper = (props) => (
           <View>
             {/* <BoxShadow setting={shadowOpt} /> */}
             <Button
@@ -142,11 +142,11 @@ class ListItem extends React.Component {
             >
               {props.children}
             </Button>
-            {floatBar && <View style={[styles.floatBar, floatBarStyle]}>{typeof floatBar === "function" ? floatBar() : floatBar}</View>}
+            {floatBar && <View style={[styles.floatBar, floatBarStyle]}>{typeof floatBar === 'function' ? floatBar() : floatBar}</View>}
           </View>
-        );
+        )
       } else {
-        Wrapper = props => (
+        Wrapper = (props) => (
           <Container>
             {/* <BoxShadow setting={shadowOpt} /> */}
             <View
@@ -156,9 +156,9 @@ class ListItem extends React.Component {
             >
               {props.children}
             </View>
-            {floatBar && <View style={[styles.floatBar, floatBarStyle]}>{typeof floatBar === "function" ? floatBar() : floatBar}</View>}
+            {floatBar && <View style={[styles.floatBar, floatBarStyle]}>{typeof floatBar === 'function' ? floatBar() : floatBar}</View>}
           </Container>
-        );
+        )
       }
     }
 
@@ -172,14 +172,14 @@ class ListItem extends React.Component {
           </View>
         )}
         {(mainText || subText) && (
-          <View row={horizontal} style={[styles.itemCenter, centerStyle, horizontal ? { alignItems: "center" } : {}]}>
+          <View row={horizontal} style={[styles.itemCenter, centerStyle, horizontal ? { alignItems: 'center' } : {}]}>
             {mainText && (
               <StyledText
                 smallSpaceRight
                 secondary
                 h3
                 flexFull
-                bold="bold"
+                bold='bold'
                 numberOfLines={mainNumberOfLines}
                 adjustsFontSizeToFit
                 style={[styles.mainText, mainTextStyle]}
@@ -206,20 +206,20 @@ class ListItem extends React.Component {
             )}
             {star !== undefined && (
               <Button style={styles.itemStar}>
-                <StarIcon fill={star ? "url(#prefix__a)" : "none"} />
+                <StarIcon fill={star ? 'url(#prefix__a)' : 'none'} />
               </Button>
             )}
           </View>
         )}
         {this.props.children}
-        {Platform.OS === "ios" && floatBar && (
-          <View style={[styles.floatBar, floatBarStyle]}>{typeof floatBar === "function" ? floatBar() : floatBar}</View>
+        {Platform.OS === 'ios' && floatBar && (
+          <View style={[styles.floatBar, floatBarStyle]}>{typeof floatBar === 'function' ? floatBar() : floatBar}</View>
         )}
       </Wrapper>
-    );
+    )
   }
 }
 
-const styles = {};
+const styles = {}
 
-export default connectStyle("iPayNow.ListItem", styles)(ListItem);
+export default connectStyle('iPayNow.ListItem', styles)(ListItem)

@@ -1,22 +1,22 @@
-import React from "react";
-import { SafeAreaView } from "react-native";
-import { connectStyle } from "native-base";
-import ThemeService from "../../services/ThemeService";
-import { View } from "react-native-animatable";
-import StyledText from "./StyledText";
-import Back from "../../assets/images/Back";
-import Button from "./Button";
-import NavigationService from "../../services/NavigationService";
+import React from 'react'
+import { SafeAreaView } from 'react-native'
+import { connectStyle } from 'native-base'
+import ThemeService from '../../services/ThemeService'
+import { View } from 'react-native-animatable'
+import StyledText from './StyledText'
+import Back from '../../assets/images/Back'
+import Button from './Button'
+import NavigationService from '../../services/NavigationService'
 
 class Screen extends React.Component {
   onBack = () => {
-    NavigationService.goBack();
-  };
+    NavigationService.goBack()
+  }
 
   render() {
-    const { disableTopBackground, disableHeader, disableBack, title, right } = this.props;
-    const styles = this.props.style;
-    const Background = ThemeService.getThemeStyle().variables.mainBackground;
+    const { disableTopBackground, disableHeader, disableBack, title, right } = this.props
+    const styles = this.props.style
+    const Background = ThemeService.getThemeStyle().variables.mainBackground
 
     return (
       <Background style={styles.container}>
@@ -30,7 +30,7 @@ class Screen extends React.Component {
                 </Button>
               )}
               {title && (
-                <StyledText h4 bold="bold" style={styles.title}>
+                <StyledText h4 bold='bold' style={styles.title}>
                   {title}
                 </StyledText>
               )}
@@ -40,17 +40,17 @@ class Screen extends React.Component {
           {this.props.children}
         </SafeAreaView>
       </Background>
-    );
+    )
   }
 }
 
 const styles = {
   container: {
-    flex: 1
+    flex: 1,
   },
   safeView: {
-    flex: 1
-  }
-};
+    flex: 1,
+  },
+}
 
-export default connectStyle("iPayNow.Screen", styles)(Screen);
+export default connectStyle('iPayNow.Screen', styles)(Screen)

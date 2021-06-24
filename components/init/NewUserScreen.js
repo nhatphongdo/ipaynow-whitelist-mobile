@@ -1,52 +1,52 @@
-import React from "react";
-import { Image } from "react-native";
-import { connect } from "react-redux";
-import { connectStyle, Container, Content, View, Picker } from "native-base";
-import i18n from "i18n-js";
-import ThemeService from "../../services/ThemeService";
-import { translate } from "../../constants/Languages";
-import Screen from "../shared/Screen";
-import Button from "../shared/Button";
-import { setSetting } from "../../stores/settings/actions";
-import { AVAILABLE_LANGUAGES } from "../../stores/settings/constants";
-import { SUPPORTED_CURRENCIES } from "../../stores/rates/constants";
+import React from 'react'
+import { Image } from 'react-native'
+import { connect } from 'react-redux'
+import { Container, Content, View, Picker, connectStyle } from 'native-base'
+import i18n from 'i18n-js'
+import ThemeService from '../../services/ThemeService'
+import { translate } from '../../constants/Languages'
+import Screen from '../shared/Screen'
+import Button from '../shared/Button'
+import { setSetting } from '../../stores/settings/actions'
+import { AVAILABLE_LANGUAGES } from '../../stores/settings/constants'
+import { SUPPORTED_CURRENCIES } from '../../stores/rates/constants'
 
 class NewUserScreen extends React.Component {
   componentDidMount() {
     if (this.props.wallet.cryptoWallet) {
-      this.props.navigation.navigate("Home");
+      this.props.navigation.navigate('MainApp', { screen: 'Home' })
     }
   }
 
   onCreateWallet = () => {
-    this.props.navigation.navigate("CreateWallet");
-  };
+    this.props.navigation.navigate('CreateWallet')
+  }
 
   onRecoverWallet = () => {
-    this.props.navigation.navigate("RestoreWallet");
-  };
+    this.props.navigation.navigate('RestoreWallet')
+  }
 
   onLanguageChange(value) {
     this.props.setSetting({
       language: value,
-      culture: AVAILABLE_LANGUAGES[value].culture
-    });
-    i18n.locale = value;
+      culture: AVAILABLE_LANGUAGES[value].culture,
+    })
+    i18n.locale = value
   }
 
   onCurrencyChange(value) {
     this.props.setSetting({
-      currency: value
-    });
+      currency: value,
+    })
   }
 
   render() {
-    const styles = this.props.style;
+    const styles = this.props.style
 
-    const DropdownIcon = ThemeService.getThemeStyle().variables.dropdownIcon;
+    const DropdownIcon = ThemeService.getThemeStyle().variables.dropdownIcon
 
-    const languages = Object.keys(AVAILABLE_LANGUAGES);
-    const currencies = Object.keys(SUPPORTED_CURRENCIES).filter(item => item.toLowerCase() !== "eth");
+    const languages = Object.keys(AVAILABLE_LANGUAGES)
+    const currencies = Object.keys(SUPPORTED_CURRENCIES).filter((item) => item.toLowerCase() !== 'eth')
 
     return (
       <Screen disableTopBackground disableHeader>
@@ -57,20 +57,20 @@ class NewUserScreen extends React.Component {
             </View>
             <View style={styles.below}>
               <Button primary full style={styles.button} onPress={this.onCreateWallet}>
-                {translate("CREATE NEW WALLET")}
+                {translate('CREATE NEW WALLET')}
               </Button>
               <Button primary full style={styles.button} onPress={this.onRecoverWallet}>
-                {translate("RECOVER EXISTING WALLET")}
+                {translate('RECOVER EXISTING WALLET')}
               </Button>
             </View>
             <View spaceTop style={styles.bottom}>
               <Picker
                 shadow
-                mode="dialog"
+                mode='dialog'
                 style={styles.language}
-                iosHeader={translate("Select language")}
+                iosHeader={translate('Select language')}
                 iosIcon={<DropdownIcon />}
-                textStyle={{ textAlign: "center" }}
+                textStyle={{ textAlign: 'center' }}
                 headerStyle={ThemeService.getThemeStyle().pickerHeaderStyle}
                 headerTitleStyle={ThemeService.getThemeStyle().pickerHeaderTitleStyle}
                 itemStyle={ThemeService.getThemeStyle().pickerItemStyle}
@@ -85,11 +85,11 @@ class NewUserScreen extends React.Component {
             <View spaceTop spaceBottom style={styles.bottom}>
               <Picker
                 shadow
-                mode="dialog"
+                mode='dialog'
                 style={styles.currency}
-                iosHeader={translate("Select currency")}
+                iosHeader={translate('Select currency')}
                 iosIcon={<DropdownIcon />}
-                textStyle={{ textAlign: "center" }}
+                textStyle={{ textAlign: 'center' }}
                 headerStyle={ThemeService.getThemeStyle().pickerHeaderStyle}
                 headerTitleStyle={ThemeService.getThemeStyle().pickerHeaderTitleStyle}
                 itemStyle={ThemeService.getThemeStyle().pickerItemStyle}
@@ -104,44 +104,43 @@ class NewUserScreen extends React.Component {
           </Content>
         </Container>
       </Screen>
-    );
+    )
   }
 }
 
 const styles = {
   container: {
-    flex: 1
+    flex: 1,
   },
   contentContainer: {
-    flex: 1
+    flex: 1,
   },
   above: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   below: {
-    flex: 1
+    flex: 1,
   },
   bottom: {
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   logo: {
-    resizeMode: "contain"
-  }
-};
+    resizeMode: 'contain',
+  },
+}
 
-const mapStateToProps = state => {
-  const { wallet, settings } = state;
-  return { wallet, settings };
-};
+const mapStateToProps = (state) => {
+  const { wallet, settings } = state
+  return { wallet, settings }
+}
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    setSetting: settings => dispatch(setSetting(settings)),
-    showAlert: config => dispatch(showAlert(config))
-  };
-};
+    setSetting: (settings) => dispatch(setSetting(settings)),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(connectStyle("iPayNow.NewUser", styles)(NewUserScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(connectStyle('iPayNow.NewUser', styles)(NewUserScreen))

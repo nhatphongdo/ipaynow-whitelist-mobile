@@ -1,92 +1,93 @@
-import React from "react";
-import { Image, Alert as SystemAlert, BackHandler, StatusBar } from "react-native";
-import "react-native-gesture-handler";
-import { AppLoading, SplashScreen, Notifications } from "expo";
-import { Asset } from "expo-asset";
-import * as Font from "expo-font";
-import { Provider } from "react-redux";
-import { StyleProvider, connectStyle, View } from "native-base";
-import AnimatedProgressWheel from "react-native-progress-wheel";
-import i18n from "i18n-js";
-import store from "./stores";
-import NavigationService from "./services/NavigationService";
-import ThemeService from "./services/ThemeService";
-import Alert from "./components/shared/Alert";
-import TopAlert from "./components/shared/TopAlert";
-import AppNavigator from "./components/navigation/AppNavigator";
-import { initPinCode } from "./stores/pincode/actions";
-import { getCryptoWallet } from "./stores/wallet/actions";
-import { initDatabase, clear } from "./stores/storage/actions";
-import { updateRates } from "./stores/rates/actions";
-import { loadSettings } from "./stores/settings/actions";
-import { register, login, saveAccount, loadAccount } from "./stores/account/actions";
-import { generateKeyPair } from "./common/helper";
-import { translate } from "./constants/Languages";
-import Socket from "./services/Socket";
-import { STORAGE_SETTINGS } from "./stores/storage/constants";
-import Storage from "./common/storage";
-import { getNotification } from "./stores/account/actions";
-import DropdownAlertService from "./services/DropdownAlertService";
-import StyledText from "./components/shared/StyledText";
+import React from 'react'
+import { Image, Alert as SystemAlert, BackHandler, StatusBar } from 'react-native'
+import 'react-native-gesture-handler'
+import AppLoading from 'expo-app-loading'
+import * as SplashScreen from 'expo-splash-screen'
+import * as Notifications from 'expo-notifications'
+import { Asset } from 'expo-asset'
+import * as Font from 'expo-font'
+import { Provider } from 'react-redux'
+import { StyleProvider, connectStyle, View } from 'native-base'
+import AnimatedProgressWheel from 'react-native-progress-wheel'
+import i18n from 'i18n-js'
+import store from './stores'
+import ThemeService from './services/ThemeService'
+import Alert from './components/shared/Alert'
+import TopAlert from './components/shared/TopAlert'
+import AppNavigator from './components/navigation/AppNavigator'
+import { initPinCode } from './stores/pincode/actions'
+import { getCryptoWallet } from './stores/wallet/actions'
+import { initDatabase, clear } from './stores/storage/actions'
+import { updateRates } from './stores/rates/actions'
+import { loadSettings } from './stores/settings/actions'
+import { register, login, saveAccount, loadAccount } from './stores/account/actions'
+import { generateKeyPair } from './common/helper'
+import { translate } from './constants/Languages'
+import Socket from './services/Socket'
+import { STORAGE_SETTINGS } from './stores/storage/constants'
+import Storage from './common/storage'
+import { getNotification } from './stores/account/actions'
+import DropdownAlertService from './services/DropdownAlertService'
+import StyledText from './components/shared/StyledText'
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       splashBottomLine: null,
       isSplashReady: false,
       isAppReady: false,
       progress: 0,
-      route: "InitApp",
-      theme: ThemeService.getThemeStyle()
-    };
+      route: 'InitApp',
+      theme: ThemeService.getThemeStyle(),
+    }
 
-    this._bootstrap();
+    this._bootstrap()
 
     this.storeUnsubscribe = store.subscribe(() => {
       if (store.getState().settings.theme !== ThemeService.getTheme()) {
-        ThemeService.setTheme(store.getState().settings.theme);
+        ThemeService.setTheme(store.getState().settings.theme)
         this.setState({
-          theme: ThemeService.getThemeStyle()
-        });
+          theme: ThemeService.getThemeStyle(),
+        })
       }
-    });
+    })
   }
 
   componentWillUnmount() {
-    this.storeUnsubscribe();
+    this.storeUnsubscribe()
   }
 
   _bootstrap = async () => {
-    const settings = await Storage.getItem(STORAGE_SETTINGS, {});
-    ThemeService.setTheme(settings.theme);
+    const settings = await Storage.getItem(STORAGE_SETTINGS, {})
+    ThemeService.setTheme(settings.theme)
     this.setState({
-      theme: ThemeService.getThemeStyle()
-    });
+      theme: ThemeService.getThemeStyle(),
+    })
 
-    this._notificationSubscription = Notifications.addListener(this._handleNotification);
-  };
+    this._notificationSubscription = Notifications.addListener(this._handleNotification)
+  }
 
-  _handleNotification = async notification => {
-    if (notification.origin === "received" && notification.data.id) {
-      const result = await store.dispatch(getNotification(notification.data.id));
+  _handleNotification = async (notification) => {
+    if (notification.origin === 'received' && notification.data.id) {
+      const result = await store.dispatch(getNotification(notification.data.id))
       if (!result.error) {
-        DropdownAlertService.show(DropdownAlertService.INFO, result.result.title, result.result.message);
+        DropdownAlertService.show(DropdownAlertService.INFO, result.result.title, result.result.message)
       }
     }
-  };
+  }
 
   render() {
-    const styles = this.props.style;
+    const styles = this.props.style
 
-    const Background = this.state.theme.variables.mainBackground;
+    const Background = this.state.theme.variables.mainBackground
 
     // if (this.state.theme.name === "colorful-dark" || this.state.theme.name === "simple-dark") {
     //   StatusBar.setBarStyle("light-content");
     // } else {
     //   StatusBar.setBarStyle("dark-content");
     // }
-    StatusBar.setBarStyle("light-content");
+    StatusBar.setBarStyle('light-content')
 
     if (!this.state.isSplashReady && !this.props.skipLoadingScreen) {
       return (
@@ -94,25 +95,25 @@ class App extends React.Component {
           startAsync={this._cacheSplashResourcesAsync}
           onError={this._handleLoadingError}
           onFinish={() => {
-            this.setState({ isSplashReady: true });
+            this.setState({ isSplashReady: true })
           }}
           autoHideSplash={false}
         />
-      );
+      )
     }
 
     if (!this.state.isAppReady) {
       return (
         <StyleProvider style={this.state.theme}>
           <Background style={styles.splashContainer}>
-            <View style={{ flex: 2, alignItems: "center", justifyContent: "flex-end" }}>
+            <View style={{ flex: 2, alignItems: 'center', justifyContent: 'flex-end' }}>
               <Image style={styles.logo} source={this.state.theme.variables.largeLogo} onLoad={this._cacheResourcesAsync} />
             </View>
-            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
               <AnimatedProgressWheel
                 size={80}
                 width={10}
-                color={"white"}
+                color={'white'}
                 fullColor={this.state.theme.variables.brandPrimary}
                 progress={this.state.progress}
                 backgroundColor={this.state.theme.variables.brandSecondary}
@@ -121,42 +122,40 @@ class App extends React.Component {
             <View
               style={{
                 flex: 0,
-                alignItems: "center",
-                justifyContent: "center",
-                marginVertical: this.state.theme.variables.footerHeight
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginVertical: this.state.theme.variables.footerHeight,
               }}
             >
               {/* <Image style={styles.bottomLine} source={this.state.splashBottomLine} /> */}
-              <StyledText h4 bold="medium">{`${translate("Copyright")} 2020 <color ${
+              <StyledText h4 bold='medium'>{`${translate('Copyright')} 2020 <color ${
                 this.state.theme.variables.brandPrimary
               }>haladinar.io</color>`}</StyledText>
-              <StyledText h4 center bold="medium" smallSpaceTop spaceLeft spaceRight>
-                {translate("A decentralized loyalty wallet")}
+              <StyledText h4 center bold='medium' smallSpaceTop spaceLeft spaceRight>
+                {translate('A decentralized loyalty wallet')}
               </StyledText>
             </View>
           </Background>
         </StyleProvider>
-      );
+      )
     }
-
-    const Navigator = AppNavigator(this.state.route);
 
     return (
       <Provider store={store}>
         <StyleProvider style={this.state.theme}>
           <View style={styles.container}>
-            <Navigator ref={navigatorRef => NavigationService.setTopLevelNavigator(navigatorRef)} />
+            <AppNavigator initialRoute={this.state.route} />
             <Alert />
             <TopAlert />
           </View>
         </StyleProvider>
       </Provider>
-    );
+    )
   }
 
   _cacheSplashResourcesAsync = async () => {
     await Asset.loadAsync([
-      require("./assets/images/logo.png")
+      require('./assets/images/logo.png'),
 
       /* require("./assets/images/splash-bottom-line.png"),
       require("./assets/images/splash-bottom-line.kr.png"),
@@ -181,12 +180,12 @@ class App extends React.Component {
       require("./assets/images/splash-bottom-line-dark-simple.jp.png"),
       require("./assets/images/splash-bottom-line-dark-simple.vn.png"),
       require("./assets/images/splash-bottom-line-dark-simple.cn.png") */
-    ]);
+    ])
     await Font.loadAsync({
-      exo: require("./assets/fonts/Exo-Regular.ttf"),
-      "exo-bold": require("./assets/fonts/Exo-Bold.ttf"),
-      "exo-medium": require("./assets/fonts/Exo-Medium.ttf")
-    });
+      exo: require('./assets/fonts/Exo-Regular.ttf'),
+      'exo-bold': require('./assets/fonts/Exo-Bold.ttf'),
+      'exo-medium': require('./assets/fonts/Exo-Medium.ttf'),
+    })
 
     /* let splashBottomLine = require("./assets/images/splash-bottom-line.png");
     const settings = await Storage.getItem(STORAGE_SETTINGS, {});
@@ -242,114 +241,116 @@ class App extends React.Component {
       }
     }
     this.setState({ splashBottomLine }); */
-  };
+  }
 
   _cacheResourcesAsync = async () => {
-    SplashScreen.hide();
+    await SplashScreen.hideAsync()
 
     await Promise.all([
       Asset.loadAsync([
-        require("./assets/images/shadow.png"),
-        require("./assets/images/shadow-light.png"),
-        require("./assets/images/membership-icon.png"),
-        require("./assets/images/special-format-icon.png"),
-        require("./assets/images/close-light.png"),
-        require("./assets/images/close-dark.png"),
-        require("./assets/images/hdn-coin.png")
-      ])
-    ]);
-    this.setState({ progress: 5 });
+        require('./assets/images/shadow.png'),
+        require('./assets/images/shadow-light.png'),
+        require('./assets/images/membership-icon.png'),
+        require('./assets/images/special-format-icon.png'),
+        require('./assets/images/close-light.png'),
+        require('./assets/images/close-dark.png'),
+        require('./assets/images/hdn-coin.png'),
+      ]),
+    ])
+    this.setState({ progress: 5 })
+
+    await store.dispatch(clear())
 
     // Load data
-    await store.dispatch(loadSettings());
-    i18n.locale = store.getState().settings.language;
-    this.setState({ progress: 10 });
-    await store.dispatch(initPinCode());
-    this.setState({ progress: 15 });
-    await store.dispatch(getCryptoWallet());
-    this.setState({ progress: 25 });
-    await store.dispatch(initDatabase());
-    this.setState({ progress: 35 });
-    await store.dispatch(updateRates());
-    this.setState({ progress: 45 });
+    await store.dispatch(loadSettings())
+    i18n.locale = store.getState().settings.language
+    this.setState({ progress: 10 })
+    await store.dispatch(initPinCode())
+    this.setState({ progress: 15 })
+    await store.dispatch(getCryptoWallet())
+    this.setState({ progress: 25 })
+    await store.dispatch(initDatabase())
+    this.setState({ progress: 35 })
+    await store.dispatch(updateRates())
+    this.setState({ progress: 45 })
 
     // Personal init
     // Load saved data
-    const account = await store.dispatch(loadAccount());
-    this.setState({ progress: 50 });
+    const account = await store.dispatch(loadAccount())
+    this.setState({ progress: 50 })
 
     if (!account.privateKey || !account.publicKey) {
       // Generate client key pair if needed
-      const keys = await generateKeyPair();
-      account.privateKey = keys.privateKey;
-      account.publicKey = keys.publicKey;
-      await store.dispatch(saveAccount(account));
-      this.setState({ progress: 70 });
+      const keys = await generateKeyPair()
+      account.privateKey = keys.privateKey
+      account.publicKey = keys.publicKey
+      await store.dispatch(saveAccount(account))
+      this.setState({ progress: 70 })
     }
 
     if (store.getState().wallet.cryptoWallet) {
       // Try to login
-      const profile = await store.dispatch(login());
-      this.setState({ progress: 80 });
+      const profile = await store.dispatch(login())
+      this.setState({ progress: 80 })
 
       if (!profile) {
         // Not yet created or failed then try to register
-        const regResult = await store.dispatch(register());
+        const regResult = await store.dispatch(register())
         if (!regResult) {
           // Register failed
           SystemAlert.alert(
-            translate("Error"),
+            translate('Error'),
             translate(
-              "Failed to register you with our system Please close application and try again after a moment or contact our staff for support"
+              'Failed to register you with our system Please close application and try again after a moment or contact our staff for support'
             ),
-            [{ text: translate("OK"), onPress: () => BackHandler.exitApp() }],
+            [{ text: translate('OK'), onPress: () => BackHandler.exitApp() }],
             { cancelable: false }
-          );
-          return;
+          )
+          return
         }
       } else {
         // Update to local store
-        const result = await store.dispatch(saveAccount(profile));
+        const result = await store.dispatch(saveAccount(profile))
       }
-      this.setState({ progress: 90 });
+      this.setState({ progress: 90 })
 
       // Connect socket
-      Socket.setStore(store);
-      await Socket.connect();
-      this.setState({ progress: 100 });
+      Socket.setStore(store)
+      await Socket.connect()
+      this.setState({ progress: 100 })
     }
 
     this.setState({
       isAppReady: true,
       progress: 100,
-      route: store.getState().wallet.cryptoWallet ? "MainApp" : "InitApp"
-    });
-  };
+      route: store.getState().wallet.cryptoWallet ? 'MainApp' : 'InitApp',
+    })
+  }
 
-  _handleLoadingError = error => {
+  _handleLoadingError = (error) => {
     // In this case, you might want to report the error to your error reporting
     // service, for example Sentry
-    console.warn(error);
-  };
+    console.warn(error)
+  }
 }
 
 const styles = {
   splashContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   container: {
-    flex: 1
+    flex: 1,
   },
   logo: {
-    resizeMode: "contain",
+    resizeMode: 'contain',
     width: ThemeService.getThemeStyle().variables.deviceWidth / 2,
-    height: ((ThemeService.getThemeStyle().variables.deviceWidth / 2) * 591) / 699
+    height: ((ThemeService.getThemeStyle().variables.deviceWidth / 2) * 591) / 699,
   },
   bottomLine: {
-    resizeMode: "contain"
-  }
-};
+    resizeMode: 'contain',
+  },
+}
 
-export default connectStyle("iPayNow.App", styles)(App);
+export default connectStyle('iPayNow.App', styles)(App)

@@ -1,76 +1,76 @@
-import React from "react";
-import { Image } from "react-native";
-import { connect } from "react-redux";
-import { connectStyle, Container, Content, View, Item, Input, Spinner } from "native-base";
-import Modal from "react-native-modal";
-import * as Permissions from "expo-permissions";
-import { BarCodeScanner } from "expo-barcode-scanner";
-import ThemeService from "../../services/ThemeService";
-import { translate } from "../../constants/Languages";
-import Screen from "../shared/Screen";
-import Button from "../shared/Button";
-import StyledText from "../shared/StyledText";
-import DropdownAlertService from "../../services/DropdownAlertService";
-import { addReferral } from "../../stores/account/actions";
+import React from 'react'
+import { Image } from 'react-native'
+import { connect } from 'react-redux'
+import { connectStyle, Container, Content, View, Item, Input, Spinner } from 'native-base'
+import Modal from 'react-native-modal'
+import * as Permissions from 'expo-permissions'
+import { BarCodeScanner } from 'expo-barcode-scanner'
+import ThemeService from '../../services/ThemeService'
+import { translate } from '../../constants/Languages'
+import Screen from '../shared/Screen'
+import Button from '../shared/Button'
+import StyledText from '../shared/StyledText'
+import DropdownAlertService from '../../services/DropdownAlertService'
+import { addReferral } from '../../stores/account/actions'
 
 class AddReferralScreen extends React.Component {
   state = {
-    referral: "",
+    referral: '',
 
     scanning: false,
     scanned: true,
 
-    confirming: false
-  };
+    confirming: false,
+  }
 
   onScan = async () => {
-    let permission = await Permissions.getAsync(Permissions.CAMERA);
-    if (permission.status === "granted") {
-      this.setState({ scanning: true, scanned: false });
+    let permission = await Permissions.getAsync(Permissions.CAMERA)
+    if (permission.status === 'granted') {
+      this.setState({ scanning: true, scanned: false })
     } else {
-      permission = await Permissions.askAsync(Permissions.CAMERA);
-      if (permission.status === "granted") {
-        this.setState({ scanning: true, scanned: false });
+      permission = await Permissions.askAsync(Permissions.CAMERA)
+      if (permission.status === 'granted') {
+        this.setState({ scanning: true, scanned: false })
       } else {
         DropdownAlertService.show(
           DropdownAlertService.ERROR,
-          translate("Error"),
-          translate("You must approve CAMERA permission to allow application to scan QR code")
-        );
+          translate('Error'),
+          translate('You must approve CAMERA permission to allow application to scan QR code')
+        )
       }
     }
-  };
+  }
 
   handleBarCodeScanned = ({ type, data }) => {
-    this.setState({ scanning: false, scanned: true });
+    this.setState({ scanning: false, scanned: true })
     if (data) {
-      this.setState({ recipient: data.trim() });
+      this.setState({ recipient: data.trim() })
     }
-  };
+  }
 
   onConfirm = async () => {
     // Validate
     if (!this.state.referral) {
-      return;
+      return
     }
 
-    this.setState({ confirming: true });
-    const result = await this.props.addReferral(this.state.referral);
-    this.setState({ confirming: false });
+    this.setState({ confirming: true })
+    const result = await this.props.addReferral(this.state.referral)
+    this.setState({ confirming: false })
     if (result.error) {
-      DropdownAlertService.show(DropdownAlertService.ERROR, translate("Error"), translate(result.error));
-      return;
+      DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate(result.error))
+      return
     }
 
-    this.props.navigation.navigate("Home");
-  };
+    this.props.navigation.navigate('MainApp', { screen: 'Home' })
+  }
 
   onIgnore = async () => {
-    this.props.navigation.navigate("Home");
-  };
+    this.props.navigation.navigate('MainApp', { screen: 'Home' })
+  }
 
   render() {
-    const styles = this.props.style;
+    const styles = this.props.style
 
     return (
       <Screen disableTopBackground disableHeader>
@@ -78,35 +78,35 @@ class AddReferralScreen extends React.Component {
           <Content style={styles.container} contentContainerStyle={styles.contentContainer}>
             <Image style={styles.logo} source={ThemeService.getThemeStyle().variables.smallLogo} />
             <StyledText largeSpaceBottom center>
-              {translate("Input your referral ID to get bonus from your network You may scan QR code to retrieve referral ID also")}
+              {translate('Input your referral ID to get bonus from your network You may scan QR code to retrieve referral ID also')}
             </StyledText>
             <StyledText center spaceBottom>
-              {translate("Input the Referral ID")}
+              {translate('Input the Referral ID')}
             </StyledText>
             <Item regular style={styles.inputContainer}>
               <Input
-                keyboardType="numeric"
+                keyboardType='numeric'
                 value={this.state.referral}
-                onChangeText={text => this.setState({ referral: text })}
+                onChangeText={(text) => this.setState({ referral: text })}
                 style={styles.input}
               />
             </Item>
             <Button primary spaceTop onPress={this.onScan}>
-              {translate("Scan QR code")}
+              {translate('Scan QR code')}
             </Button>
             <Button primary full veryLargeSpaceTop disabled={this.state.confirming} onPress={this.onConfirm}>
-              {!this.state.confirming && <StyledText>{translate("CONFIRM")}</StyledText>}
-              {this.state.confirming && <Spinner color="#fff" />}
+              {!this.state.confirming && <StyledText>{translate('CONFIRM')}</StyledText>}
+              {this.state.confirming && <Spinner color='#fff' />}
             </Button>
             <Button spaceTop spaceBottom disabled={this.state.confirming} onPress={this.onIgnore}>
-              {translate("Skip this step")}
+              {translate('Skip this step')}
             </Button>
           </Content>
         </Container>
         <Modal
           isVisible={this.state.scanning}
-          animationIn="bounceIn"
-          animationOut="bounceOut"
+          animationIn='bounceIn'
+          animationOut='bounceOut'
           animationInTiming={600}
           animationOutTiming={600}
           backdropTransitionInTiming={600}
@@ -122,41 +122,41 @@ class AddReferralScreen extends React.Component {
                 style={ThemeService.getThemeStyle().qrScanner}
               />
               <Button thirdary center spaceTop spaceBottom onPress={() => this.setState({ scanning: false, scanned: true })}>
-                {translate("Cancel")}
+                {translate('Cancel')}
               </Button>
             </View>
           )}
         </Modal>
       </Screen>
-    );
+    )
   }
 }
 
 const styles = {
   container: {
-    flex: 1
+    flex: 1,
   },
   contentContainer: {
     flex: 0,
-    alignItems: "center"
+    alignItems: 'center',
   },
   logo: {
-    resizeMode: "contain"
+    resizeMode: 'contain',
   },
   input: {
-    textAlign: "center"
-  }
-};
+    textAlign: 'center',
+  },
+}
 
-const mapStateToProps = state => {
-  const {} = state;
-  return {};
-};
+const mapStateToProps = (state) => {
+  const {} = state
+  return {}
+}
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    addReferral: id => dispatch(addReferral(id))
-  };
-};
+    addReferral: (id) => dispatch(addReferral(id)),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(connectStyle("iPayNow.AddReferral", styles)(AddReferralScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(connectStyle('iPayNow.AddReferral', styles)(AddReferralScreen))
