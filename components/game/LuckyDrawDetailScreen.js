@@ -23,7 +23,7 @@ class LuckyDrawDetailScreen extends React.Component {
     luckyNumbers: [],
     number: '',
     agreement: true,
-    participating: false
+    participating: false,
   }
 
   componentWillMount() {
@@ -41,7 +41,7 @@ class LuckyDrawDetailScreen extends React.Component {
     if (game.endJoinTime && moment.utc(game.endJoinTime) < moment.utc()) {
       this.props.navigation.goBack()
       this.props.navigation.navigate('LuckyDrawPlay', {
-        game: game
+        game: game,
       })
       return
     }
@@ -125,6 +125,14 @@ class LuckyDrawDetailScreen extends React.Component {
                 )}</strong> ${translate('on')} <strong>${formatFullDate(this.state.game.startTime)}</strong>`}</StyledText>
               )}
               {this.state.game && this.state.game.state === READY && (
+                <StyledText h4 center smallSpaceTop bold='medium'>
+                  {translate('There are {0} {1} consumed by participants', [
+                    `<color ${ThemeService.getThemeStyle().variables.brandPrimary}><strong>${this.state.game.totalCost}</strong></color>`,
+                    `<color ${ThemeService.getThemeStyle().variables.brandPrimary}><strong>${translate(this.state.game.unit)}</strong></color>`,
+                  ])}
+                </StyledText>
+              )}
+              {this.state.game && this.state.game.state === READY && (
                 <Item transparent stackedLabel spaceTop>
                   <Label>{translate('Your number')}</Label>
                   <View smallSpaceTop smallSpaceBottom style={styles.row}>
@@ -134,7 +142,7 @@ class LuckyDrawDetailScreen extends React.Component {
                       keyboardType='numeric'
                       maxLength={MaxLengthNumber}
                       value={this.state.number}
-                      onChangeText={text => this.setState({ number: text })}
+                      onChangeText={(text) => this.setState({ number: text })}
                     />
                     <Button tiny primary tinySpaceLeft onPress={this.onRandom}>
                       {translate('Pick randomly')}
@@ -171,7 +179,7 @@ class LuckyDrawDetailScreen extends React.Component {
                 <StyledText smallSpaceTop center note>
                   {translate('It will cost {0} {1} for each participation', [
                     `<color ${ThemeService.getThemeStyle().variables.brandPrimary}><strong>${formatReward(this.state.game.cost)}</strong></color>`,
-                    `<color ${ThemeService.getThemeStyle().variables.brandPrimary}><strong>${translate(this.state.game.unit)}</strong></color>`
+                    `<color ${ThemeService.getThemeStyle().variables.brandPrimary}><strong>${translate(this.state.game.unit)}</strong></color>`,
                   ])}
                 </StyledText>
               )}
@@ -183,10 +191,7 @@ class LuckyDrawDetailScreen extends React.Component {
                     {`${translate(
                       'You bought {0} numbers',
                       `<color ${ThemeService.getThemeStyle().variables.brandPrimary}><strong>${this.state.luckyNumbers.length}</strong></color>`
-                    )}. ${translate('There are {0} {1} consumed by participants', [
-                      `<color ${ThemeService.getThemeStyle().variables.brandPrimary}><strong>${this.state.game.totalCost}</strong></color>`,
-                      `<color ${ThemeService.getThemeStyle().variables.brandPrimary}><strong>${translate(this.state.game.unit)}</strong></color>`
-                    ])}`}
+                    )}.`}
                   </StyledText>
                 )}
                 {this.state.luckyNumbers && (
@@ -210,34 +215,34 @@ class LuckyDrawDetailScreen extends React.Component {
 
 const styles = {
   container: {
-    flex: 1
+    flex: 1,
   },
   contentContainer: {
-    flex: 0
+    flex: 0,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   list: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'flex-start'
-  }
+    justifyContent: 'flex-start',
+  },
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const {} = state
   return {}
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getGame: id => dispatch(getGame(id)),
+    getGame: (id) => dispatch(getGame(id)),
     buyLuckyNumber: (gameId, number) => dispatch(buyLuckyNumber(gameId, number)),
-    getLuckyNumbers: gameId => dispatch(getLuckyNumbers(gameId)),
-    gameRegistered: game => dispatch(gameRegistered(game))
+    getLuckyNumbers: (gameId) => dispatch(getLuckyNumbers(gameId)),
+    gameRegistered: (game) => dispatch(gameRegistered(game)),
   }
 }
 

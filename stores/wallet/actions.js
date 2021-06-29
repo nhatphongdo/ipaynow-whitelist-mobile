@@ -1,11 +1,10 @@
-import * as Random from 'expo-random'
 import Axios from 'axios'
-import 'ethers/dist/shims.js'
+import '@ethersproject/shims'
 import { ethers } from 'ethers'
 import numeral from 'numeral'
 import { CRYPTO_WALLET_CHANGED, CRYPTO_WALLET_INFO_CHANGED } from './constants'
 import { setEncryptedData, getEncryptedData, getDefaultHashed } from '../storage/actions'
-import { DEBUG, BASE_API_URL } from '../../constants/Constants'
+import { DEBUG, BASE_API_URL, INFURA_PROJECT_ID } from '../../constants/Constants'
 import { register } from '../account/actions'
 import { sign } from '../../common/helper'
 
@@ -13,25 +12,15 @@ import { sign } from '../../common/helper'
 const cryptoWalletChanged = (wallet) => ({ type: CRYPTO_WALLET_CHANGED, payload: wallet })
 const cryptoWalletInfoChanged = (info) => ({ type: CRYPTO_WALLET_INFO_CHANGED, payload: info })
 
+const TOKEN_DECIMAL_DIGITS = 8
+
 /* Actions */
 export const createCryptoWallet = (options) => {
   return async (dispatch, getState) => {
     try {
-      var entropy = await Random.getRandomBytesAsync(16)
-
-      if (!options) {
-        options = {}
-      }
-
-      if (options.extraEntropy) {
-        entropy = ethers.utils.arrayify(ethers.utils.keccak256(ethers.utils.concat([entropy, options.extraEntropy])).substring(0, 34))
-      }
-
-      const mnemonic = ethers.utils.HDNode.entropyToMnemonic(entropy, ethers.wordlists.en)
-      // console.log(mnemonic);
-      let wallet = ethers.Wallet.fromMnemonic(mnemonic, options.path, ethers.wordlists.en)
-      const defaultProvider = ethers.getDefaultProvider(DEBUG ? 'ropsten' : 'homestead')
-      wallet = wallet.connect(defaultProvider)
+      let wallet = ethers.Wallet.createRandom(options)
+      const provider = new ethers.providers.InfuraProvider(DEBUG ? 'ropsten' : 'homestead', INFURA_PROJECT_ID)
+      wallet = wallet.connect(provider)
 
       dispatch(cryptoWalletChanged(wallet))
       return wallet
@@ -54,8 +43,8 @@ export const restoreCryptoWallet = (mnemonic, options) => {
 
     try {
       let wallet = ethers.Wallet.fromMnemonic(mnemonic.toLowerCase(), options.path, ethers.wordlists.en)
-      const defaultProvider = ethers.getDefaultProvider(DEBUG ? 'ropsten' : 'homestead')
-      wallet = wallet.connect(defaultProvider)
+      const provider = new ethers.providers.InfuraProvider(DEBUG ? 'ropsten' : 'homestead', INFURA_PROJECT_ID)
+      wallet = wallet.connect(provider)
 
       dispatch(cryptoWalletChanged(wallet))
       return wallet
@@ -108,8 +97,8 @@ export const getCryptoWallet = () => {
     }
 
     try {
-      const defaultProvider = ethers.getDefaultProvider(DEBUG ? 'ropsten' : 'homestead')
-      const wallet = new ethers.Wallet(encryptedData.cryptoPrivateKey, defaultProvider)
+      const provider = new ethers.providers.InfuraProvider(DEBUG ? 'ropsten' : 'homestead', INFURA_PROJECT_ID)
+      const wallet = new ethers.Wallet(encryptedData.cryptoPrivateKey, provider)
       if (encryptedData.cryptoMnemonic) {
         dispatch(
           cryptoWalletChanged({
@@ -144,7 +133,7 @@ export const getWalletInfo = () => {
       const ethBalance = await wallet.getBalance()
 
       const state = {
-        tokenBalance: numeral(ethers.utils.formatEther(tokenBalance)).value(),
+        tokenBalance: numeral(ethers.utils.formatUnits(tokenBalance, TOKEN_DECIMAL_DIGITS)).value(),
         ethBalance: numeral(ethers.utils.formatEther(ethBalance)).value(),
       }
 
@@ -157,17 +146,31 @@ export const getWalletInfo = () => {
   }
 }
 
+const takeLeftMostDecimalDigits = (number, digits) => {
+  const parts = number.split('.')
+  if (parts.length !== 2) {
+    return number
+  }
+  const fraction = parts[1].substr(0, digits)
+  if (!fraction) {
+    return parts[0]
+  }
+  return `${parts[0]}.${fraction}`
+}
+
 export const estimateGas = (to, amount, isToken = true) => {
   return async (dispatch, getState) => {
     if (!getState().wallet.cryptoWallet || !getState().wallet.tokenContract) {
       return 0
     }
 
-    const weiAmount = ethers.utils.parseEther(amount)
+    const weiAmount = isToken
+      ? ethers.utils.parseUnits(takeLeftMostDecimalDigits(amount, TOKEN_DECIMAL_DIGITS), TOKEN_DECIMAL_DIGITS)
+      : ethers.utils.parseEther(amount)
     try {
       let gasPrice = await getState().wallet.cryptoWallet.provider.getGasPrice()
       if (isToken) {
-        gasPrice = gasPrice.mul(await getState().wallet.tokenContract.estimate.transfer(to, weiAmount))
+        gasPrice = gasPrice.mul(await getState().wallet.tokenContract.estimateGas.transfer(to, weiAmount))
       } else {
         gasPrice = gasPrice.mul(
           await getState().wallet.cryptoWallet.provider.estimateGas({
@@ -235,7 +238,7 @@ export const sendToken = (to, amount) => {
       return { error: 'Wallet is not initialized correctly.', result: null }
     }
 
-    const weiAmount = ethers.utils.parseEther(amount)
+    const weiAmount = ethers.utils.parseUnits(takeLeftMostDecimalDigits(amount, TOKEN_DECIMAL_DIGITS), TOKEN_DECIMAL_DIGITS)
     try {
       const result = await getState().wallet.tokenContract.transfer(to, weiAmount)
       return { error: null, result }

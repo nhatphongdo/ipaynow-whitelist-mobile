@@ -13,7 +13,7 @@ import { getWalletInfo } from '../../stores/wallet/actions'
 import Blockie from './Blockie'
 import { getRewardInfo } from '../../stores/rewards/actions'
 import { convertRateSync } from '../../stores/rates/actions'
-import { SUPPORTED_CURRENCIES, HDN, ETH, REWARD } from '../../stores/rates/constants'
+import { SUPPORTED_CURRENCIES, USDT, ETH, REWARD } from '../../stores/rates/constants'
 import Eye from '../../assets/images/Eye'
 import NoEye from '../../assets/images/NoEye'
 import { setSetting } from '../../stores/settings/actions'
@@ -66,7 +66,7 @@ class AccountCard extends React.Component {
     const QrBox = ThemeService.getThemeStyle().variables.qrBox
     const QrLabel = ThemeService.getThemeStyle().variables.qrLabel
 
-    const token = HDN
+    const token = USDT
     const tokenBalance = this.props.wallet.tokenBalance
 
     const shadow =

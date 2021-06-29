@@ -30,6 +30,14 @@ import { getNotification } from './stores/account/actions'
 import DropdownAlertService from './services/DropdownAlertService'
 import StyledText from './components/shared/StyledText'
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+})
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -65,10 +73,11 @@ class App extends React.Component {
       theme: ThemeService.getThemeStyle(),
     })
 
-    this._notificationSubscription = Notifications.addListener(this._handleNotification)
+    this._notificationSubscription = Notifications.addNotificationReceivedListener(this._handleNotification)
   }
 
   _handleNotification = async (notification) => {
+    console.log(notification)
     if (notification.origin === 'received' && notification.data.id) {
       const result = await store.dispatch(getNotification(notification.data.id))
       if (!result.error) {
@@ -128,9 +137,9 @@ class App extends React.Component {
               }}
             >
               {/* <Image style={styles.bottomLine} source={this.state.splashBottomLine} /> */}
-              <StyledText h4 bold='medium'>{`${translate('Copyright')} 2020 <color ${
+              <StyledText h4 bold='medium'>{`${translate('Copyright')} 2021 <color ${
                 this.state.theme.variables.brandPrimary
-              }>haladinar.io</color>`}</StyledText>
+              }>test.io</color>`}</StyledText>
               <StyledText h4 center bold='medium' smallSpaceTop spaceLeft spaceRight>
                 {translate('A decentralized loyalty wallet')}
               </StyledText>
@@ -259,7 +268,8 @@ class App extends React.Component {
     ])
     this.setState({ progress: 5 })
 
-    await store.dispatch(clear())
+    // Reset data
+    // await store.dispatch(clear())
 
     // Load data
     await store.dispatch(loadSettings())

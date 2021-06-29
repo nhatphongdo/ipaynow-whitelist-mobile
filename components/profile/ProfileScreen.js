@@ -12,7 +12,7 @@ import Constants from 'expo-constants'
 import i18n from 'i18n-js'
 import * as Animatable from 'react-native-animatable'
 import Modal from 'react-native-modal'
-import CountryPicker, { getAllCountries } from 'react-native-country-picker-modal'
+import CountryPicker, { getAllCountries, FlagType } from 'react-native-country-picker-modal'
 import MapView, { Marker } from 'react-native-maps'
 import ThemeService from '../../services/ThemeService'
 import { translate } from '../../constants/Languages'
@@ -73,7 +73,7 @@ class ProfileScreen extends React.Component {
       country: '',
       vendorPin:
         props.account.vendorAddressLocation && props.account.vendorAddressLocation !== ''
-          ? props.account.vendorAddressLocation.split(',').map(i => parseFloat(i))
+          ? props.account.vendorAddressLocation.split(',').map((i) => parseFloat(i))
           : [],
 
       categories: [],
@@ -83,7 +83,9 @@ class ProfileScreen extends React.Component {
       privateShowing: false,
       pinOnMapShowing: false,
       hardwareAuthenticationTypes: [],
-      hardwareAuthenticationEnabled: false
+      hardwareAuthenticationEnabled: false,
+
+      countryPickerVisible: false
     }
   }
 
@@ -100,7 +102,7 @@ class ProfileScreen extends React.Component {
         enabled = enabled && supportedTypes.length > 0
         this.setState({
           hardwareAuthenticationTypes: supportedTypes,
-          hardwareAuthenticationEnabled: enabled
+          hardwareAuthenticationEnabled: enabled,
         })
       } else {
         this.setState({ hardwareAuthenticationEnabled: false })
@@ -118,24 +120,24 @@ class ProfileScreen extends React.Component {
     const defaultCategory = categories.length > 0 ? categories[0].name : ''
     this.setState({
       categories,
-      vendorCategory: this.state.vendorCategory || defaultCategory
+      vendorCategory: this.state.vendorCategory || defaultCategory,
     })
   }
 
   _getLocationAsync = async () => {
     if (this.state.vendorCountry) {
-      const countryData = getAllCountries()
-        .filter(c => c.cca2.toLowerCase() === this.state.vendorCountry)
+      const countryData = (await getAllCountries(FlagType.EMOJI, AVAILABLE_LANGUAGES[this.props.settings.language].countryPicker))
+        .filter((c) => c.cca2.toLowerCase() === this.state.vendorCountry)
         .pop()
       if (countryData) {
-        this.setState({ country: countryData.name[AVAILABLE_LANGUAGES[this.props.settings.language].countryPicker] })
+        this.setState({ country: countryData.name })
       }
     }
 
-    let { status } = await Permissions.askAsync(Permissions.LOCATION)
+    let { status } = await Permissions.askAsync(Permissions.LOCATION_FOREGROUND)
     if (status !== 'granted') {
       // Request permissions
-      const { status, permissions } = await Permissions.askAsync(Permissions.LOCATION)
+      const { status, permissions } = await Permissions.askAsync(Permissions.LOCATION_FOREGROUND)
       if (status === 'granted') {
       } else {
         return
@@ -149,35 +151,35 @@ class ProfileScreen extends React.Component {
         this.setState({
           location: {
             coords: location.coords,
-            address: address[0]
+            address: address[0],
           },
-          vendorPin: this.state.vendorPin.length === 0 ? [location.coords.latitude, location.coords.longitude] : this.state.vendorPin
+          vendorPin: this.state.vendorPin.length === 0 ? [location.coords.latitude, location.coords.longitude] : this.state.vendorPin,
         })
       } else {
         this.setState({
           location: {
             coords: location.coords,
-            address: address[0]
+            address: address[0],
           },
           vendorCountry: address[0].isoCountryCode,
           country: address[0].country,
-          vendorPin: this.state.vendorPin.length === 0 ? [location.coords.latitude, location.coords.longitude] : this.state.vendorPin
+          vendorPin: this.state.vendorPin.length === 0 ? [location.coords.latitude, location.coords.longitude] : this.state.vendorPin,
         })
       }
     } else {
       this.setState({
         location: {
           coords: location.coords,
-          address: null
+          address: null,
         },
-        vendorPin: this.state.vendorPin.length === 0 ? [location.coords.latitude, location.coords.longitude] : this.state.vendorPin
+        vendorPin: this.state.vendorPin.length === 0 ? [location.coords.latitude, location.coords.longitude] : this.state.vendorPin,
       })
     }
   }
 
-  onEnableScroll = value => {
+  onEnableScroll = (value) => {
     this.setState({
-      enableScrollViewScroll: value
+      enableScrollViewScroll: value,
     })
   }
 
@@ -200,14 +202,14 @@ class ProfileScreen extends React.Component {
 
   onCategoryChange(value) {
     this.setState({
-      vendorCategory: value
+      vendorCategory: value,
     })
   }
 
   onLanguageChange(value) {
     this.props.setSetting({
       language: value,
-      culture: AVAILABLE_LANGUAGES[value].culture
+      culture: AVAILABLE_LANGUAGES[value].culture,
     })
     i18n.locale = value
 
@@ -217,23 +219,23 @@ class ProfileScreen extends React.Component {
 
   onCurrencyChange(value) {
     this.props.setSetting({
-      currency: value
+      currency: value,
     })
   }
 
   onThemeChange(value) {
     this.props.setSetting({
-      theme: value
+      theme: value,
     })
   }
 
-  onAvailabilityChanged = option => {
+  onAvailabilityChanged = (option) => {
     this.setState({ availability: option })
   }
 
   onBasicSave = async () => {
     this.setState({
-      basicSaving: true
+      basicSaving: true,
     })
     const result = await this.props.updateProfile(
       this.state.fullName,
@@ -255,7 +257,7 @@ class ProfileScreen extends React.Component {
       email: this.props.account.email,
       availability: this.props.account.availability,
       contactNumber: this.props.account.contactNumber,
-      paymentInfo: this.props.account.paymentInfo
+      paymentInfo: this.props.account.paymentInfo,
     })
   }
 
@@ -264,12 +266,12 @@ class ProfileScreen extends React.Component {
     this.props.navigation.navigate('PinCode', {
       type: EnterPinCode,
       mustVerifyPinCode: true,
-      onEnterSuccess: pin => {
+      onEnterSuccess: (pin) => {
         // Show private key
         setTimeout(() => {
           this.setState({ privateShowing: true })
         }, 1000)
-      }
+      },
     })
   }
 
@@ -278,17 +280,17 @@ class ProfileScreen extends React.Component {
     this.props.navigation.navigate('PinCode', {
       type: EnterPinCode,
       mustVerifyPinCode: true,
-      onEnterSuccess: pin => {
+      onEnterSuccess: (pin) => {
         // Show change pin, delay so goBack animation finishes
         setTimeout(() => {
           this.props.navigation.navigate('PinCode', {
             type: ChoosePinCode,
             choosePinCode: (result, newPin) => {
               console.log(result, newPin)
-            }
+            },
           })
         }, 1000)
-      }
+      },
     })
   }
 
@@ -299,26 +301,26 @@ class ProfileScreen extends React.Component {
       this.props.navigation.navigate('PinCode', {
         type: EnterPinCode,
         mustVerifyPinCode: true,
-        onEnterSuccess: async pin => {
+        onEnterSuccess: async (pin) => {
           // Store pin
           await this.props.storePinCode(pin)
           this.props.setSetting({
-            hardwareAuthEnabled: true
+            hardwareAuthEnabled: true,
           })
-        }
+        },
       })
     } else {
       // Clear stored pin
       await this.props.storePinCode([])
       this.props.setSetting({
-        hardwareAuthEnabled: false
+        hardwareAuthEnabled: false,
       })
     }
   }
 
   onAlwaysVerifyChanged = () => {
     this.props.setSetting({
-      alwaysVerifyBeforeSend: !this.props.settings.alwaysVerifyBeforeSend
+      alwaysVerifyBeforeSend: !this.props.settings.alwaysVerifyBeforeSend,
     })
   }
 
@@ -336,7 +338,7 @@ class ProfileScreen extends React.Component {
           closeOnHardwareBackPress: false,
           closeOnTouchOutside: false,
           progressSize: 'large',
-          showCancelButton: false
+          showCancelButton: false,
         })
 
         // Clear
@@ -344,11 +346,11 @@ class ProfileScreen extends React.Component {
         await this.props.hideAlert()
 
         // Back to Init
-        NavigationService.navigate('NewUser')
+        NavigationService.navigate('InitApp', { screen: 'NewUser' })
         if (Platform.OS === 'android') {
           BackHandler.exitApp()
         }
-      }
+      },
     })
   }
 
@@ -391,7 +393,7 @@ class ProfileScreen extends React.Component {
       mediaTypes: 'Images',
       allowsEditing: true,
       aspect: [1, 1],
-      quality: 1
+      quality: 1,
     })
 
     if (!result.cancelled) {
@@ -401,21 +403,21 @@ class ProfileScreen extends React.Component {
           [
             {
               resize: {
-                width: MaxAvatarWidth
-              }
-            }
+                width: MaxAvatarWidth,
+              },
+            },
           ],
           {
             compress: 1,
-            format: 'jpeg'
+            format: 'jpeg',
           }
         )
         this.setState({
-          vendorLogo: image.uri
+          vendorLogo: image.uri,
         })
       } else {
         this.setState({
-          vendorLogo: result.uri
+          vendorLogo: result.uri,
         })
       }
     }
@@ -434,7 +436,7 @@ class ProfileScreen extends React.Component {
     const location = await Location.geocodeAsync(this.state.vendorAddress)
     if (location.length > 0) {
       this.setState({
-        vendorPin: [location[0].latitude, location[0].longitude]
+        vendorPin: [location[0].latitude, location[0].longitude],
       })
     }
   }
@@ -443,9 +445,9 @@ class ProfileScreen extends React.Component {
     this.setState({ pinOnMapShowing: true })
   }
 
-  onMapPress = event => {
+  onMapPress = (event) => {
     this.setState({
-      vendorPin: [event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]
+      vendorPin: [event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude],
     })
   }
 
@@ -465,7 +467,7 @@ class ProfileScreen extends React.Component {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: 'Images',
       allowsEditing: Platform.OS === 'android',
-      quality: 1
+      quality: 1,
     })
 
     if (!result.cancelled) {
@@ -475,13 +477,13 @@ class ProfileScreen extends React.Component {
           [
             {
               resize: {
-                width: MaxImageWidth
-              }
-            }
+                width: MaxImageWidth,
+              },
+            },
           ],
           {
             compress: 1,
-            format: 'jpeg'
+            format: 'jpeg',
           }
         )
         const newImages = clone(this.state.vendorImages)
@@ -495,7 +497,7 @@ class ProfileScreen extends React.Component {
     }
   }
 
-  deleteImage = image => {
+  deleteImage = (image) => {
     this.onEnableScroll(true)
     const newImages = []
     for (let i = 0; i < this.state.vendorImages.length; i++) {
@@ -523,7 +525,7 @@ class ProfileScreen extends React.Component {
     }
 
     this.setState({
-      merchantSaving: true
+      merchantSaving: true,
     })
     const result = await this.props.updateMerchant(
       this.state.vendorName,
@@ -546,8 +548,8 @@ class ProfileScreen extends React.Component {
 
     let countryData = null
     if (this.props.account.vendorCountry) {
-      countryData = getAllCountries()
-        .filter(c => c.cca2.toLowerCase() === this.props.account.vendorCountry)
+      countryData = (await getAllCountries(FlagType.EMOJI, AVAILABLE_LANGUAGES[this.props.settings.language].countryPicker))
+        .filter((c) => c.cca2.toLowerCase() === this.props.account.vendorCountry)
         .pop()
     }
 
@@ -565,9 +567,9 @@ class ProfileScreen extends React.Component {
       vendorImages: this.props.account.vendorImages,
       vendorPin:
         this.props.account.vendorAddressLocation && this.props.account.vendorAddressLocation !== ''
-          ? this.props.account.vendorAddressLocation.split(',').map(i => parseFloat(i))
+          ? this.props.account.vendorAddressLocation.split(',').map((i) => parseFloat(i))
           : [],
-      country: countryData ? countryData.name[AVAILABLE_LANGUAGES[this.props.settings.language].countryPicker] : ''
+      country: countryData ? countryData.name : '',
     })
   }
 
@@ -577,7 +579,7 @@ class ProfileScreen extends React.Component {
 
   onMerchantCancel = async () => {
     this.setState({
-      merchantSaving: true
+      merchantSaving: true,
     })
     const result = await this.props.cancelMerchant()
     if (result.error) {
@@ -589,7 +591,7 @@ class ProfileScreen extends React.Component {
 
     this.setState({
       merchantSaving: false,
-      isMerchant: this.props.account.isMerchant
+      isMerchant: this.props.account.isMerchant,
     })
   }
 
@@ -603,7 +605,7 @@ class ProfileScreen extends React.Component {
 
     const sections = [translate('BASIC'), translate('MERCHANT'), translate('SETTINGS')]
     const languages = Object.keys(AVAILABLE_LANGUAGES)
-    const currencies = Object.keys(SUPPORTED_CURRENCIES).filter(item => item.toLowerCase() !== 'eth')
+    const currencies = Object.keys(SUPPORTED_CURRENCIES).filter((item) => item.toLowerCase() !== 'eth')
     const themes = Object.keys(AVAILABLE_THEMES)
 
     return (
@@ -629,15 +631,19 @@ class ProfileScreen extends React.Component {
                   </StyledText>
                   <Item stackedLabel underline spaceTop transparent>
                     <Label>{translate('Your full name')}</Label>
-                    <Input value={this.state.fullName} onChangeText={text => this.setState({ fullName: text })} />
+                    <Input value={this.state.fullName} onChangeText={(text) => this.setState({ fullName: text })} />
                   </Item>
                   <Item stackedLabel underline spaceTop transparent>
                     <Label>{translate('Your email')}</Label>
-                    <Input keyboardType='email-address' value={this.state.email} onChangeText={text => this.setState({ email: text })} />
+                    <Input keyboardType='email-address' value={this.state.email} onChangeText={(text) => this.setState({ email: text })} />
                   </Item>
                   <Item stackedLabel underline spaceTop transparent>
                     <Label>{translate('Your contact number')}</Label>
-                    <Input keyboardType='phone-pad' value={this.state.contactNumber} onChangeText={text => this.setState({ contactNumber: text })} />
+                    <Input
+                      keyboardType='phone-pad'
+                      value={this.state.contactNumber}
+                      onChangeText={(text) => this.setState({ contactNumber: text })}
+                    />
                   </Item>
                   <Item stackedLabel underline spaceTop transparent>
                     <Label>{translate('Your payment information')}</Label>
@@ -645,7 +651,7 @@ class ProfileScreen extends React.Component {
                       multiline
                       style={{ height: 3 * 30 }}
                       value={this.state.paymentInfo}
-                      onChangeText={text => this.setState({ paymentInfo: text })}
+                      onChangeText={(text) => this.setState({ paymentInfo: text })}
                     />
                   </Item>
                   <Item spaceTop transparent>
@@ -721,7 +727,7 @@ class ProfileScreen extends React.Component {
                   {this.state.isMerchant && (
                     <Item stackedLabel underline spaceTop transparent>
                       <Label>{translate('Vendor name')}</Label>
-                      <Input value={this.state.vendorName} onChangeText={text => this.setState({ vendorName: text })} />
+                      <Input value={this.state.vendorName} onChangeText={(text) => this.setState({ vendorName: text })} />
                     </Item>
                   )}
                   {this.state.isMerchant && (
@@ -753,37 +759,39 @@ class ProfileScreen extends React.Component {
                         textContentType='streetAddressLine1'
                         value={this.state.vendorAddress}
                         onBlur={this.onAddressBlur}
-                        onChangeText={text => this.setState({ vendorAddress: text })}
+                        onChangeText={(text) => this.setState({ vendorAddress: text })}
                       />
                     </Item>
                   )}
                   {this.state.isMerchant && (
                     <Item stackedLabel spaceTop transparent>
                       <Label>{translate('Country')}</Label>
-                      <Button smallSpaceTop shadow style={styles.countryPicker} onPress={() => this._countryPicker.openModal()}>
+                      <Button smallSpaceTop shadow style={styles.countryPicker} onPress={() => {
+                        this.setState({ countryPickerVisible: true })
+                      }}>
                         <CountryPicker
-                          ref={ref => (this._countryPicker = ref)}
-                          onChange={value => {
+                          onSelect={(value) => {
                             this.setState({ vendorCountry: value.cca2.toLowerCase(), country: value.name })
                           }}
-                          cca2={this.state.vendorCountry || 'us'}
+                          onClose={() => {
+                            this.setState({ countryPickerVisible: false })
+                          }}
+                          countryCode={(this.state.vendorCountry || 'US').toUpperCase()}
                           translation={AVAILABLE_LANGUAGES[this.props.settings.language].countryPicker}
-                          animationType='slide'
-                          closeable={true}
-                          filterable={true}
-                          hideAlphabetFilter={true}
-                          filterPlaceholder={translate('Filter')}
-                          autoFocusFilter={false}
-                          flagType='emoji'
+                          visible={this.state.countryPickerVisible}
+                          withFilter={true}
+                          filterProps={{
+                            placeholder: translate('Filter'),
+                            placeholderTextColor:
+                              ThemeService.getThemeStyle().name === 'colorful-dark' || ThemeService.getThemeStyle().name === 'simple-dark'
+                                ? '#fff'
+                                : '#000',
+                          }}
+                          withEmoji={true}
                           closeButtonImage={
                             ThemeService.getThemeStyle().name === 'colorful-dark' || ThemeService.getThemeStyle().name === 'simple-dark'
                               ? CloseDark
                               : CloseLight
-                          }
-                          filterPlaceholderTextColor={
-                            ThemeService.getThemeStyle().name === 'colorful-dark' || ThemeService.getThemeStyle().name === 'simple-dark'
-                              ? '#fff'
-                              : '#000'
                           }
                           styles={
                             ThemeService.getThemeStyle().name === 'colorful-dark' || ThemeService.getThemeStyle().name === 'simple-dark'
@@ -815,7 +823,7 @@ class ProfileScreen extends React.Component {
                         keyboardType='phone-pad'
                         textContentType='telephoneNumber'
                         value={this.state.vendorContactNumber}
-                        onChangeText={text => this.setState({ vendorContactNumber: text })}
+                        onChangeText={(text) => this.setState({ vendorContactNumber: text })}
                       />
                     </Item>
                   )}
@@ -826,14 +834,14 @@ class ProfileScreen extends React.Component {
                         multiline
                         style={{ height: 4 * 30 }}
                         value={this.state.vendorDescription}
-                        onChangeText={text => this.setState({ vendorDescription: text })}
+                        onChangeText={(text) => this.setState({ vendorDescription: text })}
                       />
                     </Item>
                   )}
                   {this.state.isMerchant && (
                     <Item stackedLabel underline spaceTop transparent>
                       <Label>{translate('Service')}</Label>
-                      <Input value={this.state.vendorService} onChangeText={text => this.setState({ vendorService: text })} />
+                      <Input value={this.state.vendorService} onChangeText={(text) => this.setState({ vendorService: text })} />
                     </Item>
                   )}
                   {this.state.isMerchant && (
@@ -897,7 +905,7 @@ class ProfileScreen extends React.Component {
                   {this.state.isMerchant && (
                     <Button spaceTop thirdary flexFull onPress={this.onMerchantCancel} disabled={this.state.merchantSaving}>
                       {!this.state.merchantSaving && <StyledText>{translate('CANCEL MERCHANT')}</StyledText>}
-                      {this.state.merchantSaving && <Spinner color='#186bfe' />}
+                      {this.state.merchantSaving && <Spinner color='#81D8D0' />}
                     </Button>
                   )}
                 </AnimatableView>
@@ -1047,7 +1055,7 @@ class ProfileScreen extends React.Component {
                 {translate('You can backup these 12 words in exact order to restore your wallet later')}
               </StyledText>
               <Item spaceTop regular style={styles.inputContainer}>
-                <Input multiline value={this.props.wallet.cryptoMnemonic} editable={false} />
+                <Input multiline value={this.props.wallet.cryptoMnemonic.phrase} editable={false} />
               </Item>
               <StyledText important spaceTop tinySpaceLeft tinySpaceRight center>
                 {translate('Caution If you forget those words, you will lose your wallet and its fund forever')}
@@ -1071,7 +1079,7 @@ class ProfileScreen extends React.Component {
                     latitude: this.state.vendorPin.length > 0 ? this.state.vendorPin[0] : 0,
                     longitude: this.state.vendorPin.length > 1 ? this.state.vendorPin[1] : 0,
                     latitudeDelta: 0.001,
-                    longitudeDelta: 0.001
+                    longitudeDelta: 0.001,
                   }}
                   onPress={this.onMapPress}
                 >
@@ -1079,7 +1087,7 @@ class ProfileScreen extends React.Component {
                     draggable
                     coordinate={{
                       latitude: this.state.vendorPin.length > 0 ? this.state.vendorPin[0] : 0,
-                      longitude: this.state.vendorPin.length > 1 ? this.state.vendorPin[1] : 0
+                      longitude: this.state.vendorPin.length > 1 ? this.state.vendorPin[1] : 0,
                     }}
                     onDragEnd={this.onMapPress}
                     title={this.vendorAddress}
@@ -1099,88 +1107,88 @@ class ProfileScreen extends React.Component {
 
 const styles = {
   container: {
-    flex: 1
+    flex: 1,
   },
   contentContainer: {
-    flex: 0
+    flex: 0,
   },
   logoSize: {
     width: 150,
-    height: 150
+    height: 150,
   },
   mapContainer: {
     flex: 1,
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
   },
   map: {
     position: 'absolute',
     top: 0,
     left: 0,
     bottom: 0,
-    right: 0
-  }
+    right: 0,
+  },
 }
 
 const lightTheme = StyleSheet.create({
   emojiFlag: {
-    lineHeight: 32
+    lineHeight: 32,
   },
   countryName: {
-    fontFamily: ThemeService.getThemeStyle().variables.fontFamilyMedium
+    fontFamily: ThemeService.getThemeStyle().variables.fontFamilyMedium,
   },
   itemCountryName: {
-    borderBottomWidth: 0
-  }
+    borderBottomWidth: 0,
+  },
 })
 
 const darkTheme = StyleSheet.create({
   emojiFlag: {
-    lineHeight: 32
+    lineHeight: 32,
   },
   modalContainer: {
-    backgroundColor: '#1b213b'
+    backgroundColor: '#1b213b',
   },
   contentContainer: {
-    backgroundColor: '#1b213b'
+    backgroundColor: '#1b213b',
   },
   header: {
-    backgroundColor: '#1b213b'
+    backgroundColor: '#1b213b',
   },
   itemCountryName: {
-    borderBottomWidth: 0
+    borderBottomWidth: 0,
   },
   countryName: {
     fontFamily: ThemeService.getThemeStyle().variables.fontFamilyMedium,
-    color: '#ffaeb5'
+    color: '#ffaeb5',
   },
   letterText: {
-    color: '#ffaeb5'
+    color: '#ffaeb5',
   },
   input: {
     color: '#fff',
     borderBottomWidth: 1,
-    borderColor: '#ffaeb5'
-  }
+    borderColor: '#ffaeb5',
+  },
 })
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { account, wallet, settings, pincode } = state
   return { account, wallet, settings, pincode }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    setSetting: settings => dispatch(setSetting(settings)),
+    setSetting: (settings) => dispatch(setSetting(settings)),
     updateProfile: (fullName, email, availability, contactNumber, paymentInfo, language) =>
       dispatch(updateProfile(fullName, email, availability, contactNumber, paymentInfo, language)),
-    showAlert: config => dispatch(showAlert(config)),
+    showAlert: (config) => dispatch(showAlert(config)),
     hideAlert: () => dispatch(hideAlert()),
     clear: () => dispatch(clear()),
     getCategories: () => dispatch(getCategories()),
     updateMerchant: (name, logo, address, country, location, phone, description, service, category, images) =>
       dispatch(updateMerchant(name, logo, address, country, location, phone, description, service, category, images)),
     cancelMerchant: () => dispatch(cancelMerchant()),
-    storePinCode: pin => dispatch(storePinCode(pin))
+    storePinCode: (pin) => dispatch(storePinCode(pin)),
   }
 }
 

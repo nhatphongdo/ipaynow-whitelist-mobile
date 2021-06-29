@@ -28,7 +28,7 @@ class ConfirmWalletScreen extends React.Component {
   }
 
   componentDidMount() {
-    const words = this.state.verifying ? this.props.wallet.cryptoMnemonic.split(' ') : this.props.wallet.cryptoWallet.mnemonic.split(' ')
+    const words = this.state.verifying ? this.props.wallet.cryptoMnemonic.phrase.split(' ') : this.props.wallet.cryptoWallet.mnemonic.phrase.split(' ')
     this.setState({ words: shuffle(words) })
   }
 
@@ -85,7 +85,9 @@ class ConfirmWalletScreen extends React.Component {
 
   onConfirm = async () => {
     // Validate the words
-    const words = this.state.verifying ? this.props.wallet.cryptoMnemonic.split(' ') : this.props.wallet.cryptoWallet.mnemonic.split(' ')
+    const words = this.state.verifying
+      ? this.props.wallet.cryptoMnemonic.phrase.split(' ')
+      : this.props.wallet.cryptoWallet.mnemonic.phrase.split(' ')
     if (this.state.usedWords.length < TotalWords) {
       DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate('Word phrases are not correct'))
       return

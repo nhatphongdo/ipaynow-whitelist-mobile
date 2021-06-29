@@ -4,6 +4,7 @@ import { CLEARED } from '../storage/constants';
 const INITIAL_STATE = {
     balance: 0,
     lock: null,
+    lockBalance: 0,
 
     earnPeriods: []
 };

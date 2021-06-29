@@ -101,7 +101,7 @@ class HomeScreen extends React.Component {
     }
 
     // Get the token that uniquely identifies this device
-    let token = await Notifications.getExpoPushTokenAsync()
+    let token = (await Notifications.getExpoPushTokenAsync()).data
 
     // POST the token to your backend server from where you can retrieve it to send push notifications.
     await this.props.updatePushNotificationToken(token)
@@ -156,17 +156,17 @@ class HomeScreen extends React.Component {
     this.props.navigation.navigate('Trades')
   }
 
-  onGiftPressed = async () => {
-    this.setState({ confirming: true })
-    const result = await this.props.claimDailyBonus()
-    if (result.error) {
-      await this.onClose()
-      DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate(result.error))
-      return
-    }
+  // onGiftPressed = async () => {
+  //   this.setState({ confirming: true })
+  //   const result = await this.props.claimDailyBonus()
+  //   if (result.error) {
+  //     await this.onClose()
+  //     DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate(result.error))
+  //     return
+  //   }
 
-    this.setState({ earnedBonus: result.result.amount, touching: true, animationEnded: false })
-  }
+  //   this.setState({ earnedBonus: result.result.amount, touching: true, animationEnded: false })
+  // }
 
   onClose = async () => {
     // Set latest time
@@ -231,23 +231,11 @@ class HomeScreen extends React.Component {
               </View>
 
               <View row flexFull>
-                <HexButton left styles={styles} onPress={this.onDeposit} icon={<DepositIcon height={IconSize} />}>
-                  {translate('DEPOSIT')}
-                </HexButton>
-                <HexButton center styles={styles} onPress={this.onEarn} icon={<EarnIcon height={IconSize} />}>
+                <HexButton left styles={styles} onPress={this.onEarn} icon={<EarnIcon height={IconSize} />}>
                   {translate('EARN')}
                 </HexButton>
-                <HexButton right styles={styles} onPress={this.onRates} icon={<RatesIcon height={IconSize} />}>
+                <HexButton center styles={styles} onPress={this.onRates} icon={<RatesIcon height={IconSize} />}>
                   {translate('RATES')}
-                </HexButton>
-              </View>
-
-              <View row flexFull>
-                <HexButton left styles={styles} onPress={this.onStore} icon={<StoreIcon height={IconSize} />}>
-                  {translate('STORE')}
-                </HexButton>
-                <HexButton center styles={styles} onPress={this.onGames} icon={<GamesIcon height={IconSize} />}>
-                  {translate('GAMES')}
                 </HexButton>
                 <HexButton right styles={styles} onPress={this.onReferral} icon={<ReferralIcon height={IconSize} />}>
                   {translate('REFERRAL')}
@@ -255,20 +243,14 @@ class HomeScreen extends React.Component {
               </View>
 
               <View row flexFull>
-                <HexButton left styles={styles} onPress={this.onNotification} icon={<NotificationIcon height={IconSize} />}>
-                  {translate('NOTICE')}
-                </HexButton>
-                <HexButton
-                  center
-                  styles={styles}
-                  onPress={this.onMerchants}
-                  icon={<MerchantsIcon height={IconSize} />}
-                  lines={this.props.settings.language.toLowerCase() !== 'en' ? 2 : 1}
-                >
-                  {translate('MERCHANTS')}
-                </HexButton>
-                <HexButton right styles={styles} onPress={this.onExchangeRequest} lines={2} icon={<RequestIcon height={IconSize} />}>
+                <HexButton left styles={styles} onPress={this.onExchangeRequest} lines={2} icon={<RequestIcon height={IconSize} />}>
                   {this.props.settings.language.toLowerCase() !== 'en' ? translate('OTC REQUEST') : translate('OTC REQUEST').replace(' ', '\n')}
+                </HexButton>
+                <HexButton center styles={styles} onPress={this.onGames} icon={<GamesIcon height={IconSize} />}>
+                  {translate('GAMES')}
+                </HexButton>
+                <HexButton right styles={styles} onPress={this.onNotification} icon={<NotificationIcon height={IconSize} />}>
+                  {translate('NOTICE')}
                 </HexButton>
               </View>
             </View>
@@ -292,7 +274,7 @@ class HomeScreen extends React.Component {
           </Content>
         </Container>
         <TabNavigation />
-        {this.props.reward.balance > 0 &&
+        {/* {this.props.reward.balance > 0 &&
           this.props.settings.lastDailyBonusTime <
             moment()
               .utc()
@@ -369,7 +351,7 @@ class HomeScreen extends React.Component {
                 </StyledText>
               )}
             </View>
-          )}
+          )} */}
       </Screen>
     )
   }

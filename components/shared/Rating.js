@@ -34,7 +34,7 @@ class Rating extends React.Component {
     // const stroke = { 'colorful-light': '#09dac6', 'colorful-dark': '#6e00ff', 'simple-light': '#15bdd8', 'simple-dark': '#1aa68c' }[
     //     ThemeService.getThemeStyle().name
     // ];
-    const stroke = '#186bfe'
+    const stroke = '#81D8D0'
 
     return (
       <View

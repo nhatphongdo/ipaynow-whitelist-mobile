@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+import { View, Text } from 'react-native'
 import NavigationService from '../../services/NavigationService'
 import HomeScreen from '../home/HomeScreen'
 import NewUserScreen from '../init/NewUserScreen'
@@ -34,12 +35,7 @@ import TradeDetailScreen from '../market/TradeDetailScreen'
 
 const MainAppStack = createStackNavigator()
 const MainApp = ({ landing }) => (
-  <MainAppStack.Navigator
-    initialRouteName={landing || 'Home'}
-    screenOptions={{
-      headerShown: false,
-    }}
-  >
+  <MainAppStack.Navigator initialRouteName={landing || 'Home'} headerMode='none'>
     <MainAppStack.Screen name='Home' component={HomeScreen} />
     <MainAppStack.Screen name='Send' component={SendScreen} />
     <MainAppStack.Screen name='Receive' component={ReceiveScreen} />

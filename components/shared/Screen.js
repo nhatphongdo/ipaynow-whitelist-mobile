@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { connectStyle } from 'native-base'
 import ThemeService from '../../services/ThemeService'
 import { View } from 'react-native-animatable'

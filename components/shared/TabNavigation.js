@@ -24,7 +24,7 @@ class TabNavigation extends React.Component {
   }
 
   onMall = () => {
-    NavigationService.navigate('Mall')
+    NavigationService.navigate('Merchants')
   }
 
   onProfile = () => {
@@ -40,6 +40,7 @@ class TabNavigation extends React.Component {
     const HomeIcon = ThemeService.getThemeStyle().variables.homeIcon
     const MallIcon = ThemeService.getThemeStyle().variables.mallIcon
     const ProfileIcon = ThemeService.getThemeStyle().variables.profileIcon
+    const MerchantsIcon = ThemeService.getThemeStyle().variables.merchantsIconBottom
 
     return (
       <View style={styles.container}>
@@ -64,9 +65,9 @@ class TabNavigation extends React.Component {
             </StyledText>
           </Button>
           <Button style={styles.button} onPress={this.onMall}>
-            <MallIcon height={ThemeService.getThemeStyle().variables.bottomBarIconHeight} />
+            <MerchantsIcon height={ThemeService.getThemeStyle().variables.bottomBarIconHeight} />
             <StyledText style={styles.title} numberOfLines={1} adjustsFontSizeToFit>
-              {translate('Mall')}
+              {translate('Merchant')}
             </StyledText>
           </Button>
           <Button style={styles.button} onPress={this.onProfile}>

@@ -1,30 +1,30 @@
-import React from 'react';
-import { FlatList, Platform } from 'react-native';
-import { connect } from 'react-redux';
-import { connectStyle, Container, Content, View, Input, Spinner } from 'native-base';
-import { Placeholder, PlaceholderMedia, PlaceholderLine, Shine } from 'rn-placeholder';
-import * as WebBrowser from 'expo-web-browser';
-import * as Animatable from 'react-native-animatable';
-import Modal from 'react-native-modal';
-import Lottie from 'lottie-react-native';
-import 'ethers/dist/shims.js';
-import { ethers } from 'ethers';
-import numeral from 'numeral';
-import ThemeService from '../../services/ThemeService';
-import { translate } from '../../constants/Languages';
-import Screen from '../shared/Screen';
-import TabNavigation from '../shared/TabNavigation';
-import GroupBox from '../shared/GroupBox';
-import AccountCard from '../shared/AccountCard';
-import Segment from '../shared/Segment';
-import ListItem from '../shared/ListItem';
-import StyledText from '../shared/StyledText';
-import Button from '../shared/Button';
-import BoxShadow from '../shared/BoxShadow';
-import { createExchange, getExchanges, withdraw } from '../../stores/market/actions';
-import { BUY, SELL, CREDIT_CARD, BANK_TRANSFER, PAYPAL, PAYONEER, BITCOIN, ETHEREUM } from '../../stores/market/constants';
-import { updateTransaction } from '../../stores/storage/actions';
-import DropdownAlertService from '../../services/DropdownAlertService';
+import React from 'react'
+import { FlatList, Platform } from 'react-native'
+import { connect } from 'react-redux'
+import { connectStyle, Container, Content, View, Input, Spinner } from 'native-base'
+import { Placeholder, PlaceholderMedia, PlaceholderLine, Shine } from 'rn-placeholder'
+import * as WebBrowser from 'expo-web-browser'
+import * as Animatable from 'react-native-animatable'
+import Modal from 'react-native-modal'
+import Lottie from 'lottie-react-native'
+import '@ethersproject/shims'
+import { ethers } from 'ethers'
+import numeral from 'numeral'
+import ThemeService from '../../services/ThemeService'
+import { translate } from '../../constants/Languages'
+import Screen from '../shared/Screen'
+import TabNavigation from '../shared/TabNavigation'
+import GroupBox from '../shared/GroupBox'
+import AccountCard from '../shared/AccountCard'
+import Segment from '../shared/Segment'
+import ListItem from '../shared/ListItem'
+import StyledText from '../shared/StyledText'
+import Button from '../shared/Button'
+import BoxShadow from '../shared/BoxShadow'
+import { createExchange, getExchanges, withdraw } from '../../stores/market/actions'
+import { BUY, SELL, CREDIT_CARD, BANK_TRANSFER, PAYPAL, PAYONEER, BITCOIN, ETHEREUM } from '../../stores/market/constants'
+import { updateTransaction } from '../../stores/storage/actions'
+import DropdownAlertService from '../../services/DropdownAlertService'
 import {
   sendToken,
   getBlockNumber,
@@ -32,17 +32,17 @@ import {
   getTransaction,
   submitTransaction,
   estimateGas,
-  getWalletInfo
-} from '../../stores/wallet/actions';
-import { MAXIMUM_TRIES, CONFIRMATION_PERIOD, CONFIRMATION_BLOCKS } from '../../stores/wallet/constants';
-import { EXCHANGE_SELL_ESCROW } from '../../stores/storage/constants';
-import { EnterPinCode } from '../init/PinCodeScreen';
-import { showAlert, hideAlert } from '../../stores/alert/actions';
-import { formatCurrency, formatCrypto } from '../../common/helper';
-import { HDN } from '../../stores/rates/constants';
-import { convertRate } from '../../stores/rates/actions';
-import { PRIVATE, SHARED, PUBLIC } from '../../stores/account/constants';
-import Help from '../../assets/images/Help';
+  getWalletInfo,
+} from '../../stores/wallet/actions'
+import { MAXIMUM_TRIES, CONFIRMATION_PERIOD, CONFIRMATION_BLOCKS } from '../../stores/wallet/constants'
+import { EXCHANGE_SELL_ESCROW } from '../../stores/storage/constants'
+import { EnterPinCode } from '../init/PinCodeScreen'
+import { showAlert, hideAlert } from '../../stores/alert/actions'
+import { formatCurrency, formatCrypto } from '../../common/helper'
+import { USDT } from '../../stores/rates/constants'
+import { convertRate } from '../../stores/rates/actions'
+import { PRIVATE, SHARED, PUBLIC } from '../../stores/account/constants'
+import Help from '../../assets/images/Help'
 
 class ExchangeScreen extends React.Component {
   state = {
@@ -66,73 +66,73 @@ class ExchangeScreen extends React.Component {
 
     animationEnded: false,
 
-    withdrawing: false
-  };
+    withdrawing: false,
+  }
 
-  types = [translate('BUY'), translate('SELL')];
+  types = [translate('BUY'), translate('SELL')]
 
   componentDidMount() {
-    this._bootstrapAsync();
+    this._bootstrapAsync()
   }
 
   componentWillUnmount() {
     if (this._confirmingTimer) {
-      clearInterval(this._confirmingTimer);
-      this._confirmingTimer = null;
+      clearInterval(this._confirmingTimer)
+      this._confirmingTimer = null
     }
   }
 
   _bootstrapAsync = async () => {
-    await this.loadExchanges();
-  };
+    await this.loadExchanges()
+  }
 
   loadExchanges = async () => {
     // Get exchanges
-    this.setState({ exchanges: [null, null, null, null, null] });
-    const exchanges = await this.props.getExchanges();
-    this.setState({ exchanges });
-  };
+    this.setState({ exchanges: [null, null, null, null, null] })
+    const exchanges = await this.props.getExchanges()
+    this.setState({ exchanges })
+  }
 
-  onItemPress = async item => {
-    this.props.navigation.navigate('TradeDetail', { id: item.id });
-  };
+  onItemPress = async (item) => {
+    this.props.navigation.navigate('TradeDetail', { id: item.id })
+  }
 
-  onWithdraw = async item => {
-    this.setState({ withdrawing: true });
-    const result = await this.props.withdraw(item.id);
-    this.setState({ withdrawing: false });
+  onWithdraw = async (item) => {
+    this.setState({ withdrawing: true })
+    const result = await this.props.withdraw(item.id)
+    this.setState({ withdrawing: false })
     if (result.error) {
-      DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate(result.error));
-      return;
+      DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate(result.error))
+      return
     }
 
-    DropdownAlertService.show(DropdownAlertService.SUCCESS, translate('Success'), translate('Please wait We are sending your HDN back'));
-    await this.loadExchanges();
-  };
+    DropdownAlertService.show(DropdownAlertService.SUCCESS, translate('Success'), translate('Please wait We are sending your HDN back'))
+    await this.loadExchanges()
+  }
 
-  _keyExtractor = (item, index) => index.toString();
+  _keyExtractor = (item, index) => index.toString()
 
   _renderItem = ({ item, index }) => {
     if (!item) {
       return (
         <Placeholder
           Animation={Shine}
-          Right={props => <PlaceholderMedia isRound={true} style={props.style} />}
+          Right={(props) => <PlaceholderMedia isRound={true} style={props.style} />}
           style={{ marginBottom: ThemeService.getThemeStyle().variables.baseSpace }}
         >
           <PlaceholderLine width={80} />
           <PlaceholderLine />
           <PlaceholderLine width={30} />
         </Placeholder>
-      );
+      )
     }
 
-    const CreditCardIcon = ThemeService.getThemeStyle().variables.creditCardPaymentIcon;
-    const BankIcon = ThemeService.getThemeStyle().variables.bankPaymentIcon;
-    const PaypalIcon = ThemeService.getThemeStyle().variables.paypalPaymentIcon;
-    const PayoneerIcon = ThemeService.getThemeStyle().variables.payoneerPaymentIcon;
-    const BitcoinIcon = ThemeService.getThemeStyle().variables.bitcoinPaymentIcon;
-    const EthereumIcon = ThemeService.getThemeStyle().variables.ethereumPaymentIcon;
+    const CreditCardIcon = ThemeService.getThemeStyle().variables.creditCardPaymentIcon
+    const BankIcon = ThemeService.getThemeStyle().variables.bankPaymentIcon
+    const PaypalIcon = ThemeService.getThemeStyle().variables.paypalPaymentIcon
+    const PayoneerIcon = ThemeService.getThemeStyle().variables.payoneerPaymentIcon
+    const BitcoinIcon = ThemeService.getThemeStyle().variables.bitcoinPaymentIcon
+    const EthereumIcon = ThemeService.getThemeStyle().variables.ethereumPaymentIcon
 
     return (
       <ListItem highlight containerStyle={{ marginBottom: ThemeService.getThemeStyle().variables.tinySpace }}>
@@ -161,61 +161,61 @@ class ExchangeScreen extends React.Component {
           )}
         </View>
       </ListItem>
-    );
-  };
+    )
+  }
 
   onTradeExpand = () => {
     if (!this.state.tradeExpanded) {
-      this.setState({ tradeExpanded: true }, () => this.tradeView.zoomIn(300));
+      this.setState({ tradeExpanded: true }, () => this.tradeView.zoomIn(300))
     } else {
-      this.tradeView.zoomOut(300).then(endState => this.setState({ tradeExpanded: false }));
+      this.tradeView.zoomOut(300).then((endState) => this.setState({ tradeExpanded: false }))
     }
-  };
+  }
 
-  onAmountChanged = async text => {
-    this.setState({ amount: text });
-    let amountFiat = '';
-    let amountValue = numeral(text);
+  onAmountChanged = async (text) => {
+    this.setState({ amount: text })
+    let amountFiat = ''
+    let amountValue = numeral(text)
     if (!isNaN(amountValue.value()) && amountValue.value()) {
-      amountFiat = formatCurrency(await this.props.convertRate(HDN, this.props.settings.currency, amountValue.value()));
+      amountFiat = formatCurrency(await this.props.convertRate(USDT, this.props.settings.currency, amountValue.value()))
     }
-    this.setState({ amountFiat });
-  };
+    this.setState({ amountFiat })
+  }
 
-  onAmountFiatChanged = async text => {
-    this.setState({ amountFiat: text });
-    let amount = '';
-    let amountValue = numeral(text);
+  onAmountFiatChanged = async (text) => {
+    this.setState({ amountFiat: text })
+    let amount = ''
+    let amountValue = numeral(text)
     if (!isNaN(amountValue.value()) && amountValue.value()) {
-      amount = formatCurrency(await this.props.convertRate(this.props.settings.currency, HDN, amountValue.value()));
+      amount = formatCurrency(await this.props.convertRate(this.props.settings.currency, USDT, amountValue.value()))
     }
-    this.setState({ amount });
-  };
+    this.setState({ amount })
+  }
 
   onBuy = async () => {
-    let amountValue = numeral(this.state.amount);
+    let amountValue = numeral(this.state.amount)
     if (isNaN(amountValue.value()) || amountValue.value() === null || amountValue.value() <= 0) {
       // This is not valid amount
-      DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate('You must input the valid Amount'));
-      return;
+      DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate('You must input the valid Amount'))
+      return
     }
     if (this.props.account.availability === PRIVATE || (!this.props.account.email && !this.props.account.contactNumber)) {
       this.props.showAlert({
         title: translate('Warning'),
         message: translate(
           'You must set Availability as Shared or Public and provide your contact information such as Email or Phone number so that seller can connect to you'
-        )
-      });
+        ),
+      })
     } else {
-      this.buy();
+      this.buy()
     }
-  };
+  }
 
   buy = () => {
-    let amountValue = numeral(this.state.amount);
+    let amountValue = numeral(this.state.amount)
     this.props.showAlert({
       title: translate('Confirm!'),
-      message: translate('Do you really want to buy {0}?', formatCurrency(this.state.amount, this.props.settings.culture, HDN)),
+      message: translate('Do you really want to buy {0}?', formatCurrency(this.state.amount, this.props.settings.culture, USDT)),
       showConfirmButton: true,
       onConfirmPressed: async () => {
         this.props.showAlert({
@@ -224,33 +224,33 @@ class ExchangeScreen extends React.Component {
           closeOnHardwareBackPress: false,
           closeOnTouchOutside: false,
           progressSize: 'large',
-          showCancelButton: false
-        });
+          showCancelButton: false,
+        })
 
-        const result = await this.props.createExchange(amountValue.value(), BUY);
-        this.props.hideAlert();
+        const result = await this.props.createExchange(amountValue.value(), BUY)
+        this.props.hideAlert()
         if (result.error) {
-          DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate(result.error));
-          return;
+          DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate(result.error))
+          return
         }
 
         DropdownAlertService.show(
           DropdownAlertService.SUCCESS,
           translate('Success'),
           translate('Your request is sent successfully Please check RUBY TRADE screen to see the request status')
-        );
+        )
 
-        this.loadExchanges();
-      }
-    });
-  };
+        this.loadExchanges()
+      },
+    })
+  }
 
   onSell = () => {
-    let amountValue = numeral(this.state.amount);
+    let amountValue = numeral(this.state.amount)
     if (isNaN(amountValue.value()) || amountValue.value() === null || amountValue.value() <= 0) {
       // This is not valid amount
-      DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate('You must input the valid Amount'));
-      return;
+      DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate('You must input the valid Amount'))
+      return
     }
     if (
       this.props.account.availability === PRIVATE ||
@@ -260,29 +260,29 @@ class ExchangeScreen extends React.Component {
         title: translate('Warning'),
         message: translate(
           'You must set Availability as Shared or Public and provide your contact information such as Email or Phone number or Payment information so that buyer can connect to you'
-        )
-      });
+        ),
+      })
     } else {
-      this.sell();
+      this.sell()
     }
-  };
+  }
 
   sell = () => {
-    let amountValue = numeral(this.state.amount);
+    let amountValue = numeral(this.state.amount)
     this.props.showAlert({
       title: translate('Confirm!'),
       message:
         this.props.settings.exchangeFee <= 0
           ? translate(
               'Do you really want to sell {0}? Your Ruby will be sent to our escrow wallet until they are released to buyer',
-              formatCurrency(amountValue.value(), this.props.settings.culture, HDN)
+              formatCurrency(amountValue.value(), this.props.settings.culture, USDT)
             )
           : translate(
               'Do you really want to sell {0}? Your Ruby will be sent to our escrow wallet until they are released to buyer We charge a service fee as {1} So the total transfered is {2}',
               [
-                formatCurrency(amountValue.value(), this.props.settings.culture, HDN),
-                formatCurrency(amountValue.value() * this.props.settings.exchangeFee, this.props.settings.culture, HDN),
-                formatCurrency(amountValue.value() + amountValue.value() * this.props.settings.exchangeFee, this.props.settings.culture, HDN)
+                formatCurrency(amountValue.value(), this.props.settings.culture, USDT),
+                formatCurrency(amountValue.value() * this.props.settings.exchangeFee, this.props.settings.culture, USDT),
+                formatCurrency(amountValue.value() + amountValue.value() * this.props.settings.exchangeFee, this.props.settings.culture, USDT),
               ]
             ),
       showConfirmButton: true,
@@ -293,56 +293,58 @@ class ExchangeScreen extends React.Component {
           closeOnHardwareBackPress: false,
           closeOnTouchOutside: false,
           progressSize: 'large',
-          showCancelButton: false
-        });
+          showCancelButton: false,
+        })
 
         // Check limit
-        const limitResult = await this.props.createExchange(this.state.amount, SELL);
+        const limitResult = await this.props.createExchange(this.state.amount, SELL)
         if (limitResult.error) {
-          this.props.hideAlert();
-          DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate(limitResult.error));
-          return;
+          this.props.hideAlert()
+          DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate(limitResult.error))
+          return
         }
 
         // Send to escrow wallet
-        const fee = this.props.settings.exchangeFee <= 0 ? 0 : amountValue.value() * this.props.settings.exchangeFee;
-        amountValue = amountValue.add(fee);
+        const fee = this.props.settings.exchangeFee <= 0 ? 0 : amountValue.value() * this.props.settings.exchangeFee
+        amountValue = amountValue.add(fee)
         if (amountValue.value() + fee > this.props.wallet.tokenBalance) {
-          this.props.hideAlert();
-          DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate('Insufficient balance to sell'));
-          return;
+          this.props.hideAlert()
+          DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate('Insufficient balance to sell'))
+          return
         }
 
         // Estimate gas
-        const gas = await this.props.estimateGas(this.props.settings.escrowWallet, amountValue.format('0.000000000000000000'));
+        const gas = await this.props.estimateGas(this.props.settings.escrowWallet, amountValue.format('0.000000000000000000'), true)
         if (gas > this.props.wallet.ethBalance) {
-          this.props.hideAlert();
+          this.props.hideAlert()
           DropdownAlertService.show(
             DropdownAlertService.ERROR,
             translate('Error'),
             translate('Insufficient gas to send You need at least {0} ETH as gas to sell', formatCrypto(gas))
-          );
-          return;
+          )
+          return
         }
 
-        this.props.hideAlert();
+        this.props.hideAlert()
 
         // Verify pin before send
         if (this.props.settings.alwaysVerifyBeforeSend) {
           this.props.navigation.navigate('PinCode', {
             type: EnterPinCode,
-            onEnterSuccess: pin => {
+            onEnterSuccess: (pin) => {
               setTimeout(() => {
-                this.send(this.props.settings.escrowWallet, amountValue);
-              }, 1000);
-            }
-          });
+                this.send(this.props.settings.escrowWallet, amountValue)
+              }, 1000)
+            },
+          })
         } else {
-          await this.send(this.props.settings.escrowWallet, amountValue);
+          setTimeout(() => {
+            this.send(this.props.settings.escrowWallet, amountValue)
+          }, 500)
         }
-      }
-    });
-  };
+      },
+    })
+  }
 
   send = async (address, amountValue) => {
     // Send
@@ -350,41 +352,41 @@ class ExchangeScreen extends React.Component {
       sending: true,
       confirming: true,
       confirmationCount: 0,
-      animationEnded: false
-    });
-    const transaction = await this.props.sendToken(address, amountValue.format('0.000000000000000000'));
+      animationEnded: false,
+    })
+    const transaction = await this.props.sendToken(address, amountValue.format('0.000000000000000000'))
     if (transaction.error) {
       // Failed
       this.setState({
         transaction: null,
         transactionStatus: null,
         confirming: false,
-        errorMessage: transaction.error
-      });
-      return;
+        errorMessage: transaction.error,
+      })
+      return
     }
 
     // Save to database
-    await this.props.updateTransaction(address, amountValue.value(), HDN, '', EXCHANGE_SELL_ESCROW, transaction.result.hash);
+    await this.props.updateTransaction(address, amountValue.value(), USDT, '', EXCHANGE_SELL_ESCROW, transaction.result.hash)
 
     // Submit transaction to server
-    const sendResult = await this.props.submitTransaction(transaction.result.hash, address, amountValue.value(), false);
+    const sendResult = await this.props.submitTransaction(transaction.result.hash, address, amountValue.value(), false)
 
     // Wait for confirmation
-    const blockNumber = 0; // await this.props.getBlockNumber();
+    const blockNumber = 0 // await this.props.getBlockNumber();
     this.setState(
       {
         transaction: transaction.result,
         transactionStatus: null,
         blockNumber,
-        confirming: true
+        confirming: true,
       },
       () => {
-        this._confirmingTries = 0;
-        this._confirmingTimer = setInterval(this.confirmingHandler, CONFIRMATION_PERIOD);
+        this._confirmingTries = 0
+        this._confirmingTimer = setInterval(this.confirmingHandler, CONFIRMATION_PERIOD)
       }
-    );
-  };
+    )
+  }
 
   confirmingHandler = async () => {
     if (
@@ -393,32 +395,32 @@ class ExchangeScreen extends React.Component {
       (this.state.transactionStatus !== null && this.state.confirmationCount >= CONFIRMATION_BLOCKS)
     ) {
       // Stop
-      clearInterval(this._confirmingTimer);
-      this._confirmingTimer = null;
-      this.setState({ confirming: false });
-      this.props.getWalletInfo();
-      return;
+      clearInterval(this._confirmingTimer)
+      this._confirmingTimer = null
+      this.setState({ confirming: false })
+      this.props.getWalletInfo()
+      return
     }
 
     if (this.state.blockNumber === 0) {
-      const tx = await this.props.getTransaction(this.state.transaction.hash);
+      const tx = await this.props.getTransaction(this.state.transaction.hash)
       if (tx === null || !tx.blockNumber) {
-        this._confirmingTries += 1;
-        return;
+        this._confirmingTries += 1
+        return
       }
 
-      this.setState({ blockNumber: tx.blockNumber, confirmationCount: 0 });
+      this.setState({ blockNumber: tx.blockNumber, confirmationCount: 0 })
     } else {
       // Get block number
-      const blockNumber = await this.props.getBlockNumber();
+      const blockNumber = await this.props.getBlockNumber()
       if (this.state.confirmationCount < blockNumber - this.state.blockNumber) {
         // Only increment
-        this.setState({ confirmationCount: blockNumber - this.state.blockNumber });
+        this.setState({ confirmationCount: blockNumber - this.state.blockNumber })
       }
     }
 
     // Get transaction
-    const receipt = await this.props.getTransactionReceipt(this.state.transaction.hash);
+    const receipt = await this.props.getTransactionReceipt(this.state.transaction.hash)
 
     // if (receipt.status === 1) {
     //     // Stop
@@ -429,49 +431,49 @@ class ExchangeScreen extends React.Component {
     //     return;
     // }
 
-    this.setState({ transactionStatus: receipt.status });
-  };
+    this.setState({ transactionStatus: receipt.status })
+  }
 
   onComplete = async () => {
-    this.setState({ completing: true });
-    const result = await this.props.createExchange(this.state.amount, SELL, this.state.transaction.hash);
-    this.setState({ sending: false, completing: false });
+    this.setState({ completing: true })
+    const result = await this.props.createExchange(this.state.amount, SELL, this.state.transaction.hash)
+    this.setState({ sending: false, completing: false })
     if (result.error) {
-      DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate(result.error));
-      return;
+      DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate(result.error))
+      return
     }
 
     DropdownAlertService.show(
       DropdownAlertService.SUCCESS,
       translate('Success'),
       translate('Your request is sent successfully Please check RUBY TRADE screen to see the request status')
-    );
+    )
 
-    this.loadExchanges();
-  };
+    this.loadExchanges()
+  }
 
   onLayout(event) {
     if (this.state.width && this.state.height) {
-      return;
+      return
     }
 
     this.setState({
       width: event.nativeEvent.layout.width,
-      height: event.nativeEvent.layout.height
-    });
+      height: event.nativeEvent.layout.height,
+    })
   }
 
   onHelp = async () => {
-    await WebBrowser.openBrowserAsync('https://haladinar.io/hdn2/help.html');
-  };
+    await WebBrowser.openBrowserAsync('https://haladinar.io/hdn2/help.html')
+  }
 
   render() {
-    const styles = this.props.style;
-    const ExchangeIcon = ThemeService.getThemeStyle().variables.exchangeIcon;
-    const ExchangeMoneyIcon = ThemeService.getThemeStyle().variables.exchangeMoneyIcon;
-    const FilterIcon = ThemeService.getThemeStyle().variables.filterIcon;
-    const ArrowUp = ThemeService.getThemeStyle().variables.arrowUp;
-    const ArrowDown = ThemeService.getThemeStyle().variables.arrowDown;
+    const styles = this.props.style
+    const ExchangeIcon = ThemeService.getThemeStyle().variables.exchangeIcon
+    const ExchangeMoneyIcon = ThemeService.getThemeStyle().variables.exchangeMoneyIcon
+    const FilterIcon = ThemeService.getThemeStyle().variables.filterIcon
+    const ArrowUp = ThemeService.getThemeStyle().variables.arrowUp
+    const ArrowDown = ThemeService.getThemeStyle().variables.arrowDown
 
     let shadowOpt = {
       width: this.state.width,
@@ -483,13 +485,13 @@ class ExchangeScreen extends React.Component {
       y: ThemeService.getThemeStyle()['NativeBase.ViewNB']['.shadow'].shadowOffset.height,
       radius: ThemeService.getThemeStyle().variables.buttonBorderRadius,
       style: {
-        position: 'absolute'
-      }
-    };
+        position: 'absolute',
+      },
+    }
 
-    let arrowColor = '#191660';
+    let arrowColor = '#191660'
     if (ThemeService.getThemeStyle().name === 'colorful-dark' || ThemeService.getThemeStyle().name === 'simple-dark') {
-      arrowColor = '#fff';
+      arrowColor = '#fff'
     }
 
     return (
@@ -510,19 +512,19 @@ class ExchangeScreen extends React.Component {
                 {this.state.tradeExpanded ? <ArrowUp fill={arrowColor} /> : <ArrowDown fill={arrowColor} />}
               </Button>
               {this.state.tradeExpanded && (
-                <Animatable.View ref={ref => (this.tradeView = ref)} useNativeDriver={true}>
+                <Animatable.View ref={(ref) => (this.tradeView = ref)} useNativeDriver={true}>
                   <View row center smallSpaceBottom spaceBetween>
                     <View row flexFull tinySpaceRight>
                       {/* {Platform.OS === "android" && <BoxShadow setting={shadowOpt} />} */}
                       <View flexFull>
                         <StyledText h4 center smallSpaceBottom bold='medium'>
-                          HDN
+                          USDT
                         </StyledText>
                         <Input
                           style={[
                             ThemeService.getThemeStyle()['NativeBase.ViewNB']['.box'],
                             ThemeService.getThemeStyle()['NativeBase.ViewNB']['.shadow'],
-                            { height: 50 }
+                            { height: 50 },
                           ]}
                           placeholder={translate('Amount')}
                           keyboardType='numeric'
@@ -531,7 +533,7 @@ class ExchangeScreen extends React.Component {
                         />
                       </View>
                     </View>
-                    <ExchangeMoneyIcon height={20} />
+                    <ExchangeMoneyIcon height={20} style={{ marginTop: 30 }} />
                     <View row flexFull tinySpaceLeft>
                       {/* {Platform.OS === "android" && <BoxShadow setting={shadowOpt} />} */}
                       <View flexFull>
@@ -542,7 +544,7 @@ class ExchangeScreen extends React.Component {
                           style={[
                             ThemeService.getThemeStyle()['NativeBase.ViewNB']['.box'],
                             ThemeService.getThemeStyle()['NativeBase.ViewNB']['.shadow'],
-                            { height: 50 }
+                            { height: 50 },
                           ]}
                           placeholder={translate('Amount')}
                           keyboardType='numeric'
@@ -661,7 +663,7 @@ class ExchangeScreen extends React.Component {
               </StyledText>
               <Button spaceTop spaceBottom thirdary onPress={this.onComplete} disabled={this.state.completing}>
                 {!this.state.completing && <StyledText>{translate('Close')}</StyledText>}
-                {this.state.completing && <Spinner color='#186bfe' />}
+                {this.state.completing && <Spinner color='#81D8D0' />}
               </Button>
             </View>
           )}
@@ -677,31 +679,31 @@ class ExchangeScreen extends React.Component {
           )}
         </Modal>
       </Screen>
-    );
+    )
   }
 }
 
 const styles = {
   container: {
-    flex: 1
+    flex: 1,
   },
   contentContainer: {
-    flex: 1
+    flex: 1,
   },
   list: {
-    flex: 1
-  }
-};
+    flex: 1,
+  },
+}
 
-const mapStateToProps = state => {
-  const { settings, wallet, storage, market, account } = state;
-  return { settings, wallet, storage, market, account };
-};
+const mapStateToProps = (state) => {
+  const { settings, wallet, storage, market, account } = state
+  return { settings, wallet, storage, market, account }
+}
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     convertRate: (from, to, amount) => dispatch(convertRate(from, to, amount)),
-    showAlert: config => dispatch(showAlert(config)),
+    showAlert: (config) => dispatch(showAlert(config)),
     hideAlert: () => dispatch(hideAlert()),
     createExchange: (amount, type, txHash) => dispatch(createExchange(amount, type, txHash)),
     getExchanges: () => dispatch(getExchanges()),
@@ -709,13 +711,13 @@ const mapDispatchToProps = dispatch => {
       dispatch(updateTransaction(toAddress, amount, unit, description, type, txHash)),
     sendToken: (toAddress, amount) => dispatch(sendToken(toAddress, amount)),
     getBlockNumber: () => dispatch(getBlockNumber()),
-    getTransaction: id => dispatch(getTransaction(id)),
-    getTransactionReceipt: id => dispatch(getTransactionReceipt(id)),
+    getTransaction: (id) => dispatch(getTransaction(id)),
+    getTransactionReceipt: (id) => dispatch(getTransactionReceipt(id)),
     submitTransaction: (txHash, toAddress, amount, isEth) => dispatch(submitTransaction(txHash, toAddress, amount, isEth)),
     estimateGas: (to, amount, isToken) => dispatch(estimateGas(to, amount, isToken)),
     getWalletInfo: () => dispatch(getWalletInfo()),
-    withdraw: id => dispatch(withdraw(id))
-  };
-};
+    withdraw: (id) => dispatch(withdraw(id)),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(connectStyle('iPayNow.Exchange', styles)(ExchangeScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(connectStyle('iPayNow.Exchange', styles)(ExchangeScreen))

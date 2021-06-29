@@ -1,11 +1,11 @@
-import _ from "lodash";
-import { Platform } from "react-native";
-import Constants from "expo-constants";
-import getTheme from "../../native-base-theme/components";
-import simpleLight from "../../native-base-theme/variables/simpleLight";
+import _ from 'lodash'
+import { Platform } from 'react-native'
+import Constants from 'expo-constants'
+import getTheme from '../../native-base-theme/components'
+import simpleLight from '../../native-base-theme/variables/simpleLight'
 
-export default themeName => {
-  let variables;
+export default (themeName) => {
+  let variables
   switch (themeName) {
     // case 'colorful-dark':
     //     variables = colorDark;
@@ -19,123 +19,123 @@ export default themeName => {
     // case 'colorful-light':
     //     variables = colorLight;
     default:
-      variables = simpleLight;
-      break;
+      variables = simpleLight
+      break
   }
 
   const spaces = {
-    ".tinySpaceTop": {
-      marginTop: variables.tinySpace
+    '.tinySpaceTop': {
+      marginTop: variables.tinySpace,
     },
-    ".smallSpaceTop": {
-      marginTop: variables.smallSpace
+    '.smallSpaceTop': {
+      marginTop: variables.smallSpace,
     },
-    ".spaceTop": {
-      marginTop: variables.baseSpace
+    '.spaceTop': {
+      marginTop: variables.baseSpace,
     },
-    ".largeSpaceTop": {
-      marginTop: variables.largeSpace
+    '.largeSpaceTop': {
+      marginTop: variables.largeSpace,
     },
-    ".veryLargeSpaceTop": {
-      marginTop: variables.veryLargeSpace
+    '.veryLargeSpaceTop': {
+      marginTop: variables.veryLargeSpace,
     },
-    ".tinySpaceBottom": {
-      marginBottom: variables.tinySpace
+    '.tinySpaceBottom': {
+      marginBottom: variables.tinySpace,
     },
-    ".smallSpaceBottom": {
-      marginBottom: variables.smallSpace
+    '.smallSpaceBottom': {
+      marginBottom: variables.smallSpace,
     },
-    ".spaceBottom": {
-      marginBottom: variables.baseSpace
+    '.spaceBottom': {
+      marginBottom: variables.baseSpace,
     },
-    ".largeSpaceBottom": {
-      marginBottom: variables.largeSpace
+    '.largeSpaceBottom': {
+      marginBottom: variables.largeSpace,
     },
-    ".veryLargeSpaceBottom": {
-      marginBottom: variables.veryLargeSpace
+    '.veryLargeSpaceBottom': {
+      marginBottom: variables.veryLargeSpace,
     },
-    ".tinySpaceLeft": {
-      marginLeft: variables.tinySpace
+    '.tinySpaceLeft': {
+      marginLeft: variables.tinySpace,
     },
-    ".smallSpaceLeft": {
-      marginLeft: variables.smallSpace
+    '.smallSpaceLeft': {
+      marginLeft: variables.smallSpace,
     },
-    ".spaceLeft": {
-      marginLeft: variables.baseSpace
+    '.spaceLeft': {
+      marginLeft: variables.baseSpace,
     },
-    ".largeSpaceLeft": {
-      marginLeft: variables.largeSpace
+    '.largeSpaceLeft': {
+      marginLeft: variables.largeSpace,
     },
-    ".veryLargeSpaceLeft": {
-      marginLeft: variables.veryLargeSpace
+    '.veryLargeSpaceLeft': {
+      marginLeft: variables.veryLargeSpace,
     },
-    ".tinySpaceRight": {
-      marginRight: variables.tinySpace
+    '.tinySpaceRight': {
+      marginRight: variables.tinySpace,
     },
-    ".smallSpaceRight": {
-      marginRight: variables.smallSpace
+    '.smallSpaceRight': {
+      marginRight: variables.smallSpace,
     },
-    ".spaceRight": {
-      marginRight: variables.baseSpace
+    '.spaceRight': {
+      marginRight: variables.baseSpace,
     },
-    ".largeSpaceRight": {
-      marginRight: variables.largeSpace
+    '.largeSpaceRight': {
+      marginRight: variables.largeSpace,
     },
-    ".veryLargeSpaceRight": {
-      marginRight: variables.veryLargeSpace
-    }
-  };
+    '.veryLargeSpaceRight': {
+      marginRight: variables.veryLargeSpace,
+    },
+  }
 
   const walletTheme = {
     contentContainer: {
-      paddingHorizontal: variables.screenPadding
+      paddingHorizontal: variables.screenPadding,
     },
     logo: {
       width: variables.deviceWidth / 4,
       height: variables.deviceWidth / 4,
       marginTop: variables.largeSpace,
-      marginBottom: variables.largeSpace
+      marginBottom: variables.largeSpace,
     },
     description: {
-      textAlign: "center"
+      textAlign: 'center',
     },
     button: {
       width: (variables.deviceWidth - variables.screenPadding * 2) / 2 - variables.buttonSmallMargin * 2 - variables.buttonMargin / 2,
-      margin: variables.buttonSmallMargin
-    }
-  };
+      margin: variables.buttonSmallMargin,
+    },
+  }
   const groupBoxHeaderIcon = {
     colors: [variables.groupBoxHeaderColor, variables.groupBoxHeaderColor],
     width: 50,
     height: 30,
-    marginBottom: variables.tinySpace
-  };
+    marginBottom: variables.tinySpace,
+  }
   const absoluteFill = {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0
-  };
-  const modalScreen = {
-    flex: 1,
-    marginHorizontal: 0,
-    marginTop: 10 // Platform.OS === "android" ? Constants.statusBarHeight : 10
-  };
-  const qrScanner = {
-    flex: 0,
-    width: variables.deviceWidth,
-    height: variables.deviceWidth
-  };
-  const animation = {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
     bottom: 0,
     right: 0,
-    backgroundColor: "transparent"
-  };
-  const picker = Platform.OS == "android" ? { color: "#186BFE" } : {};
+  }
+  const modalScreen = {
+    flex: 1,
+    marginHorizontal: 0,
+    marginTop: 10, // Platform.OS === "android" ? Constants.statusBarHeight : 10
+  }
+  const qrScanner = {
+    flex: 0,
+    width: variables.deviceWidth,
+    height: variables.deviceWidth,
+  }
+  const animation = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    backgroundColor: 'transparent',
+  }
+  const picker = Platform.OS == 'android' ? { color: '#81D8D0' } : {}
 
   const theme = {
     ...getTheme(variables),
@@ -148,490 +148,490 @@ export default themeName => {
     animation,
 
     // Controls
-    "NativeBase.ViewNB": {
+    'NativeBase.ViewNB': {
       ...spaces,
 
-      ".row": {
-        flexDirection: "row"
+      '.row': {
+        flexDirection: 'row',
       },
-      ".center": {
-        alignItems: "center"
+      '.center': {
+        alignItems: 'center',
       },
-      ".right": {
-        alignItems: "flex-end"
+      '.right': {
+        alignItems: 'flex-end',
       },
-      ".flexCenter": {
-        alignItems: "center",
-        justifyContent: "center"
+      '.flexCenter': {
+        alignItems: 'center',
+        justifyContent: 'center',
       },
-      ".spaceBetween": {
-        justifyContent: "space-between"
-      },
-
-      ".flexFull": {
-        flex: 1
-      },
-      ".flexWrap": {
-        flexWrap: "wrap"
-      },
-      ".noMargin": {
-        margin: 0
+      '.spaceBetween': {
+        justifyContent: 'space-between',
       },
 
-      ".shadow": {
+      '.flexFull': {
+        flex: 1,
+      },
+      '.flexWrap': {
+        flexWrap: 'wrap',
+      },
+      '.noMargin': {
+        margin: 0,
+      },
+
+      '.shadow': {
         shadowOffset: {
           width: 0,
-          height: 3
+          height: 3,
         },
         shadowRadius: 6,
         shadowColor: variables.shadowColor,
         shadowOpacity: variables.shadowOpacity,
-        elevation: 6
+        elevation: 6,
       },
-      ".bigDarkShadow": {
+      '.bigDarkShadow': {
         shadowOffset: {
           width: 0,
-          height: 8
+          height: 8,
         },
         shadowRadius: 15,
         shadowColor: variables.shadowColor,
         shadowOpacity: 0.7,
-        elevation: 15
+        elevation: 15,
       },
-      ".bigLightShadow": {
+      '.bigLightShadow': {
         shadowOffset: {
           width: 0,
-          height: 8
+          height: 8,
         },
         shadowRadius: 15,
         shadowColor: variables.bigLightShadowColor,
         shadowOpacity: 1,
-        elevation: 15
+        elevation: 15,
       },
 
-      ".search": {
-        flexDirection: "row",
+      '.search': {
+        flexDirection: 'row',
         borderRadius: variables.buttonBorderRadius,
         backgroundColor: {
-          "colorful-light": "#fff",
-          "colorful-dark": "#191660",
-          "simple-light": "#fff",
-          "simple-dark": "#242424"
+          'colorful-light': '#fff',
+          'colorful-dark': '#191660',
+          'simple-light': '#fff',
+          'simple-dark': '#242424',
         }[themeName],
         paddingHorizontal: variables.contentPadding,
-        paddingVertical: Platform.OS === "ios" ? variables.contentPadding : variables.contentPadding / 2
+        paddingVertical: Platform.OS === 'ios' ? variables.contentPadding : variables.contentPadding / 2,
       },
 
-      ".separatorTop": {
+      '.separatorTop': {
         borderTopWidth: 1,
-        borderColor: variables.secondaryTextColor
+        borderColor: variables.secondaryTextColor,
       },
 
-      ".box": {
+      '.box': {
         backgroundColor: {
-          "colorful-light": "#fff",
-          "colorful-dark": "#191660",
-          "simple-light": "#fff",
-          "simple-dark": "#242424"
+          'colorful-light': '#fff',
+          'colorful-dark': '#191660',
+          'simple-light': '#fff',
+          'simple-dark': '#242424',
         }[themeName],
         borderRadius: variables.buttonBorderRadius,
         paddingVertical: variables.buttonVerticalPadding,
         paddingHorizontal: variables.buttonHorizontalPadding,
-        alignItems: "center",
-        justifyContent: "center"
+        alignItems: 'center',
+        justifyContent: 'center',
       },
-      ".highlight": {
+      '.highlight': {
         // backgroundColor: {
         //   "colorful-light": "#f9d4d7",
         //   "colorful-dark": "#e12160",
         //   "simple-light": "#f9d4d7",
         //   "simple-dark": "#e12160"
         // }[themeName]
-        backgroundColor: "rgba(71, 199, 143, 1)"
+        backgroundColor: 'rgba(71, 199, 143, 1)',
       },
 
-      ".padder": {
-        padding: variables.baseSpace
+      '.padder': {
+        padding: variables.baseSpace,
       },
 
-      ".fullWidth": {
-        width: variables.deviceWidth
-      }
+      '.fullWidth': {
+        width: variables.deviceWidth,
+      },
     },
-    "NativeBase.Button": {
-      "iPayNow.StyledText": {
-        color: "#0079FE",
+    'NativeBase.Button': {
+      'iPayNow.StyledText': {
+        color: '#0079FE',
         fontSize: variables.btnTextSize,
         lineHeight: variables.btnTextSize * 1.4,
         fontFamily: variables.btnFontFamily,
-        textDecorationLine: "underline"
+        textDecorationLine: 'underline',
       },
-      "NativeBase.Text": {
-        color: "#0079FE",
+      'NativeBase.Text': {
+        color: '#0079FE',
         fontSize: variables.btnTextSize,
         lineHeight: variables.btnTextSize * 1.4,
         fontFamily: variables.btnFontFamily,
-        textDecorationLine: "underline"
+        textDecorationLine: 'underline',
       },
 
-      ".primary": {
-        "iPayNow.StyledText": {
+      '.primary': {
+        'iPayNow.StyledText': {
           color: variables.btnPrimaryColor,
-          textDecorationLine: "none"
-        }
+          textDecorationLine: 'none',
+        },
       },
-      ".secondary": {
-        "iPayNow.StyledText": {
+      '.secondary': {
+        'iPayNow.StyledText': {
           color: variables.btnSecondaryColor,
-          textDecorationLine: "none"
-        }
+          textDecorationLine: 'none',
+        },
       },
-      ".thirdary": {
-        "iPayNow.StyledText": {
+      '.thirdary': {
+        'iPayNow.StyledText': {
           color: variables.btnThirdaryColor,
-          textDecorationLine: "none"
-        }
+          textDecorationLine: 'none',
+        },
       },
-      ".disabled": {
-        "iPayNow.StyledText": {
+      '.disabled': {
+        'iPayNow.StyledText': {
           color: variables.btnDisabledColor,
-          textDecorationLine: "none"
-        }
+          textDecorationLine: 'none',
+        },
       },
-      ".danger": {
+      '.danger': {
         backgroundColor: variables.btnDangerBg,
-        "iPayNow.StyledText": {
+        'iPayNow.StyledText': {
           color: variables.btnDangerColor,
-          textDecorationLine: "none"
-        }
+          textDecorationLine: 'none',
+        },
       },
-      ".success": {
+      '.success': {
         backgroundColor: variables.btnSuccessBg,
-        "iPayNow.StyledText": {
+        'iPayNow.StyledText': {
           color: variables.btnDangerColor,
-          textDecorationLine: "none"
-        }
+          textDecorationLine: 'none',
+        },
       },
-      ".listItem": {
-        "iPayNow.StyledText": {
+      '.listItem': {
+        'iPayNow.StyledText': {
           color: variables.textColor,
-          textDecorationLine: "none"
-        }
+          textDecorationLine: 'none',
+        },
       },
 
-      ".small": {
-        "iPayNow.StyledText": {
+      '.small': {
+        'iPayNow.StyledText': {
           fontSize: variables.btnTextSizeSmall,
           lineHeight: variables.btnTextSizeSmall * 1.4,
-          textDecorationLine: "none"
-        }
+          textDecorationLine: 'none',
+        },
       },
-      ".tiny": {
-        "iPayNow.StyledText": {
+      '.tiny': {
+        'iPayNow.StyledText': {
           fontSize: variables.btnTextSizeSmall,
           lineHeight: variables.btnTextSizeSmall * 1.4,
           color: variables.btnTinyColor,
-          textDecorationLine: "none"
-        }
+          textDecorationLine: 'none',
+        },
       },
-      ".bordered": {
+      '.bordered': {
         paddingVertical: variables.buttonVerticalPadding,
         paddingHorizontal: variables.buttonHorizontalPadding,
-        borderColor: variables.brandPrimary
+        borderColor: variables.brandPrimary,
       },
-      ".noBordered": {
-        "iPayNow.StyledText": {
-          textDecorationLine: "none"
-        }
+      '.noBordered': {
+        'iPayNow.StyledText': {
+          textDecorationLine: 'none',
+        },
       },
-      ".iconLeft": {
-        "iPayNow.StyledText": {
-          position: "absolute",
-          textAlign: "center",
+      '.iconLeft': {
+        'iPayNow.StyledText': {
+          position: 'absolute',
+          textAlign: 'center',
           left: variables.buttonHorizontalPadding,
-          right: variables.buttonHorizontalPadding
+          right: variables.buttonHorizontalPadding,
         },
         paddingHorizontal: variables.buttonVerticalPadding,
-        flexDirection: "row",
-        justifyContent: "flex-start"
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
       },
-      ".row": {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center"
+      '.row': {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
       },
-      ".toggle": {
-        "iPayNow.StyledText": {
+      '.toggle': {
+        'iPayNow.StyledText': {
           fontSize: variables.fontSizeBase,
           lineHeight: variables.fontSizeBase * 1.4,
           color: variables.buttonToggleOffColor,
-          textDecorationLine: "none"
-        }
+          textDecorationLine: 'none',
+        },
       },
-      ".checkbox": {
-        "iPayNow.StyledText": {
+      '.checkbox': {
+        'iPayNow.StyledText': {
           fontSize: variables.fontSizeBase,
           lineHeight: variables.fontSizeBase * 1.4,
           marginLeft: variables.smallSpace,
           color: variables.buttonToggleOffColor,
-          textDecorationLine: "none"
+          textDecorationLine: 'none',
         },
         paddingRight: variables.buttonVerticalPadding,
-        flexDirection: "row",
-        justifyContent: "flex-start"
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
       },
-      ".checked": {
-        "iPayNow.StyledText": {
+      '.checked': {
+        'iPayNow.StyledText': {
           color: variables.buttonToggleOnColor,
-          textDecorationLine: "none"
-        }
+          textDecorationLine: 'none',
+        },
       },
-      ".segment": {
-        "iPayNow.StyledText": {
+      '.segment': {
+        'iPayNow.StyledText': {
           fontSize: variables.fontSizeH4,
           lineHeight: variables.lineHeightH4,
           color: variables.buttonToggleOffColor,
-          textDecorationLine: "none"
-        }
+          textDecorationLine: 'none',
+        },
       },
-      ".active": {
-        "iPayNow.StyledText": {
+      '.active': {
+        'iPayNow.StyledText': {
           color: variables.buttonToggleOnColor,
-          textDecorationLine: "none"
-        }
+          textDecorationLine: 'none',
+        },
       },
 
       padding: 0,
-      alignSelf: "stretch",
-      alignItems: "center",
-      justifyContent: "center"
+      alignSelf: 'stretch',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
-    "NativeBase.Label": {
+    'NativeBase.Label': {
       ...spaces,
 
-      ".white": {
-        color: "#fff"
+      '.white': {
+        color: '#fff',
       },
 
       color: variables.groupBoxLabelColor,
-      fontFamily: variables.fontFamilyMedium
+      fontFamily: variables.fontFamilyMedium,
     },
-    "NativeBase.Item": {
+    'NativeBase.Item': {
       ...spaces,
 
-      ".regular": {
-        "NativeBase.Input": {
+      '.regular': {
+        'NativeBase.Input': {
           margin: variables.contentPadding,
-          borderWidth: 0
+          borderWidth: 0,
         },
 
-        borderRadius: variables.inputBorderRadius
+        borderRadius: variables.inputBorderRadius,
       },
-      ".underline": {
+      '.underline': {
         borderWidth: 0,
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
       },
-      ".flexFull": {
-        flex: 1
+      '.flexFull': {
+        flex: 1,
       },
-      ".stretch": {
-        alignSelf: "stretch"
+      '.stretch': {
+        alignSelf: 'stretch',
       },
-      ".flexCenter": {
-        alignItems: "center"
-      },
-
-      ".transparent": {
-        backgroundColor: "transparent"
+      '.flexCenter': {
+        alignItems: 'center',
       },
 
-      ".shadow": {
+      '.transparent': {
+        backgroundColor: 'transparent',
+      },
+
+      '.shadow': {
         shadowOffset: {
           width: 0,
-          height: 5
+          height: 5,
         },
         shadowRadius: 10,
         shadowColor: variables.shadowColor,
         shadowOpacity: variables.shadowOpacity,
-        elevation: 10
+        elevation: 10,
       },
 
       minHeight: variables.inputHeightBase,
       borderColor: variables.inputBorderColor,
-      backgroundColor: variables.inputBackground
+      backgroundColor: variables.inputBackground,
     },
-    "NativeBase.Form": {
-      margin: 0
+    'NativeBase.Form': {
+      margin: 0,
     },
-    "NativeBase.List": {
-      ...spaces
+    'NativeBase.List': {
+      ...spaces,
     },
-    "NativeBase.Input": {
+    'NativeBase.Input': {
       ...spaces,
 
-      ".underline": {
+      '.underline': {
         borderColor: variables.inputBorderColor,
         borderWidth: 0,
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
       },
-      ".multiline": {
+      '.multiline': {
         minHeight: 30,
-        height: "auto"
+        height: 'auto',
       },
-      ".large": {
-        height: 30 * 3
-      },
-
-      ".alignCenter": {
-        textAlign: "center"
+      '.large': {
+        height: 30 * 3,
       },
 
-      ".stretch": {
-        alignSelf: "stretch"
+      '.alignCenter': {
+        textAlign: 'center',
       },
 
-      ".flexFull": {
-        flex: 1
+      '.stretch': {
+        alignSelf: 'stretch',
       },
 
-      ".white": {
-        color: "#fff"
+      '.flexFull': {
+        flex: 1,
+      },
+
+      '.white': {
+        color: '#fff',
       },
 
       backgroundColor: variables.inputBackground,
       color: variables.inputColor,
       height: 30,
       fontFamily: variables.inputFontFamily,
-      fontSize: variables.inputFontSize
+      fontSize: variables.inputFontSize,
     },
-    "NativeBase.Spinner": {
-      height: undefined
+    'NativeBase.Spinner': {
+      height: undefined,
     },
-    "NativeBase.PickerNB": {
+    'NativeBase.PickerNB': {
       ...spaces,
 
-      "NativeBase.Button": {
-        "NativeBase.Text": {
+      'NativeBase.Button': {
+        'NativeBase.Text': {
           flex: 1,
-          color: "#186bfe",
+          color: '#81D8D0',
           marginRight: variables.smallSpace,
-          textAlign: "center",
-          textDecorationLine: "none"
-        }
+          textAlign: 'center',
+          textDecorationLine: 'none',
+        },
       },
 
-      ".flexFull": {
+      '.flexFull': {
         flex: 1,
-        width: undefined
+        width: undefined,
       },
-      ".large": {
-        width: 140
+      '.large': {
+        width: 140,
       },
 
-      ".shadow": {
+      '.shadow': {
         shadowOffset: {
           width: 0,
-          height: 3
+          height: 3,
         },
         shadowRadius: 6,
         shadowColor: variables.shadowColor,
         shadowOpacity: variables.shadowOpacity,
-        elevation: 6
+        elevation: 6,
       },
 
       borderRadius: variables.buttonBorderRadius,
       paddingVertical: variables.buttonVerticalPadding,
       paddingHorizontal: variables.buttonHorizontalPadding,
       backgroundColor: {
-        "colorful-light": "#191660",
-        "colorful-dark": "#d5a3ff",
-        "simple-light": "#ffffff",
-        "simple-dark": "#15bdd8"
+        'colorful-light': '#191660',
+        'colorful-dark': '#d5a3ff',
+        'simple-light': '#ffffff',
+        'simple-dark': '#15bdd8',
       }[themeName],
       flex: 0,
-      flexDirection: "row",
+      flexDirection: 'row',
       width: 100,
       minHeight: variables.buttonHeight,
 
-      ...picker
+      ...picker,
     },
-    "iPayNow.StyledText": {
+    'iPayNow.StyledText': {
       ...spaces,
 
-      ".h1": {
+      '.h1': {
         fontSize: variables.fontSizeH1,
-        lineHeight: variables.lineHeightH1
+        lineHeight: variables.lineHeightH1,
       },
-      ".h2": {
+      '.h2': {
         fontSize: variables.fontSizeH2,
-        lineHeight: variables.lineHeightH2
+        lineHeight: variables.lineHeightH2,
       },
-      ".h3": {
+      '.h3': {
         fontSize: variables.fontSizeH3,
-        lineHeight: variables.lineHeightH3
+        lineHeight: variables.lineHeightH3,
       },
-      ".h4": {
+      '.h4': {
         fontSize: variables.fontSizeH4,
-        lineHeight: variables.lineHeightH4
+        lineHeight: variables.lineHeightH4,
       },
-      ".small": {
+      '.small': {
         fontSize: variables.fontSizeBase * 0.9,
-        lineHeight: variables.fontSizeBase * 0.9 * 1.2
+        lineHeight: variables.fontSizeBase * 0.9 * 1.2,
       },
-      ".tiny": {
+      '.tiny': {
         fontSize: variables.fontSizeBase * 0.8,
-        lineHeight: variables.fontSizeBase * 0.8 * 1.2
+        lineHeight: variables.fontSizeBase * 0.8 * 1.2,
       },
-      ".large": {
+      '.large': {
         fontSize: variables.fontSizeBase * 2.4,
-        lineHeight: variables.fontSizeBase * 2.4 * 1.2
+        lineHeight: variables.fontSizeBase * 2.4 * 1.2,
       },
-      ".veryLarge": {
+      '.veryLarge': {
         fontSize: variables.fontSizeBase * 3,
-        lineHeight: variables.fontSizeBase * 3 * 1.2
+        lineHeight: variables.fontSizeBase * 3 * 1.2,
       },
-      ".center": {
-        textAlign: "center"
+      '.center': {
+        textAlign: 'center',
       },
-      ".full": {
-        alignSelf: "stretch"
+      '.full': {
+        alignSelf: 'stretch',
       },
-      ".flexFull": {
-        flex: 1
+      '.flexFull': {
+        flex: 1,
       },
-      ".error": {
-        color: variables.brandDanger
+      '.error': {
+        color: variables.brandDanger,
       },
-      ".success": {
-        color: variables.brandSuccess
+      '.success': {
+        color: variables.brandSuccess,
       },
-      ".info": {
-        color: variables.brandInfo
+      '.info': {
+        color: variables.brandInfo,
       },
-      ".warning": {
-        color: variables.brandWarning
+      '.warning': {
+        color: variables.brandWarning,
       },
-      ".secondary": {
-        color: variables.brandSecondary
+      '.secondary': {
+        color: variables.brandSecondary,
       },
-      ".note": {
-        color: variables.secondaryTextColor
+      '.note': {
+        color: variables.secondaryTextColor,
       },
-      ".white": {
-        color: "#fff"
+      '.white': {
+        color: '#fff',
       },
-      ".pink": {
-        color: "#ffaeb5"
+      '.pink': {
+        color: '#ffaeb5',
       },
-      ".header": {
+      '.header': {
         color: {
-          "colorful-light": "#717e91",
-          "colorful-dark": "#fff",
-          "simple-light": "#717e91",
-          "simple-dark": "#fff"
-        }[themeName]
+          'colorful-light': '#717e91',
+          'colorful-dark': '#fff',
+          'simple-light': '#717e91',
+          'simple-dark': '#fff',
+        }[themeName],
       },
-      ".important": {
+      '.important': {
         fontFamily: variables.fontFamilyMedium,
         fontSize: variables.fontSizeBase * 0.8,
         // backgroundColor: "#f9d4d7",
@@ -639,146 +639,146 @@ export default themeName => {
         borderRadius: variables.borderRadiusBase,
         paddingHorizontal: variables.smallSpace,
         paddingVertical: variables.tinySpace,
-        textAlign: "center",
-        overflow: "hidden"
+        textAlign: 'center',
+        overflow: 'hidden',
       },
 
-      ".right": {
-        alignSelf: "flex-end"
+      '.right': {
+        alignSelf: 'flex-end',
       },
 
-      ".wrap": {
-        flexWrap: "wrap"
+      '.wrap': {
+        flexWrap: 'wrap',
       },
 
       color: variables.textColor,
       fontSize: variables.noteFontSize,
-      lineHeight: variables.noteFontSize * 1.2
+      lineHeight: variables.noteFontSize * 1.2,
     },
-    "iPayNow.Button": {
+    'iPayNow.Button': {
       ...spaces,
 
       background: {
         flex: 0,
         borderRadius: variables.buttonBorderRadius,
-        alignItems: "stretch",
-        justifyContent: "center",
-        elevation: 6
+        alignItems: 'stretch',
+        justifyContent: 'center',
+        elevation: 6,
       },
 
       button: {
         borderRadius: variables.buttonBorderRadius,
         paddingVertical: variables.buttonVerticalPadding,
         paddingHorizontal: variables.buttonHorizontalPadding,
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: variables.buttonHeight
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: variables.buttonHeight,
       },
 
-      ".full": {
-        alignSelf: "stretch",
-        margin: variables.buttonMargin
+      '.full': {
+        alignSelf: 'stretch',
+        margin: variables.buttonMargin,
       },
-      ".flexFull": {
-        flex: 1
+      '.flexFull': {
+        flex: 1,
       },
-      ".flexLeft": {
+      '.flexLeft': {
         flex: 0,
-        alignSelf: "flex-start"
+        alignSelf: 'flex-start',
       },
-      ".center": {
+      '.center': {
         flex: 0,
-        alignSelf: "center"
+        alignSelf: 'center',
       },
-      ".right": {
+      '.right': {
         flex: 0,
-        alignSelf: "flex-end"
+        alignSelf: 'flex-end',
       },
-      ".alignLeft": {
-        alignItems: "flex-start"
+      '.alignLeft': {
+        alignItems: 'flex-start',
       },
-      ".alignRight": {
-        alignItems: "flex-end"
+      '.alignRight': {
+        alignItems: 'flex-end',
       },
 
-      ".small": {
+      '.small': {
         button: {
           minHeight: variables.buttonSmallHeight,
-          borderRadius: variables.buttonSmallHeight / 2
+          borderRadius: variables.buttonSmallHeight / 2,
         },
         background: {
-          borderRadius: variables.buttonSmallHeight / 2
+          borderRadius: variables.buttonSmallHeight / 2,
         },
-        minHeight: variables.buttonSmallHeight
+        minHeight: variables.buttonSmallHeight,
       },
-      ".tiny": {
+      '.tiny': {
         button: {
           minHeight: variables.buttonTinyHeight,
-          borderRadius: variables.buttonTinyHeight / 2
+          borderRadius: variables.buttonTinyHeight / 2,
         },
         background: {
-          borderRadius: variables.buttonTinyHeight / 2
+          borderRadius: variables.buttonTinyHeight / 2,
         },
-        minHeight: variables.buttonTinyHeight
+        minHeight: variables.buttonTinyHeight,
       },
-      ".bordered": {
-        shadowOpacity: 0
+      '.bordered': {
+        shadowOpacity: 0,
       },
-      ".toggle": {
+      '.toggle': {
         paddingVertical: variables.buttonVerticalPadding,
         borderRadius: variables.buttonBorderRadius,
         borderWidth: 1,
         borderColor: variables.buttonToggleOffColor,
-        shadowOpacity: 0
+        shadowOpacity: 0,
       },
-      ".active": {
-        borderColor: variables.buttonToggleOnColor
+      '.active': {
+        borderColor: variables.buttonToggleOnColor,
       },
-      ".checkbox": {
+      '.checkbox': {
         minHeight: 0,
         paddingVertical: variables.buttonVerticalPadding,
-        shadowOpacity: 0
+        shadowOpacity: 0,
       },
-      ".loading": {},
-      ".listItem": {
+      '.loading': {},
+      '.listItem': {
         paddingHorizontal: variables.buttonHorizontalPadding,
         paddingVertical: variables.buttonVerticalPadding,
-        backgroundColor: "#fff"
+        backgroundColor: '#fff',
       },
-      ".danger": {
-        borderRadius: 0
+      '.danger': {
+        borderRadius: 0,
       },
-      ".success": {
-        borderRadius: 0
+      '.success': {
+        borderRadius: 0,
       },
 
-      ".shadow": {
+      '.shadow': {
         shadowOffset: {
           width: 0,
-          height: 3
+          height: 3,
         },
         shadowRadius: 6,
         shadowColor: variables.shadowColor,
         shadowOpacity: variables.shadowOpacity,
-        elevation: 6
+        elevation: 6,
       },
 
-      ".normal": {
+      '.normal': {
         borderRadius: variables.buttonBorderRadius,
         paddingVertical: variables.buttonVerticalPadding,
         paddingHorizontal: variables.buttonHorizontalPadding,
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: variables.buttonHeight
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: variables.buttonHeight,
       },
 
-      minHeight: variables.buttonHeight
+      minHeight: variables.buttonHeight,
     },
 
     pickerItemStyle: {
       // backgroundColor: { "colorful-light": "#fff", "colorful-dark": "#1b213b", "simple-light": "#fff", "simple-dark": "#242424" }[themeName],
       marginLeft: 0,
-      paddingLeft: 10
+      paddingLeft: 10,
     },
     pickerHeaderStyle: {
       // backgroundColor: { "colorful-light": "#fff", "colorful-dark": "#1b213b", "simple-light": "#fff", "simple-dark": "#242424" }[themeName]
@@ -788,232 +788,232 @@ export default themeName => {
     },
 
     // Screens and Components
-    "iPayNow.App": {},
-    "iPayNow.Screen": {
+    'iPayNow.App': {},
+    'iPayNow.Screen': {
       container: {
-        paddingTop: Platform.OS === "android" ? Constants.statusBarHeight : 0
+        paddingTop: Platform.OS === 'android' ? Constants.statusBarHeight : 0,
       },
       topBackground: {
         backgroundColor: variables.brandPrimary,
         width: variables.deviceWidth,
         height: 120,
-        position: "absolute",
+        position: 'absolute',
         top: 0,
-        left: 0
+        left: 0,
       },
       header: {
         height: variables.headerHeight,
-        justifyContent: "center",
-        alignItems: "center"
+        justifyContent: 'center',
+        alignItems: 'center',
       },
       back: {
         width: variables.headerHeight,
         height: variables.headerHeight,
         minHeight: 0,
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         left: 0,
         zIndex: 999,
         borderRadius: 0,
         paddingHorizontal: 20,
         paddingVertical: 5,
-        alignItems: "flex-start",
-        justifyContent: "center"
+        alignItems: 'flex-start',
+        justifyContent: 'center',
       },
       title: {
         paddingHorizontal: 20,
         paddingVertical: 5,
-        color: variables.inverseTextColor
+        color: variables.inverseTextColor,
       },
       right: {
         height: variables.headerHeight,
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         right: 0,
         zIndex: 999,
         paddingHorizontal: 20,
         paddingVertical: 5,
-        alignItems: "flex-end",
-        justifyContent: "center"
-      }
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+      },
     },
-    "iPayNow.Alert": {
+    'iPayNow.Alert': {
       alertTitle: {
-        fontFamily: variables.fontFamilyBold
+        fontFamily: variables.fontFamilyBold,
       },
       alertMessage: {
         fontFamily: variables.fontFamily,
-        textAlign: "center"
+        textAlign: 'center',
       },
       alertConfirmTitle: {
-        fontFamily: variables.fontFamilyMedium
+        fontFamily: variables.fontFamilyMedium,
       },
       alertCancelTitle: {
-        fontFamily: variables.fontFamilyMedium
-      }
+        fontFamily: variables.fontFamilyMedium,
+      },
     },
-    "iPayNow.DropdownAlert": {
+    'iPayNow.DropdownAlert': {
       title: {
         fontFamily: variables.fontFamilyBold,
         fontSize: variables.fontSizeBase,
-        color: "#fff"
+        color: '#fff',
       },
       message: {
         fontFamily: variables.fontFamily,
         fontSize: variables.fontSizeBase,
-        color: "#fff"
-      }
+        color: '#fff',
+      },
     },
-    "iPayNow.Home": {
+    'iPayNow.Home': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       feature: {
-        backgroundColor: "#fff",
+        backgroundColor: '#fff',
         borderRadius: 22,
         width: (variables.deviceWidth - variables.screenPadding * 2) / 3 - variables.buttonMargin * 2,
         height: 100,
         margin: variables.buttonMargin,
         paddingHorizontal: 7,
         paddingVertical: 10,
-        alignItems: "center"
+        alignItems: 'center',
       },
       featureList: {},
       featureTitle: {
         fontFamily: variables.fontFamilyMedium,
         color: variables.keypadTextColor,
-        textAlign: "center",
-        marginTop: 10
+        textAlign: 'center',
+        marginTop: 10,
       },
       badge: {
         height: 30,
         minWidth: 30,
         borderRadius: 15,
         paddingHorizontal: variables.badgePadding,
-        alignItems: "center",
-        justifyContent: "center",
-        position: "absolute",
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'absolute',
         top: 15,
-        right: 35
+        right: 35,
       },
       badgeText: {
         fontFamily: variables.fontFamilyMedium,
         color: variables.badgeColor,
         fontSize: variables.fontSizeBase,
         lineHeight: 30,
-        textAlign: "center"
-      }
+        textAlign: 'center',
+      },
     },
-    "iPayNow.NewUser": {
+    'iPayNow.NewUser': {
       contentContainer: {
-        paddingHorizontal: variables.screenPadding
+        paddingHorizontal: variables.screenPadding,
       },
       below: {
         paddingLeft: variables.screenPadding,
-        paddingRight: variables.screenPadding
+        paddingRight: variables.screenPadding,
       },
       logo: {
         width: variables.deviceWidth / 2,
-        height: variables.deviceWidth / 2
+        height: variables.deviceWidth / 2,
       },
       button: {
-        margin: variables.buttonMargin
+        margin: variables.buttonMargin,
       },
       language: {
-        minWidth: 150
+        minWidth: 150,
       },
       currency: {
-        minWidth: 250
-      }
+        minWidth: 250,
+      },
     },
-    "iPayNow.CreateWallet": walletTheme,
-    "iPayNow.ConfirmWallet": {
+    'iPayNow.CreateWallet': walletTheme,
+    'iPayNow.ConfirmWallet': {
       ...walletTheme,
       inputContainer: {
-        alignSelf: "stretch",
+        alignSelf: 'stretch',
         margin: variables.buttonMargin,
         height: variables.inputHeightBase * 2,
         shadowOffset: {
           width: 0,
-          height: 5
+          height: 5,
         },
         shadowRadius: 10,
         shadowColor: variables.shadowColor,
         shadowOpacity: variables.shadowOpacity,
-        elevation: 10
+        elevation: 10,
       },
       countWords: {
-        alignSelf: "flex-end",
-        marginRight: variables.buttonMargin
-      }
+        alignSelf: 'flex-end',
+        marginRight: variables.buttonMargin,
+      },
     },
-    "iPayNow.RestoreWallet": {
+    'iPayNow.RestoreWallet': {
       ...walletTheme,
       inputContainer: {
-        alignSelf: "stretch",
+        alignSelf: 'stretch',
         margin: variables.buttonMargin,
         height: variables.inputHeightBase * 2,
         shadowOffset: {
           width: 0,
-          height: 5
+          height: 5,
         },
         shadowRadius: 10,
         shadowColor: variables.shadowColor,
         shadowOpacity: variables.shadowOpacity,
-        elevation: 10
+        elevation: 10,
       },
       countWords: {
-        alignSelf: "flex-end",
-        marginRight: variables.buttonMargin
-      }
+        alignSelf: 'flex-end',
+        marginRight: variables.buttonMargin,
+      },
     },
-    "iPayNow.AddReferral": {
+    'iPayNow.AddReferral': {
       ...walletTheme,
       inputContainer: {
-        alignSelf: "stretch",
+        alignSelf: 'stretch',
         margin: variables.buttonMargin,
         shadowOffset: {
           width: 0,
-          height: 5
+          height: 5,
         },
         shadowRadius: 10,
         shadowColor: variables.shadowColor,
         shadowOpacity: variables.shadowOpacity,
-        elevation: 10
-      }
+        elevation: 10,
+      },
     },
-    "iPayNow.PinCode": {
+    'iPayNow.PinCode': {
       contentContainer: {
-        paddingHorizontal: variables.screenPadding
+        paddingHorizontal: variables.screenPadding,
       },
       logo: {
         width: (variables.deviceWidth - variables.screenPadding * 2) / 2,
         height: (((variables.deviceWidth - variables.screenPadding * 2) / 2) * 174) / 582,
         marginTop: variables.largeSpace,
-        marginBottom: variables.largeSpace
+        marginBottom: variables.largeSpace,
       },
       lockImage: {
-        alignSelf: "center"
+        alignSelf: 'center',
       },
       lockTimer: {
         color: variables.textColor,
         fontFamily: variables.fontFamilyBold,
         fontSize: variables.fontSizeBase * 3,
-        lineHeight: variables.fontSizeBase * 3 * 1.4
+        lineHeight: variables.fontSizeBase * 3 * 1.4,
       },
       successMessage: {
-        color: variables.brandSuccess
+        color: variables.brandSuccess,
       },
       dot: {
         marginLeft: 3,
-        marginRight: 3
+        marginRight: 3,
       },
       keypad: {
         width: (variables.deviceWidth - variables.screenPadding * 2) / 3 - variables.buttonSmallMargin * 2 - variables.buttonMargin * 2,
         height: (variables.deviceWidth - variables.screenPadding * 2) / 3 - variables.buttonSmallMargin * 2 - variables.buttonMargin * 2,
-        margin: variables.buttonMargin
+        margin: variables.buttonMargin,
       },
       keypadText: {
         height: (variables.deviceWidth - variables.screenPadding * 2) / 3 - variables.buttonSmallMargin * 2 - variables.buttonMargin * 2,
@@ -1021,19 +1021,19 @@ export default themeName => {
         lineHeight: (variables.deviceWidth - variables.screenPadding * 2) / 3 - variables.buttonSmallMargin * 2 - variables.buttonMargin * 2,
         fontFamily: variables.fontFamilyBold,
         color: variables.keypadTextColor,
-        textDecorationLine: "none"
-      }
+        textDecorationLine: 'none',
+      },
     },
-    "iPayNow.AccountCard": {
+    'iPayNow.AccountCard': {
       container: {
         // marginTop: Platform.OS === "android" ? 10 : 0,
         // paddingBottom: 30,
         marginVertical: 10,
-        overflow: "visible"
+        overflow: 'visible',
       },
       shadow: {
         width: variables.deviceWidth - variables.screenPadding * 2,
-        bottom: -60
+        bottom: -60,
       },
       card: {
         backgroundColor: variables.cardDefaultBg,
@@ -1041,35 +1041,35 @@ export default themeName => {
         paddingHorizontal: variables.cardItemPadding,
         paddingVertical: (variables.cardItemPadding * 2) / 3,
         // paddingBottom: (variables.cardItemPadding * 3) / 2,
-        flexDirection: "row"
+        flexDirection: 'row',
       },
       label: {
         fontFamily: variables.fontFamilyMedium,
         fontSize: variables.fontSizeBase,
         lineHeight: variables.lineHeight,
-        color: variables.cardLabelColor
+        color: variables.cardLabelColor,
       },
       value: {
         color: variables.cardTextColor,
-        marginTop: 2
+        marginTop: 2,
       },
       exchange: {
         fontSize: variables.fontSizeBase * 0.9,
-        color: variables.cardTextColor
+        color: variables.cardTextColor,
       },
       code: {
-        alignSelf: "flex-end",
+        alignSelf: 'flex-end',
         width: 50,
         height: 50,
-        backgroundColor: "#fff",
+        backgroundColor: '#fff',
         borderRadius: 25,
         borderColor: variables.cardLabelColor,
         borderWidth: 3,
-        overflow: "hidden"
+        overflow: 'hidden',
       },
       row: {
         marginTop: variables.smallSpace,
-        marginRight: variables.smallSpace
+        marginRight: variables.smallSpace,
       },
       info: {
         fontFamily: variables.fontFamilyMedium,
@@ -1077,60 +1077,60 @@ export default themeName => {
         lineHeight: variables.lineHeight,
         color: variables.textColor,
         marginRight: variables.tinySpace,
-        textAlign: "right"
+        textAlign: 'right',
       },
       icon: {
-        transform: [{ scale: 1.4 }, { translateX: variables.tinySpace }]
+        transform: [{ scale: 1.4 }, { translateX: variables.tinySpace }],
       },
       membership: {
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: 'center',
+        justifyContent: 'center',
         height: 30,
         backgroundColor: variables.bgInfo,
         marginTop: variables.smallSpace,
         borderTopLeftRadius: 15,
         borderBottomLeftRadius: 15,
         paddingHorizontal: variables.baseSpace,
-        marginRight: -20
+        marginRight: -20,
       },
       scanButton: {
-        position: "absolute",
+        position: 'absolute',
         width: 50,
         height: 50,
         borderRadius: 25,
-        backgroundColor: "#f58d4e",
+        backgroundColor: '#f58d4e',
         bottom: 15,
-        right: 20
+        right: 20,
       },
       eye: {
         minHeight: 0,
         width: 30,
         height: 25,
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: -5
-      }
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: -5,
+      },
     },
-    "iPayNow.BannerSlider": {
+    'iPayNow.BannerSlider': {
       container: {
-        height: 100
+        height: 100,
       },
       button: {
         width: 40,
-        height: "100%",
-        alignItems: "center",
-        justifyContent: "center"
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
       },
       leftButton: {
-        left: 0
+        left: 0,
       },
       rightButton: {
-        right: 0
+        right: 0,
       },
       card: {
         height: 100,
         top: -50,
-        alignSelf: "center"
+        alignSelf: 'center',
       },
       background: {
         width: variables.deviceWidth - variables.screenPadding * 2 - 80,
@@ -1138,63 +1138,63 @@ export default themeName => {
         paddingHorizontal: variables.cardItemPadding,
         paddingVertical: (variables.cardItemPadding * 2) / 3,
         paddingBottom: (variables.cardItemPadding * 3) / 2,
-        flexDirection: "row"
-      }
+        flexDirection: 'row',
+      },
     },
-    "iPayNow.TabNavigation": {
+    'iPayNow.TabNavigation': {
       container: {
-        backgroundColor: "#fff",
-        position: "absolute",
+        backgroundColor: '#fff',
+        position: 'absolute',
         zIndex: 999,
         bottom: 0,
-        alignSelf: "center",
+        alignSelf: 'center',
         shadowOffset: {
           width: 0,
-          height: -9
+          height: -9,
         },
         shadowRadius: 15,
         shadowColor: variables.bottomBarShadowColor,
         shadowOpacity: 0.8,
-        elevation: 15
+        elevation: 15,
       },
       menus: {
-        backgroundColor: "#fff",
+        backgroundColor: '#fff',
         width: variables.deviceWidth,
         bottom: 0,
         paddingVertical: 10,
-        alignSelf: "center"
+        alignSelf: 'center',
       },
       title: {
         fontFamily: variables.fontFamilyMedium,
         fontSize: variables.fontSizeBase * 0.9,
         color: variables.bottomMenuColor,
-        textDecorationLine: "none"
+        textDecorationLine: 'none',
       },
       home: {
-        top: -40
-      }
+        top: -40,
+      },
     },
-    "iPayNow.GroupBox": {
+    'iPayNow.GroupBox': {
       ...spaces,
 
-      "NativeBase.ViewNB": {
-        "NativeBase.ViewNB": {
-          "NativeBase.ViewNB": {
-            ".fullWidth": {
-              marginHorizontal: -variables.groupBoxPadding
+      'NativeBase.ViewNB': {
+        'NativeBase.ViewNB': {
+          'NativeBase.ViewNB': {
+            '.fullWidth': {
+              marginHorizontal: -variables.groupBoxPadding,
             },
-            ".padder": {
-              paddingHorizontal: variables.groupBoxPadding
+            '.padder': {
+              paddingHorizontal: variables.groupBoxPadding,
             },
-            ".fill": {
-              backgroundColor: variables.groupBoxBg
-            }
-          }
-        }
+            '.fill': {
+              backgroundColor: variables.groupBoxBg,
+            },
+          },
+        },
       },
 
-      ".fullHeight": {
-        flex: 1
+      '.fullHeight': {
+        flex: 1,
       },
 
       container: {
@@ -1203,87 +1203,87 @@ export default themeName => {
       },
       noHeader: {
         top: 0,
-        marginBottom: 0
+        marginBottom: 0,
       },
       headerContainer: {
-        position: "absolute",
+        position: 'absolute',
         top: -variables.groupBoxHeaderSize / 2,
-        alignSelf: "center"
+        alignSelf: 'center',
       },
       header: {
         width: variables.groupBoxHeaderSize,
         height: variables.groupBoxHeaderSize,
         borderRadius: variables.groupBoxHeaderSize / 2,
-        alignItems: "center",
-        justifyContent: "center"
+        alignItems: 'center',
+        justifyContent: 'center',
       },
       headerTitle: {
-        alignSelf: "stretch",
+        alignSelf: 'stretch',
         color: variables.groupBoxHeaderColor,
         fontFamily: variables.fontFamilyBold,
         fontSize: variables.fontSizeBase * 0.9,
         lineHeight: undefined,
-        textAlign: "center",
-        marginHorizontal: 10
+        textAlign: 'center',
+        marginHorizontal: 10,
       },
       backButton: {
-        position: "absolute",
+        position: 'absolute',
         top: 5,
-        left: variables.groupBoxPadding
+        left: variables.groupBoxPadding,
       },
       rightButton: {
-        position: "absolute",
+        position: 'absolute',
         top: 5,
-        right: variables.groupBoxPadding
+        right: variables.groupBoxPadding,
       },
       content: {
         backgroundColor: variables.groupBoxBg,
         borderRadius: variables.groupBoxBorderRadius, // variables.borderRadiusBase,
         padding: variables.groupBoxPadding,
         // paddingTop: variables.groupBoxHeaderSize / 2 + variables.groupBoxPadding
-        elevation: 15
+        elevation: 15,
       },
       contentNoHeader: {
-        paddingTop: variables.groupBoxPadding
-      }
+        paddingTop: variables.groupBoxPadding,
+      },
     },
-    "iPayNow.Send": {
+    'iPayNow.Send': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       right: {
-        marginLeft: variables.smallSpace
+        marginLeft: variables.smallSpace,
       },
       list: {
         flex: 1,
-        backgroundColor: "#fff"
-      }
+        backgroundColor: '#fff',
+      },
     },
-    "iPayNow.Receive": {
+    'iPayNow.Receive': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       qrLabelText: {
         fontFamily: variables.fontFamilyMedium,
-        color: variables.inverseTextColor
-      }
+        color: variables.inverseTextColor,
+      },
     },
-    "iPayNow.Earn": {
+    'iPayNow.Earn': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       timer: {
         fontFamily: variables.fontFamilyBold,
-        color: { "colorful-light": "#191660", "colorful-dark": "#fff", "simple-light": "#191660", "simple-dark": "#fff" }[themeName]
+        color: { 'colorful-light': '#191660', 'colorful-dark': '#fff', 'simple-light': '#191660', 'simple-dark': '#fff' }[themeName],
       },
       list: {
-        marginHorizontal: -variables.smallSpace / 2
+        marginHorizontal: -variables.smallSpace / 2,
       },
       button: {
         minWidth: 120,
@@ -1295,46 +1295,46 @@ export default themeName => {
             (variables.smallSpace / 2) * 2 -
             variables.smallSpace * 2) /
           2,
-        margin: variables.smallSpace / 2
+        margin: variables.smallSpace / 2,
       },
       unselectedButton: {
         button: {
           // backgroundColor: "#717e91"
-        }
+        },
       },
       selectedButton: {
-        button: {}
+        button: {},
       },
       name: {
         fontFamily: variables.fontFamilyMedium,
-        color: variables.textColor
+        color: variables.textColor,
         // color: { "colorful-light": "#fff", "colorful-dark": "#1b213b", "simple-light": "#fff", "simple-dark": "#fff" }[themeName]
       },
       selectedName: {
         fontFamily: variables.fontFamilyBold,
-        color: variables.inverseTextColor
+        color: variables.inverseTextColor,
         // color: { "colorful-light": "#191660", "colorful-dark": "#fff", "simple-light": "#191660", "simple-dark": "#191660" }[themeName]
       },
       interest: {
         fontFamily: variables.fontFamily,
         fontSize: variables.fontSizeBase * 0.8,
-        color: variables.brandPrimary
+        color: variables.brandPrimary,
         // color: { "colorful-light": "#ffaeb5", "colorful-dark": "#d6404c", "simple-light": "#ffaeb5", "simple-dark": "#ffaeb5" }[themeName]
       },
       selectedInterest: {
         fontFamily: variables.fontFamilyMedium,
-        color: variables.inverseTextColor
+        color: variables.inverseTextColor,
         // color: { "colorful-light": "#ba1c2a", "colorful-dark": "#f9d4d7", "simple-light": "#ba1c2a", "simple-dark": "#ba1c2a" }[themeName]
-      }
+      },
     },
-    "iPayNow.BuyReward": {
+    'iPayNow.BuyReward': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       list: {
-        marginHorizontal: -variables.smallSpace / 2
+        marginHorizontal: -variables.smallSpace / 2,
       },
       button: {
         minWidth: 120,
@@ -1346,46 +1346,46 @@ export default themeName => {
             (variables.smallSpace / 2) * 2 -
             variables.smallSpace * 2) /
           2,
-        margin: variables.smallSpace / 2
+        margin: variables.smallSpace / 2,
       },
       unselectedButton: {
         button: {
           // backgroundColor: "#717e91"
-        }
+        },
       },
       selectedButton: {
-        button: {}
+        button: {},
       },
       name: {
         fontFamily: variables.fontFamilyMedium,
-        color: variables.textColor
+        color: variables.textColor,
         // color: { "colorful-light": "#fff", "colorful-dark": "#1b213b", "simple-light": "#fff", "simple-dark": "#fff" }[themeName]
       },
       selectedName: {
         fontFamily: variables.fontFamilyBold,
-        color: variables.inverseTextColor
+        color: variables.inverseTextColor,
         // color: { "colorful-light": "#191660", "colorful-dark": "#fff", "simple-light": "#191660", "simple-dark": "#191660" }[themeName]
       },
       interest: {
         fontFamily: variables.fontFamily,
         fontSize: variables.fontSizeBase * 0.8,
-        color: variables.brandPrimary
+        color: variables.brandPrimary,
         // color: { "colorful-light": "#ffaeb5", "colorful-dark": "#d6404c", "simple-light": "#ffaeb5", "simple-dark": "#ffaeb5" }[themeName]
       },
       selectedInterest: {
         fontFamily: variables.fontFamilyMedium,
-        color: variables.inverseTextColor
+        color: variables.inverseTextColor,
         // color: { "colorful-light": "#ba1c2a", "colorful-dark": "#f9d4d7", "simple-light": "#ba1c2a", "simple-dark": "#ba1c2a" }[themeName]
-      }
+      },
     },
-    "iPayNow.Deposit": {
+    'iPayNow.Deposit': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       list: {
-        marginHorizontal: -variables.smallSpace / 2
+        marginHorizontal: -variables.smallSpace / 2,
       },
       button: {
         minWidth: 100,
@@ -1397,21 +1397,21 @@ export default themeName => {
             (variables.smallSpace / 2) * 2 -
             variables.smallSpace * 4) /
           4,
-        margin: variables.smallSpace / 2
+        margin: variables.smallSpace / 2,
       },
       name: {
         fontFamily: variables.fontFamilyBold,
-        color: "#191660"
-      }
+        color: '#191660',
+      },
     },
-    "iPayNow.Games": {
+    'iPayNow.Games': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       list: {
-        marginHorizontal: -variables.smallSpace / 2
+        marginHorizontal: -variables.smallSpace / 2,
       },
       button: {
         minWidth: 120,
@@ -1428,30 +1428,30 @@ export default themeName => {
         // padding: variables.buttonPadding,
         button: {
           backgroundColor: {
-            "colorful-light": "transparent",
-            "colorful-dark": "transparent",
-            "simple-light": "#717e91",
-            "simple-dark": "#242424"
-          }[themeName]
-        }
+            'colorful-light': 'transparent',
+            'colorful-dark': 'transparent',
+            'simple-light': '#717e91',
+            'simple-dark': '#242424',
+          }[themeName],
+        },
       },
       name: {
-        color: variables.inverseTextColor
+        color: variables.inverseTextColor,
       },
       icon: {
-        marginTop: variables.buttonPadding + 30
+        marginTop: variables.buttonPadding + 30,
       },
       badgeContainer: {
-        position: "absolute",
+        position: 'absolute',
         left: 0,
         right: 0,
         top: variables.buttonPadding,
         height: 30,
-        alignItems: "center",
-        justifyContent: "center"
+        alignItems: 'center',
+        justifyContent: 'center',
       },
       time: {
-        position: "absolute",
+        position: 'absolute',
         left: 0,
         right: 0,
         top: 0,
@@ -1459,137 +1459,137 @@ export default themeName => {
         fontFamily: variables.fontFamilyMedium,
         fontSize: variables.fontSizeBase * 0.5,
         lineHeight: 30,
-        color: { "colorful-light": "#1b213b", "colorful-dark": "#fff", "simple-light": "#1b213b", "simple-dark": "#242424" }[themeName]
+        color: { 'colorful-light': '#1b213b', 'colorful-dark': '#fff', 'simple-light': '#1b213b', 'simple-dark': '#242424' }[themeName],
       },
       resultBadge: {
-        position: "absolute",
+        position: 'absolute',
         top: variables.buttonPadding,
-        right: variables.buttonPadding * 2
-      }
+        right: variables.buttonPadding * 2,
+      },
     },
-    "iPayNow.LuckyDrawDetail": {
+    'iPayNow.LuckyDrawDetail': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       list: {
-        marginHorizontal: -variables.smallSpace / 2
+        marginHorizontal: -variables.smallSpace / 2,
       },
       number: {
         margin: variables.smallSpace / 2,
         backgroundColor: variables.brandSuccess,
-        color: variables.textColor
-      }
+        color: variables.textColor,
+      },
     },
-    "iPayNow.LuckyDrawPlay": {
+    'iPayNow.LuckyDrawPlay': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       timer: {
         fontFamily: variables.fontFamilyBold,
         fontSize: variables.fontSizeBase * 3,
-        lineHeight: variables.fontSizeBase * 3 * 1.4
+        lineHeight: variables.fontSizeBase * 3 * 1.4,
       },
       machineContainer: {
-        height: 180
+        height: 180,
       },
       machine: {
-        marginLeft: (variables.deviceWidth - variables.screenPadding * 2 - variables.groupBoxPadding * 2 - 315) / 2
+        marginLeft: (variables.deviceWidth - variables.screenPadding * 2 - variables.groupBoxPadding * 2 - 315) / 2,
       },
       numbers: {
         marginHorizontal: 18,
-        marginTop: 50
+        marginTop: 50,
       },
       number: {
         fontSize: variables.fontSizeBase * 2.4,
         fontFamily: variables.fontFamilyBold,
-        lineHeight: variables.fontSizeBase * 2.4 * 1.2
-      }
+        lineHeight: variables.fontSizeBase * 2.4 * 1.2,
+      },
     },
-    "iPayNow.GameCongratulations": {},
-    "iPayNow.RollingDicePlay": {
+    'iPayNow.GameCongratulations': {},
+    'iPayNow.RollingDicePlay': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       dice: {
         width: 80,
         height: 80,
-        alignItems: "stretch",
-        justifyContent: "flex-end",
+        alignItems: 'stretch',
+        justifyContent: 'flex-end',
         padding: 15,
-        margin: 15
+        margin: 15,
       },
       rollDice: {
         width: 80,
         height: 80,
         margin: 15,
-        overflow: "hidden"
+        overflow: 'hidden',
       },
       input: {
         flex: 1,
         fontFamily: variables.fontFamilyBold,
         fontSize: variables.fontSizeBase * 3,
-        textAlign: "center",
+        textAlign: 'center',
         borderBottomWidth: 3,
-        color: "#191660",
-        backgroundColor: "transparent"
-      }
+        color: '#191660',
+        backgroundColor: 'transparent',
+      },
     },
-    "iPayNow.GamesSlider": {
+    'iPayNow.GamesSlider': {
       container: {
         height: 80,
         marginHorizontal: -variables.groupBoxPadding,
-        backgroundColor: "#1b213b",
-        overflow: "hidden"
+        backgroundColor: '#1b213b',
+        overflow: 'hidden',
       },
       button: {
         width: 40,
-        height: "100%",
-        alignItems: "center",
-        justifyContent: "center"
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
       },
       leftButton: {
-        left: 0
+        left: 0,
       },
       rightButton: {
-        right: 0
+        right: 0,
       },
       card: {
         width: variables.deviceWidth - variables.screenPadding * 2,
         height: 80,
         marginTop: -40,
         marginLeft: -variables.deviceWidth / 2 + variables.screenPadding,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#1b213b"
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#1b213b',
       },
       icon: {
         opacity: 0.5,
-        transform: [{ scale: 2 }]
+        transform: [{ scale: 2 }],
       },
       name: {
-        position: "absolute",
+        position: 'absolute',
         left: 50,
         right: 50,
         fontFamily: variables.fontFamilyMedium,
         fontSize: variables.fontSizeBase * 2.5,
         lineHeight: 80,
-        textAlign: "center",
-        color: "#fff",
-        textShadowColor: "rgba(255, 255, 255, 0.8)",
+        textAlign: 'center',
+        color: '#fff',
+        textShadowColor: 'rgba(255, 255, 255, 0.8)',
         textShadowOffset: {
           width: 0,
-          height: 1
+          height: 1,
         },
-        textShadowRadius: 6
-      }
+        textShadowRadius: 6,
+      },
     },
-    "iPayNow.ListItem": {
+    'iPayNow.ListItem': {
       ...spaces,
 
       item: {
@@ -1600,10 +1600,10 @@ export default themeName => {
         //   "simple-dark": "#242424"
         // }[themeName],
         borderRadius: variables.borderRadiusBase,
-        backgroundColor: "#f7f8fa",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "flex-start"
+        backgroundColor: '#f7f8fa',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
       },
       highlight: {
         // backgroundColor: {
@@ -1612,45 +1612,45 @@ export default themeName => {
         //   "simple-light": "#f9d4d7",
         //   "simple-dark": "#e12160"
         // }[themeName]
-        backgroundColor: "rgba(71, 199, 143, 0.2)"
+        backgroundColor: 'rgba(71, 199, 143, 0.2)',
       },
       itemLeft: {
         width: 50,
         height: 50,
-        backgroundColor: "#d6404c",
+        backgroundColor: '#d6404c',
         borderRadius: 25,
         marginHorizontal: variables.smallSpace,
         marginVertical: 6,
         borderWidth: 2,
-        borderColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-        overflow: "hidden"
+        borderColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
       },
       itemCenter: {
         flex: 1,
         marginVertical: 6,
         marginRight: variables.smallSpace,
-        alignItems: "flex-start",
-        justifyContent: "center"
+        alignItems: 'flex-start',
+        justifyContent: 'center',
       },
       itemRight: {
         marginRight: variables.smallSpace,
-        marginVertical: 6
+        marginVertical: 6,
       },
       itemAvatar: {
         width: 30,
         height: 30,
-        resizeMode: "contain"
+        resizeMode: 'contain',
       },
       itemNumber: {
-        alignSelf: "flex-end",
+        alignSelf: 'flex-end',
         width: 40,
         height: 40,
         borderRadius: 20,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#fff"
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
       },
       itemNumberText: {
         // position: "absolute",
@@ -1661,16 +1661,16 @@ export default themeName => {
         fontFamily: variables.fontFamilyBold,
         fontSize: variables.fontSizeBase * 1.4,
         lineHeight: 40,
-        textAlign: "center",
-        color: variables.brandPrimary
+        textAlign: 'center',
+        color: variables.brandPrimary,
       },
       itemStar: {
-        width: 30
+        width: 30,
       },
       floatBar: {
-        position: "absolute",
+        position: 'absolute',
         right: variables.tinySpace,
-        bottom: Platform.OS === "ios" ? -variables.buttonSmallHeight / 2 : variables.buttonSmallHeight / 2
+        bottom: Platform.OS === 'ios' ? -variables.buttonSmallHeight / 2 : variables.buttonSmallHeight / 2,
       },
       mainText: {
         // color: {
@@ -1679,7 +1679,7 @@ export default themeName => {
         //   "simple-light": "#191660",
         //   "simple-dark": "#fff"
         // }[themeName]
-        color: variables.brandPrimary
+        color: variables.brandPrimary,
       },
       subText: {
         // color: {
@@ -1688,165 +1688,165 @@ export default themeName => {
         //   "simple-light": "#191660",
         //   "simple-dark": "#fff"
         // }[themeName]
-        color: variables.textColor
-      }
+        color: variables.textColor,
+      },
     },
-    "iPayNow.Leaderboards": {
+    'iPayNow.Leaderboards': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       datePickerButton: {
-        height: 40
+        height: 40,
       },
       datePicker: {
         height: 30,
         padding: 5,
         color: variables.textColor,
-        textDecorationLine: "none"
+        textDecorationLine: 'none',
       },
       winning: {
         shadowOffset: {
           width: 0,
-          height: 0
+          height: 0,
         },
         shadowRadius: 8,
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOpacity: 1,
-        elevation: 8
+        elevation: 8,
       },
       winningNumber: {
-        position: "absolute",
+        position: 'absolute',
         left: 10,
         right: 10,
         fontFamily: variables.fontFamilyBold,
         fontSize: variables.fontSizeBase * 2,
         lineHeight: variables.fontSizeBase * 2 * 1.2,
-        textAlign: "center",
-        color: "#fff"
+        textAlign: 'center',
+        color: '#fff',
       },
       list: {
-        marginTop: variables.baseSpace
+        marginTop: variables.baseSpace,
         // overflow: "visible"
-      }
+      },
     },
-    "iPayNow.ReferralList": {
+    'iPayNow.ReferralList': {
       container: {
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center"
+        alignItems: 'center',
+        justifyContent: 'center',
       },
       button: {
         width: 30,
-        height: "100%",
-        justifyContent: "center"
+        height: '100%',
+        justifyContent: 'center',
       },
       leftButton: {
         left: 0,
-        alignItems: "flex-start"
+        alignItems: 'flex-start',
       },
       rightButton: {
         right: 0,
-        alignItems: "flex-end"
+        alignItems: 'flex-end',
       },
       list: {
-        marginHorizontal: 30
+        marginHorizontal: 30,
       },
       listContent: {
-        alignItems: "center",
-        justifyContent: "center"
-      }
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
     },
-    "iPayNow.Referral": {
+    'iPayNow.Referral': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       score: {
         fontFamily: variables.fontFamilyBold,
         fontSize: variables.fontSizeBase * 3,
         lineHeight: variables.fontSizeBase * 3 * 1.4,
-        color: { "colorful-light": "#191660", "colorful-dark": "#fff", "simple-light": "#191660", "simple-dark": "#fff" }[themeName]
+        color: { 'colorful-light': '#191660', 'colorful-dark': '#fff', 'simple-light': '#191660', 'simple-dark': '#fff' }[themeName],
       },
       row: {
         height: 70,
         marginVertical: 5,
-        alignItems: "center",
-        justifyContent: "center"
-      }
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
     },
-    "iPayNow.Search": {
+    'iPayNow.Search': {
       input: {
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: 'center',
+        justifyContent: 'center',
         marginLeft: variables.smallSpace,
-        color: variables.inputColor
-      }
+        color: variables.inputColor,
+      },
     },
-    "iPayNow.Segment": {
+    'iPayNow.Segment': {
       button: {
-        marginHorizontal: variables.smallSpace
+        marginHorizontal: variables.smallSpace,
       },
       first: {
-        marginLeft: 0
+        marginLeft: 0,
       },
       last: {
-        marginRight: 0
-      }
+        marginRight: 0,
+      },
     },
-    "iPayNow.Rates": {
+    'iPayNow.Rates': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       list: {
         marginHorizontal: -variables.groupBoxPadding,
         paddingHorizontal: variables.groupBoxPadding,
-        marginTop: variables.smallSpace
+        marginTop: variables.smallSpace,
       },
       listContent: {
-        paddingBottom: variables.smallSpace
+        paddingBottom: variables.smallSpace,
       },
       leftStyle: {
         width: 30,
         height: 30,
-        borderRadius: 15
+        borderRadius: 15,
       },
       itemMainText: {
-        flex: 0
+        flex: 0,
       },
       itemSubText: {
         flex: 1,
         fontFamily: variables.fontFamilyBold,
-        textAlign: "right",
+        textAlign: 'right',
         fontSize: variables.fontSizeH4,
         lineHeight: variables.lineHeightH4,
         marginLeft: variables.smallSpace,
         color: {
-          "colorful-light": "#191660",
-          "colorful-dark": "#fff",
-          "simple-light": "#191660",
-          "simple-dark": "#fff"
-        }[themeName]
-      }
+          'colorful-light': '#191660',
+          'colorful-dark': '#fff',
+          'simple-light': '#191660',
+          'simple-dark': '#fff',
+        }[themeName],
+      },
     },
-    "iPayNow.Store": {
+    'iPayNow.Store': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       list: {
         marginHorizontal: -variables.groupBoxPadding,
         paddingHorizontal: variables.groupBoxPadding,
-        paddingTop: variables.smallSpace
+        paddingTop: variables.smallSpace,
       },
       listContent: {
-        paddingBottom: variables.smallSpace
+        paddingBottom: variables.smallSpace,
       },
       itemMainText: {},
       itemSubText: {
@@ -1856,87 +1856,87 @@ export default themeName => {
         marginTop: variables.smallSpace,
         marginRight: 100,
         color: {
-          "colorful-light": "#191660",
-          "colorful-dark": "#fff",
-          "simple-light": "#191660",
-          "simple-dark": "#fff"
-        }[themeName]
+          'colorful-light': '#191660',
+          'colorful-dark': '#fff',
+          'simple-light': '#191660',
+          'simple-dark': '#fff',
+        }[themeName],
       },
       itemContainer: {
-        marginBottom: variables.buttonSmallHeight / 2 + 10
-      }
+        marginBottom: variables.buttonSmallHeight / 2 + 10,
+      },
     },
-    "iPayNow.MerchantItem": {
+    'iPayNow.MerchantItem': {
       item: {
         marginHorizontal: -variables.groupBoxPadding,
-        overflow: "hidden",
-        borderRadius: 0
+        overflow: 'hidden',
+        borderRadius: 0,
       },
       backgroundImage: {
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         left: 0,
         bottom: 0,
         right: 0,
-        resizeMode: "cover"
+        resizeMode: 'cover',
       },
       container: {
         flex: 1,
-        alignSelf: "stretch",
-        backgroundColor: "rgba(0, 0, 0, 0.6)",
-        alignItems: "center",
-        justifyContent: "center"
+        alignSelf: 'stretch',
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        alignItems: 'center',
+        justifyContent: 'center',
       },
       logoContainer: {
         width: 60,
         height: 60,
         borderRadius: 30,
-        marginLeft: variables.baseSpace
+        marginLeft: variables.baseSpace,
       },
       logo: {
         width: 60,
         height: 60,
-        borderRadius: 30
+        borderRadius: 30,
       },
       info: {
         flex: 1,
-        padding: variables.baseSpace
+        padding: variables.baseSpace,
       },
       brand: {
         fontFamily: variables.fontFamilyBold,
         fontSize: variables.fontSizeBase * 2,
-        lineHeight: Platform.OS === "ios" ? 0 : variables.fontSizeBase * 2 * 1.2,
-        color: "#fff",
-        textShadowColor: "rgba(255, 255, 255, 0.8)",
+        lineHeight: Platform.OS === 'ios' ? 0 : variables.fontSizeBase * 2 * 1.2,
+        color: '#fff',
+        textShadowColor: 'rgba(255, 255, 255, 0.8)',
         textShadowOffset: {
           width: 0,
-          height: 0
+          height: 0,
         },
-        textShadowRadius: 6
+        textShadowRadius: 6,
       },
       service: {
-        color: "#ffaeb5"
+        color: '#ffaeb5',
       },
       address: {
-        color: "#ffaeb5"
-      }
+        color: '#ffaeb5',
+      },
     },
-    "iPayNow.Merchants": {
+    'iPayNow.Merchants': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       list: {
         marginHorizontal: -variables.groupBoxPadding,
         paddingHorizontal: variables.groupBoxPadding,
-        paddingTop: variables.smallSpace
+        paddingTop: variables.smallSpace,
       },
       listContent: {
-        paddingBottom: variables.smallSpace
+        paddingBottom: variables.smallSpace,
       },
       merchantItem: {
-        marginBottom: variables.smallSpace
+        marginBottom: variables.smallSpace,
       },
       countryPicker: {
         borderRadius: variables.buttonBorderRadius,
@@ -1948,77 +1948,77 @@ export default themeName => {
         //   "simple-light": "#15bdd8",
         //   "simple-dark": "#15bdd8"
         // }[themeName],
-        backgroundColor: "#fff",
+        backgroundColor: '#fff',
         minHeight: variables.buttonHeight,
-        alignItems: "center",
-        justifyContent: "flex-start",
-        flexDirection: "row"
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
       },
       countryPickerTitle: {
         // color: { "colorful-light": "#fff", "colorful-dark": "#fff", "simple-light": "#fff", "simple-dark": "#fff" }[themeName]
         color: variables.brandPrimary,
-        textDecorationLine: "none"
-      }
+        textDecorationLine: 'none',
+      },
     },
-    "iPayNow.MerchantDetail": {
+    'iPayNow.MerchantDetail': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         // paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       slider: {
         height: 250,
         marginHorizontal: -variables.groupBoxPadding,
-        overflow: "visible"
+        overflow: 'visible',
       },
       sliderContentContainer: {
         paddingHorizontal: variables.groupBoxPadding,
-        paddingBottom: variables.groupBoxPadding
+        paddingBottom: variables.groupBoxPadding,
       },
       imageContainer: {
         flex: 1,
         borderRadius: variables.borderRadiusBase,
-        overflow: "hidden"
+        overflow: 'hidden',
       },
       image: {
         flex: 1,
         borderRadius: variables.borderRadiusBase,
-        resizeMode: "cover"
+        resizeMode: 'cover',
       },
       paginationContainer: {
-        paddingVertical: 8
+        paddingVertical: 8,
       },
       paginationDot: {
         width: 8,
         height: 8,
         borderRadius: 4,
-        marginHorizontal: 2
+        marginHorizontal: 2,
       },
       logo: {
         width: 60,
         height: 60,
-        borderRadius: 30
+        borderRadius: 30,
       },
       mapContainer: {
-        height: 200
+        height: 200,
       },
       map: {
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         left: 0,
         bottom: 0,
-        right: 0
+        right: 0,
       },
       overlay: {
         flex: 0.6,
-        padding: variables.groupBoxPadding
+        padding: variables.groupBoxPadding,
       },
       address: {
-        color: "#191660"
+        color: '#191660',
       },
       direction: {
-        color: "#ba1c2a",
-        textDecorationLine: "underline"
+        color: '#ba1c2a',
+        textDecorationLine: 'underline',
       },
       itemAvatar: {
         width: 50,
@@ -2026,113 +2026,113 @@ export default themeName => {
         borderRadius: 25,
         borderWidth: 2,
         borderColor: variables.brandPrimary,
-        alignItems: "center",
-        justifyContent: "center",
-        overflow: "hidden"
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
       },
       ratingContainer: {
-        paddingLeft: 60
+        paddingLeft: 60,
       },
       rating: {
-        marginTop: variables.baseSpace
-      }
+        marginTop: variables.baseSpace,
+      },
     },
-    "iPayNow.Exchange": {
+    'iPayNow.Exchange': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       list: {
         marginHorizontal: -variables.groupBoxPadding,
         paddingHorizontal: variables.groupBoxPadding,
-        paddingTop: variables.smallSpace
+        paddingTop: variables.smallSpace,
       },
       listContent: {
-        paddingBottom: variables.smallSpace
+        paddingBottom: variables.smallSpace,
       },
       paymentIcon: {
-        margin: 1
+        margin: 1,
       },
       listItem: {
         paddingVertical: variables.buttonVerticalPadding,
-        paddingHorizontal: variables.buttonHorizontalPadding
+        paddingHorizontal: variables.buttonHorizontalPadding,
       },
       message: {
         color: {
-          "colorful-light": "#191660",
-          "colorful-dark": "#fff",
-          "simple-light": "#191660",
-          "simple-dark": "#fff"
-        }[themeName]
-      }
+          'colorful-light': '#191660',
+          'colorful-dark': '#fff',
+          'simple-light': '#191660',
+          'simple-dark': '#fff',
+        }[themeName],
+      },
     },
-    "iPayNow.History": {
+    'iPayNow.History': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       list: {
         borderWidth: 0,
         marginHorizontal: -variables.groupBoxPadding,
-        paddingHorizontal: variables.groupBoxPadding
+        paddingHorizontal: variables.groupBoxPadding,
       },
       header: {
         color: {
-          "colorful-light": "#191660",
-          "colorful-dark": "#fff",
-          "simple-light": "#191660",
-          "simple-dark": "#fff"
-        }[themeName]
-      }
+          'colorful-light': '#191660',
+          'colorful-dark': '#fff',
+          'simple-light': '#191660',
+          'simple-dark': '#fff',
+        }[themeName],
+      },
     },
-    "iPayNow.Profile": {
+    'iPayNow.Profile': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       imageItem: {
-        backgroundColor: "#fff",
+        backgroundColor: '#fff',
         borderRadius: variables.buttonBorderRadius,
-        margin: variables.smallSpace
+        margin: variables.smallSpace,
       },
       first: {
-        marginLeft: 0
+        marginLeft: 0,
       },
       last: {
-        marginRight: 0
+        marginRight: 0,
       },
       imageContainer: {
         borderRadius: variables.buttonBorderRadius,
-        overflow: "hidden"
+        overflow: 'hidden',
       },
       image: {
         width: 120,
         height: 80,
-        borderRadius: variables.buttonBorderRadius
+        borderRadius: variables.buttonBorderRadius,
       },
       overlay: {
         width: 120,
         height: 80,
         borderRadius: variables.buttonBorderRadius,
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         left: 0,
-        backgroundColor: "rgba(0, 0, 0, 0.2)"
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
       },
       delete: {
         width: 30,
         height: 30,
         minHeight: 30,
         borderRadius: 15,
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
-        position: "absolute",
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        position: 'absolute',
         top: 10,
         right: 10,
-        alignItems: "center",
-        justifyContent: "center"
+        alignItems: 'center',
+        justifyContent: 'center',
       },
       countryPicker: {
         borderRadius: variables.buttonBorderRadius,
@@ -2144,93 +2144,93 @@ export default themeName => {
         //   "simple-light": "#15bdd8",
         //   "simple-dark": "#15bdd8"
         // }[themeName],
-        backgroundColor: "#fff",
+        backgroundColor: '#fff',
         minHeight: variables.buttonHeight,
-        alignItems: "center",
-        justifyContent: "flex-start",
-        flexDirection: "row"
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
       },
       countryPickerTitle: {
         // color: { "colorful-light": "#fff", "colorful-dark": "#fff", "simple-light": "#fff", "simple-dark": "#fff" }[themeName],
         color: variables.brandPrimary,
-        textDecorationLine: "none"
+        textDecorationLine: 'none',
       },
       contactUsButton: {
         // position: "absolute",
         // top: 5,
         // right: variables.groupBoxPadding
-        backgroundColor: "#fff",
+        backgroundColor: '#fff',
         width: 30,
         height: 30,
         minHeight: 30,
         borderRadius: 15,
-        alignItems: "center",
-        justifyContent: "center"
-      }
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
     },
-    "iPayNow.Notifications": {
+    'iPayNow.Notifications': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       list: {
         marginHorizontal: -variables.groupBoxPadding,
         paddingHorizontal: variables.groupBoxPadding,
-        paddingTop: variables.smallSpace
+        paddingTop: variables.smallSpace,
       },
       listContent: {
-        paddingBottom: variables.smallSpace
+        paddingBottom: variables.smallSpace,
       },
       image: {
         width: variables.deviceWidth - variables.screenPadding * 2 - variables.groupBoxPadding * 2 - variables.buttonHorizontalPadding * 2,
         height: 100,
-        resizeMode: "contain",
-        marginBottom: variables.smallSpace
+        resizeMode: 'contain',
+        marginBottom: variables.smallSpace,
       },
       itemContainer: {
-        marginBottom: variables.smallSpace
+        marginBottom: variables.smallSpace,
       },
       listItem: {
         paddingVertical: variables.buttonVerticalPadding,
-        paddingHorizontal: variables.buttonHorizontalPadding
+        paddingHorizontal: variables.buttonHorizontalPadding,
       },
       message: {
         color: {
-          "colorful-light": "#191660",
-          "colorful-dark": "#fff",
-          "simple-light": "#191660",
-          "simple-dark": "#fff"
-        }[themeName]
-      }
+          'colorful-light': '#191660',
+          'colorful-dark': '#fff',
+          'simple-light': '#191660',
+          'simple-dark': '#fff',
+        }[themeName],
+      },
     },
-    "iPayNow.Mall": {
+    'iPayNow.Mall': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
-      }
+        paddingBottom: variables.bottomNavigationSpace,
+      },
     },
-    "iPayNow.Trades": {
+    'iPayNow.Trades': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
+        paddingBottom: variables.bottomNavigationSpace,
       },
       list: {
         marginHorizontal: -variables.groupBoxPadding,
         paddingHorizontal: variables.groupBoxPadding,
-        paddingTop: variables.smallSpace
+        paddingTop: variables.smallSpace,
       },
       listContent: {
-        paddingBottom: variables.smallSpace
+        paddingBottom: variables.smallSpace,
       },
       itemContainer: {
-        marginBottom: variables.largeSpace
+        marginBottom: variables.largeSpace,
       },
       listItem: {
         paddingVertical: variables.buttonHorizontalPadding,
-        paddingHorizontal: variables.buttonHorizontalPadding
+        paddingHorizontal: variables.buttonHorizontalPadding,
       },
       title: {
         // color: {
@@ -2242,42 +2242,42 @@ export default themeName => {
       },
       message: {
         color: {
-          "colorful-light": "#191660",
-          "colorful-dark": "#fff",
-          "simple-light": "#191660",
-          "simple-dark": "#fff"
-        }[themeName]
-      }
+          'colorful-light': '#191660',
+          'colorful-dark': '#fff',
+          'simple-light': '#191660',
+          'simple-dark': '#fff',
+        }[themeName],
+      },
     },
-    "iPayNow.TradeDetail": {
+    'iPayNow.TradeDetail': {
       contentContainer: {
         paddingBottom: variables.contentBottomPadding,
         paddingHorizontal: variables.screenPadding,
-        paddingBottom: variables.bottomNavigationSpace
-      }
-    }
-  };
+        paddingBottom: variables.bottomNavigationSpace,
+      },
+    },
+  }
 
   const cssifyTheme = (grandparent, parent, parentKey) => {
     _.forEach(parent, (style, styleName) => {
-      if (styleName.indexOf(".") === 0 && parentKey && parentKey.indexOf(".") === 0) {
+      if (styleName.indexOf('.') === 0 && parentKey && parentKey.indexOf('.') === 0) {
         if (grandparent) {
           if (!grandparent[styleName]) {
-            grandparent[styleName] = {};
+            grandparent[styleName] = {}
           } else {
-            grandparent[styleName][parentKey] = style;
+            grandparent[styleName][parentKey] = style
           }
         }
       }
-      if (style && typeof style === "object" && styleName !== "fontVariant" && styleName !== "transform") {
-        cssifyTheme(parent, style, styleName);
+      if (style && typeof style === 'object' && styleName !== 'fontVariant' && styleName !== 'transform') {
+        cssifyTheme(parent, style, styleName)
       }
-    });
-  };
+    })
+  }
 
-  cssifyTheme(null, theme, null);
+  cssifyTheme(null, theme, null)
 
-  theme["groupBoxHeaderIcon"] = groupBoxHeaderIcon;
+  theme['groupBoxHeaderIcon'] = groupBoxHeaderIcon
 
-  return theme;
-};
+  return theme
+}

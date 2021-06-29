@@ -23,7 +23,7 @@ class CreateWalletScreen extends React.Component {
 
   _bootstrap = async () => {
     if (this.state.verifying) {
-      const words = this.props.wallet.cryptoMnemonic.split(' ')
+      const words = this.props.wallet.cryptoMnemonic.phrase.split(' ')
       this.setState({ creating: false, words: words })
     } else {
       const wallet = await this.props.createCryptoWallet()
@@ -36,7 +36,7 @@ class CreateWalletScreen extends React.Component {
         this.props.navigation.goBack()
         return
       }
-      this.setState({ creating: false, words: wallet.mnemonic.split(' ') })
+      this.setState({ creating: false, words: wallet.mnemonic.phrase.split(' ') })
     }
   }
 

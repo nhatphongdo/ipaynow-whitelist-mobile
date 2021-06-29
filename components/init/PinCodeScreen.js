@@ -501,7 +501,7 @@ class PinCodeScreen extends React.Component {
       >
         {_codes.map((val, index) =>
           this.state.pinCode.length > index ? (
-            <SelectedPinDot key={index} style={styles.dot} fill='#186BFE' />
+            <SelectedPinDot key={index} style={styles.dot} fill='#81D8D0' />
           ) : (
             <PinDot key={index} style={styles.dot} />
           )

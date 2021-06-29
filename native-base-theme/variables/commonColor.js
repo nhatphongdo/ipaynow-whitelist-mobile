@@ -61,54 +61,52 @@ export default {
   buttonDisabledBg: '#b5b5b5',
   buttonPadding: 6,
   get buttonPrimaryBg() {
-    return this.brandPrimary;
+    return this.brandPrimary
   },
   get buttonPrimaryColor() {
-    return this.inverseTextColor;
+    return this.inverseTextColor
   },
   get buttonInfoBg() {
-    return this.brandInfo;
+    return this.brandInfo
   },
   get buttonInfoColor() {
-    return this.inverseTextColor;
+    return this.inverseTextColor
   },
   get buttonSuccessBg() {
-    return this.brandSuccess;
+    return this.brandSuccess
   },
   get buttonSuccessColor() {
-    return this.inverseTextColor;
+    return this.inverseTextColor
   },
   get buttonDangerBg() {
-    return this.brandDanger;
+    return this.brandDanger
   },
   get buttonDangerColor() {
-    return this.inverseTextColor;
+    return this.inverseTextColor
   },
   get buttonWarningBg() {
-    return this.brandWarning;
+    return this.brandWarning
   },
   get buttonWarningColor() {
-    return this.inverseTextColor;
+    return this.inverseTextColor
   },
   get buttonTextSize() {
-    return platform === PLATFORM.IOS
-      ? this.fontSizeBase * 1.1
-      : this.fontSizeBase - 1;
+    return platform === PLATFORM.IOS ? this.fontSizeBase * 1.1 : this.fontSizeBase - 1
   },
   get buttonTextSizeLarge() {
-    return this.fontSizeBase * 1.5;
+    return this.fontSizeBase * 1.5
   },
   get buttonTextSizeSmall() {
-    return this.fontSizeBase * 0.8;
+    return this.fontSizeBase * 0.8
   },
   get borderRadiusLarge() {
-    return this.fontSizeBase * 3.8;
+    return this.fontSizeBase * 3.8
   },
   get iconSizeLarge() {
-    return this.iconFontSize * 1.5;
+    return this.iconFontSize * 1.5
   },
   get iconSizeSmall() {
-    return this.iconFontSize * 0.6;
+    return this.iconFontSize * 0.6
   },
 
   // Card
@@ -130,7 +128,7 @@ export default {
   checkboxTickColor: '#fff',
 
   // Color
-  brandPrimary: platform === PLATFORM.IOS ? '#007aff' : '#3F51B5',
+  brandPrimary: platform === PLATFORM.IOS ? '#81D8D0' : '#3F51B5',
   brandInfo: '#62B1F6',
   brandSuccess: '#5cb85c',
   brandDanger: '#d9534f',
@@ -153,13 +151,13 @@ export default {
   fontFamily: platform === PLATFORM.IOS ? 'System' : 'Roboto',
   fontSizeBase: 15,
   get fontSizeH1() {
-    return this.fontSizeBase * 1.8;
+    return this.fontSizeBase * 1.8
   },
   get fontSizeH2() {
-    return this.fontSizeBase * 1.6;
+    return this.fontSizeBase * 1.6
   },
   get fontSizeH3() {
-    return this.fontSizeBase * 1.4;
+    return this.fontSizeBase * 1.4
   },
 
   // Footer
@@ -189,12 +187,12 @@ export default {
   get statusBarColor() {
     return color(this.toolbarDefaultBg)
       .darken(0.2)
-      .hex();
+      .hex()
   },
   get darkenHeader() {
     return color(this.tabBgColor)
       .darken(0.03)
-      .hex();
+      .hex()
   },
 
   // Icon
@@ -209,10 +207,10 @@ export default {
   inputErrorBorderColor: '#ed2f2f',
   inputHeightBase: 50,
   get inputColor() {
-    return this.textColor;
+    return this.textColor
   },
   get inputColorPlaceholder() {
-    return '#575757';
+    return '#575757'
   },
 
   // Line Height
@@ -230,7 +228,7 @@ export default {
   listItemPadding: platform === PLATFORM.IOS ? 10 : 12,
   listNoteColor: '#808080',
   listNoteSize: 13,
-  listItemSelected: platform === PLATFORM.IOS ? '#007aff' : '#3F51B5',
+  listItemSelected: platform === PLATFORM.IOS ? '#81D8D0' : '#3F51B5',
 
   // Progress Bar
   defaultProgressColor: '#E4202D',
@@ -241,7 +239,7 @@ export default {
   radioSelectedColorAndroid: '#3F51B5',
   radioBtnLineHeight: platform === PLATFORM.IOS ? 29 : 24,
   get radioColor() {
-    return this.brandPrimary;
+    return this.brandPrimary
   },
 
   // Segment
@@ -272,7 +270,7 @@ export default {
   inverseTextColor: '#fff',
   noteFontSize: 14,
   get defaultTextColor() {
-    return this.textColor;
+    return this.textColor
   },
 
   // Title
@@ -299,13 +297,13 @@ export default {
       topInset: 24,
       leftInset: 0,
       rightInset: 0,
-      bottomInset: 34
+      bottomInset: 34,
     },
     landscape: {
       topInset: 0,
       leftInset: 44,
       rightInset: 44,
-      bottomInset: 21
-    }
-  }
-};
+      bottomInset: 21,
+    },
+  },
+}

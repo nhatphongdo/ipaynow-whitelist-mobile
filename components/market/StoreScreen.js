@@ -5,7 +5,7 @@ import { connectStyle, Container, Content, View, Spinner } from 'native-base';
 import { Placeholder, PlaceholderMedia, PlaceholderLine, Shine } from 'rn-placeholder';
 import Modal from 'react-native-modal';
 import Lottie from 'lottie-react-native';
-import 'ethers/dist/shims.js';
+import '@ethersproject/shims'
 import { ethers } from 'ethers';
 import numeral from 'numeral';
 import ThemeService from '../../services/ThemeService';
@@ -134,7 +134,7 @@ class StoreScreen extends React.Component {
     }
 
     // Save to database
-    await this.props.updateTransaction(address, amountValue.value(), 'HDN', '', BUY_STORE_ITEM, transaction.result.hash);
+    await this.props.updateTransaction(address, amountValue.value(), 'USDT', '', BUY_STORE_ITEM, transaction.result.hash)
 
     // Submit transaction to server
     const sendResult = await this.props.submitTransaction(transaction.result.hash, address, amountValue.value(), false);
@@ -266,7 +266,7 @@ class StoreScreen extends React.Component {
             }
 
             DropdownAlertService.show(DropdownAlertService.SUCCESS, translate('Success'), translate('Item is bought successfully'));
-          } else if (item.unit.toLowerCase() === 'hdn') {
+          } else if (item.unit.toLowerCase() === 'usdt') {
             if (amountValue.value() > this.props.wallet.tokenBalance) {
               this.props.hideAlert();
               DropdownAlertService.show(DropdownAlertService.ERROR, translate('Error'), translate('Insufficient balance to buy'));
@@ -451,7 +451,7 @@ class StoreScreen extends React.Component {
               </StyledText>
               <Button spaceTop spaceBottom thirdary onPress={this.onComplete} disabled={this.state.completing}>
                 {!this.state.completing && <StyledText>{translate('Close')}</StyledText>}
-                {this.state.completing && <Spinner color='#186bfe' />}
+                {this.state.completing && <Spinner color='#81D8D0' />}
               </Button>
             </View>
           )}
