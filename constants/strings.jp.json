@@ -383,12 +383,12 @@
   "Edit": "編集",
   "Select wallet": "ウォレットを選択",
   "Copyright": "著作権",
-  "A decentralized loyalty wallet": "報酬のある分散型ハラール市場",
+  "A decentralized loyalty wallet": "ポイント付きの分散型ブロックチェーンウォレット",
   "There are {0} {1} consumed by participants": "賞: {0} {1}",
   "CANCEL MERCHANT": "商人をキャンセル",
   "INFO": "情報",
   "Withdraw": "撤回する",
   "Please wait We are sending your HDN back": "お待ちください。 USDTを返送しています。",
   "Exchange Sell Withdraw": "販売者により撤回",
-  "Total USDT staked is: {0}": "Total USDT staked is: <strong>{0}</strong>"
+  "Total USDT staked is: {0}": "賭けた合計ポイント: <strong>{0}</strong>"
 }

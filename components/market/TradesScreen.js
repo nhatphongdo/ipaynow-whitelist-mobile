@@ -239,7 +239,7 @@ class TradesScreen extends React.Component {
             adjustsFontSizeToFit
             style={{
               // position: "absolute",
-              color: '#81D8D0',
+              color: '#62C0B3',
               lineHeight: 40,
               // width: 60,
               textAlign: 'center',

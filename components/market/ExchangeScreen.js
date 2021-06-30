@@ -421,15 +421,16 @@ class ExchangeScreen extends React.Component {
 
     // Get transaction
     const receipt = await this.props.getTransactionReceipt(this.state.transaction.hash)
+    console.log(receipt)
 
-    // if (receipt.status === 1) {
-    //     // Stop
-    //     clearInterval(this._confirmingTimer);
-    //     this._confirmingTimer = null;
-    //     this.setState({ confirming: false });
-    //     this.props.getWalletInfo();
-    //     return;
-    // }
+    if (receipt.status === 1) {
+      // Stop
+      clearInterval(this._confirmingTimer)
+      this._confirmingTimer = null
+      this.setState({ confirming: false, transactionStatus: receipt.status })
+      this.props.getWalletInfo()
+      return
+    }
 
     this.setState({ transactionStatus: receipt.status })
   }
@@ -497,11 +498,11 @@ class ExchangeScreen extends React.Component {
     return (
       <Screen
         title={translate('EXCHANGE')}
-        right={
-          <Button onPress={this.onHelp}>
-            <Help height={ThemeService.getThemeStyle().variables.headerHeight - 10} />
-          </Button>
-        }
+        // right={
+        //   <Button onPress={this.onHelp}>
+        //     <Help height={ThemeService.getThemeStyle().variables.headerHeight - 10} />
+        //   </Button>
+        // }
       >
         <Container style={styles.container}>
           <Content style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -663,7 +664,7 @@ class ExchangeScreen extends React.Component {
               </StyledText>
               <Button spaceTop spaceBottom thirdary onPress={this.onComplete} disabled={this.state.completing}>
                 {!this.state.completing && <StyledText>{translate('Close')}</StyledText>}
-                {this.state.completing && <Spinner color='#81D8D0' />}
+                {this.state.completing && <Spinner color='#62C0B3' />}
               </Button>
             </View>
           )}

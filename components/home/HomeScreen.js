@@ -83,7 +83,7 @@ class HomeScreen extends React.Component {
   }
 
   registerForPushNotifications = async () => {
-    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS)
+    const { status: existingStatus } = await Notifications.getPermissionsAsync()
     let finalStatus = existingStatus
 
     // only ask if permissions have not already been determined, because
@@ -91,7 +91,7 @@ class HomeScreen extends React.Component {
     if (existingStatus !== 'granted') {
       // Android remote notification permissions are granted during the app
       // install, so this will only ask on iOS
-      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS)
+      const { status } = await Notifications.requestPermissionsAsync()
       finalStatus = status
     }
 

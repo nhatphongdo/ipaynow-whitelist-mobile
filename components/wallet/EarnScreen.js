@@ -153,7 +153,7 @@ class EarnScreen extends React.Component {
             <AccountCard />
             <GroupBox icon={<EarnIcon {...ThemeService.getThemeStyle().groupBoxHeaderIcon} />} title={translate('EARN')}>
               {this.props.reward.lockBalance !== undefined && (
-                <StyledText h4 smallSpaceTop spaceBottom style={styles.center}>
+                <StyledText h4 smallSpaceTop spaceBottom style={styles.center} numberOfLines={1} adjustsFontSizeToFit={true}>
                   {translate(
                     'Total USDT staked is: {0}',
                     formatCurrency(

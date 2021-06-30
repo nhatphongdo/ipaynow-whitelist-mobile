@@ -135,7 +135,7 @@ export default (themeName) => {
     right: 0,
     backgroundColor: 'transparent',
   }
-  const picker = Platform.OS == 'android' ? { color: '#81D8D0' } : {}
+  const picker = Platform.OS == 'android' ? { color: '#62C0B3' } : {}
 
   const theme = {
     ...getTheme(variables),
@@ -513,7 +513,7 @@ export default (themeName) => {
       'NativeBase.Button': {
         'NativeBase.Text': {
           flex: 1,
-          color: '#81D8D0',
+          color: '#62C0B3',
           marginRight: variables.smallSpace,
           textAlign: 'center',
           textDecorationLine: 'none',

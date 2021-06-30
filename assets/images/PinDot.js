@@ -3,7 +3,7 @@ import Svg, { Defs, LinearGradient, Stop, G, Circle, Rect } from "react-native-s
 /* SVGR has dropped some elements not supported by react-native-svg: filter */
 
 const PinDot = props => {
-    const { width, height, start, end, offsets, colors, fill = '#fff', stroke = '#81D8D0', ...others } = props
+    const { width, height, start, end, offsets, colors, fill = '#fff', stroke = '#62C0B3', ...others } = props
     let ratio = 1;
     if (width && height) {
         ratio = Math.min(width / 30, height / 30);

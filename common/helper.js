@@ -238,7 +238,7 @@ export function formatCurrency(number, culture = 'en-US', currencyCode = '', inc
   if (['vnd', 'krw', 'jpy', 'twd'].indexOf(currencyCode.toLowerCase()) >= 0) {
     // Non-decimal currency
     money = formatNumber(number, '0,0')
-  } else if (['eth', 'hdn', 'usdt'].indexOf(currencyCode.toLowerCase()) >= 0) {
+  } else if (['eth', 'hdn'].indexOf(currencyCode.toLowerCase()) >= 0) {
     // Crypto uses 5 digits decimal
     money = formatNumber(number, omitFractionsIfNotExist ? '0,0.[00000]' : '0,0.00000')
   } else {

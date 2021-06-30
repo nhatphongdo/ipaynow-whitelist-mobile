@@ -383,12 +383,12 @@
   "Edit": "편집하다",
   "Select wallet": "지갑 선택",
   "Copyright": "저작권",
-  "A decentralized loyalty wallet": "보상이있는 탈 중앙화 된 할랄 마켓 플레이스",
+  "A decentralized loyalty wallet": "보상 포인트가있는 분산 형 블록 체인 지갑",
   "There are {0} {1} consumed by participants": "상: {0} {1}",
   "CANCEL MERCHANT": "상인을 취소하다",
   "INFO": "정보",
   "Withdraw": "빼다",
   "Please wait We are sending your HDN back": "기다려주세요 USDT을 다시 보내드립니다.",
   "Exchange Sell Withdraw": "판매자가 철회",
-  "Total USDT staked is: {0}": "Total USDT staked is: <strong>{0}</strong>"
+  "Total USDT staked is: {0}": "총 스테이 킹 포인트: <strong>{0}</strong>"
 }

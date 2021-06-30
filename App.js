@@ -139,7 +139,7 @@ class App extends React.Component {
               {/* <Image style={styles.bottomLine} source={this.state.splashBottomLine} /> */}
               <StyledText h4 bold='medium'>{`${translate('Copyright')} 2021 <color ${
                 this.state.theme.variables.brandPrimary
-              }>test.io</color>`}</StyledText>
+              }>Ripple Technologies Pte Ltd</color>`}</StyledText>
               <StyledText h4 center bold='medium' smallSpaceTop spaceLeft spaceRight>
                 {translate('A decentralized loyalty wallet')}
               </StyledText>

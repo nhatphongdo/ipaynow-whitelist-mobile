@@ -383,12 +383,12 @@
   "Edit": "编辑",
   "Select wallet": "选择钱包",
   "Copyright": "版权",
-  "A decentralized loyalty wallet": "去中心化的清真市场",
+  "A decentralized loyalty wallet": "带有奖励积分的去中心化区块链钱包",
   "There are {0} {1} consumed by participants": "奖: {0} {1}",
   "CANCEL MERCHANT": "取消商家",
   "INFO": "资料",
   "Withdraw": "退出",
   "Please wait We are sending your HDN back": "请耐心等待。我们正在将您的USDT发回。",
   "Exchange Sell Withdraw": "卖方撤回",
-  "Total USDT staked is: {0}": "Total USDT staked is: <strong>{0}</strong>"
+  "Total USDT staked is: {0}": "总点数: <strong>{0}</strong>"
 }

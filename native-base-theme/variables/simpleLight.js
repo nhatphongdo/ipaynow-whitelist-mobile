@@ -125,13 +125,13 @@ export default {
     return 'transparent'
   },
   get btnSecondaryColor() {
-    return '#81D8D0'
+    return '#62C0B3'
   },
   get btnThirdaryBg() {
     return 'transparent'
   },
   get btnThirdaryColor() {
-    return '#81D8D0'
+    return '#62C0B3'
   },
   get btnDisabledBg() {
     return 'transparent'
@@ -187,7 +187,7 @@ export default {
   },
 
   // Color
-  brandPrimary: '#81D8D0',
+  brandPrimary: '#62C0B3',
   brandSecondary: '#CADBFB',
   brandInfo: '#717e91',
   brandSuccess: '#47C78F',
@@ -221,7 +221,7 @@ export default {
   CheckboxIconSize: platform === 'ios' ? 21 : 16,
   CheckboxIconMarginTop: platform === 'ios' ? undefined : 1,
   CheckboxFontSize: platform === 'ios' ? 23 / 0.9 : 17,
-  checkboxBgColor: '#81D8D0',
+  checkboxBgColor: '#62C0B3',
   checkboxSize: 20,
   checkboxTickColor: '#fff',
 
@@ -259,20 +259,20 @@ export default {
   // FooterTab
   tabBarTextColor: platform === 'ios' ? '#6b6b6b' : '#b3c7f9',
   tabBarTextSize: platform === 'ios' ? 14 : 11,
-  activeTab: platform === 'ios' ? '#81D8D0' : '#fff',
-  sTabBarActiveTextColor: '#81D8D0',
-  tabBarActiveTextColor: platform === 'ios' ? '#81D8D0' : '#fff',
+  activeTab: platform === 'ios' ? '#62C0B3' : '#fff',
+  sTabBarActiveTextColor: '#62C0B3',
+  tabBarActiveTextColor: platform === 'ios' ? '#62C0B3' : '#fff',
   tabActiveBgColor: platform === 'ios' ? '#cde1f9' : '#3F51B5',
 
   // Header
-  toolbarBtnColor: platform === 'ios' ? '#81D8D0' : '#fff',
+  toolbarBtnColor: platform === 'ios' ? '#62C0B3' : '#fff',
   toolbarDefaultBg: platform === 'ios' ? '#F8F8F8' : '#3F51B5',
   toolbarHeight: platform === 'ios' ? 64 : 56,
   toolbarSearchIconSize: platform === 'ios' ? 20 : 23,
   toolbarInputColor: platform === 'ios' ? '#CECDD2' : '#fff',
   searchBarHeight: platform === 'ios' ? 30 : 40,
   searchBarInputHeight: platform === 'ios' ? 30 : 50,
-  toolbarBtnTextColor: platform === 'ios' ? '#81D8D0' : '#fff',
+  toolbarBtnTextColor: platform === 'ios' ? '#62C0B3' : '#fff',
   toolbarDefaultBorder: platform === 'ios' ? '#a7a6ab' : '#3F51B5',
   iosStatusbar: platform === 'ios' ? 'dark-content' : 'light-content',
   get statusBarColor() {
@@ -294,7 +294,7 @@ export default {
   // InputGroup
   inputFontFamily: 'exo-medium',
   inputFontSize: 17,
-  inputBorderColor: '#81D8D0',
+  inputBorderColor: '#62C0B3',
   inputSuccessBorderColor: '#2b8339',
   inputErrorBorderColor: '#ed2f2f',
   inputHeightBase: 50,
@@ -316,7 +316,7 @@ export default {
   lineHeightH3: 15 * 1.4 * 1.2,
   lineHeightH4: 15 * 1.2 * 1.2,
   lineHeight: 15 * 1.2,
-  listItemSelected: platform === 'ios' ? '#81D8D0' : '#3F51B5',
+  listItemSelected: platform === 'ios' ? '#62C0B3' : '#3F51B5',
 
   // List
   listBg: 'transparent',
@@ -328,7 +328,7 @@ export default {
   listNoteSize: 13,
 
   // Progress Bar
-  defaultProgressColor: '#81D8D0',
+  defaultProgressColor: '#62C0B3',
   inverseProgressColor: '#CADBFB',
 
   // Radio Button
@@ -341,10 +341,10 @@ export default {
 
   // Segment
   segmentBackgroundColor: platform === 'ios' ? '#F8F8F8' : '#3F51B5',
-  segmentActiveBackgroundColor: platform === 'ios' ? '#81D8D0' : '#fff',
-  segmentTextColor: platform === 'ios' ? '#81D8D0' : '#fff',
+  segmentActiveBackgroundColor: platform === 'ios' ? '#62C0B3' : '#fff',
+  segmentTextColor: platform === 'ios' ? '#62C0B3' : '#fff',
   segmentActiveTextColor: platform === 'ios' ? '#fff' : '#3F51B5',
-  segmentBorderColor: platform === 'ios' ? '#81D8D0' : '#fff',
+  segmentBorderColor: platform === 'ios' ? '#62C0B3' : '#fff',
   segmentBorderColorMain: platform === 'ios' ? '#a7a6ab' : '#3F51B5',
 
   // Spinner
@@ -354,9 +354,9 @@ export default {
   // Tab
   tabDefaultBg: platform === 'ios' ? '#F8F8F8' : '#3F51B5',
   topTabBarTextColor: platform === 'ios' ? '#6b6b6b' : '#b3c7f9',
-  topTabBarActiveTextColor: platform === 'ios' ? '#81D8D0' : '#fff',
+  topTabBarActiveTextColor: platform === 'ios' ? '#62C0B3' : '#fff',
   topTabBarBorderColor: platform === 'ios' ? '#a7a6ab' : '#fff',
-  topTabBarActiveBorderColor: platform === 'ios' ? '#81D8D0' : '#fff',
+  topTabBarActiveBorderColor: platform === 'ios' ? '#62C0B3' : '#fff',
 
   // Tabs
   tabBgColor: '#F8F8F8',
@@ -410,26 +410,26 @@ export default {
 
   // Linear background
   mainBackground: (props) => <LinearGradient colors={['#f7f8fa', '#f7f8fa']} start={[1, 1]} end={[0, 0]} {...props} />,
-  primaryButtonBackground: (props) => <LinearGradient colors={['#81D8D0', '#81D8D0']} start={[1.113, 0.591]} end={[-0.062, 0.676]} {...props} />,
-  secondaryButtonBackground: (props) => <LinearGradient colors={['#81D8D0', '#81D8D0']} start={[1.113, 0.591]} end={[-0.062, 0.676]} {...props} />,
+  primaryButtonBackground: (props) => <LinearGradient colors={['#62C0B3', '#62C0B3']} start={[1.113, 0.591]} end={[-0.062, 0.676]} {...props} />,
+  secondaryButtonBackground: (props) => <LinearGradient colors={['#62C0B3', '#62C0B3']} start={[1.113, 0.591]} end={[-0.062, 0.676]} {...props} />,
   thirdaryButtonBackground: (props) => <LinearGradient colors={['#ffffff', '#ffffff']} start={[1.113, 0.591]} end={[-0.062, 0.676]} {...props} />,
-  tinyButtonBackground: (props) => <LinearGradient colors={['#81D8D0', '#81D8D0']} start={[1.113, 0.591]} end={[-0.062, 0.676]} {...props} />,
+  tinyButtonBackground: (props) => <LinearGradient colors={['#62C0B3', '#62C0B3']} start={[1.113, 0.591]} end={[-0.062, 0.676]} {...props} />,
   disabledButtonBackground: (props) => <LinearGradient colors={['#cadbfb', '#cadbfb']} start={[1.113, 0.591]} end={[-0.062, 0.676]} {...props} />,
-  badgeBackground: (props) => <LinearGradient colors={['#81D8D0', '#81D8D0']} start={[1, 1]} end={[0, 0]} {...props} />,
-  primaryBackground: (props) => <LinearGradient colors={['#81D8D0', '#81D8D0']} start={[1, 0.46]} end={[0, 0.456]} {...props} />,
-  groupBoxHeaderBackground: (props) => <LinearGradient colors={['#81D8D0', '#81D8D0']} start={[0.5, 0]} end={[0.5, 1]} {...props} />,
+  badgeBackground: (props) => <LinearGradient colors={['#62C0B3', '#62C0B3']} start={[1, 1]} end={[0, 0]} {...props} />,
+  primaryBackground: (props) => <LinearGradient colors={['#62C0B3', '#62C0B3']} start={[1, 0.46]} end={[0, 0.456]} {...props} />,
+  groupBoxHeaderBackground: (props) => <LinearGradient colors={['#62C0B3', '#62C0B3']} start={[0.5, 0]} end={[0.5, 1]} {...props} />,
 
   // Images
   largeLogo: require('../../assets/images/logo.png'),
   mediumLogo: require('../../assets/images/logo.png'),
   smallLogo: require('../../assets/images/logo.png'),
-  lock: (props) => <Lock colors={['#81D8D0', '#81D8D0']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
+  lock: (props) => <Lock colors={['#62C0B3', '#62C0B3']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
   pinDot: (props) => <PinDot colors={['#33c4b3', '#33c4b3']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
   selectedPinDot: (props) => <SelectedPinDot colors={['#33c4b3', '#33c4b3']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
   keypadBackground: (props) => <KeypadBackground colors={['#33c4b3', '#33c4b3']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
   keypadDelete: (props) => <KeypadDelete stroke='#092058' {...props} />,
-  faceId: (props) => <FaceId colors={['#81D8D0', '#81D8D0']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
-  touchId: (props) => <TouchId colors={['#81D8D0', '#81D8D0']} start={['50%', '0%']} end={['50%', '100%']} stroke='#81D8D0' {...props} />,
+  faceId: (props) => <FaceId colors={['#62C0B3', '#62C0B3']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
+  touchId: (props) => <TouchId colors={['#62C0B3', '#62C0B3']} start={['50%', '0%']} end={['50%', '100%']} stroke='#62C0B3' {...props} />,
   hexagon: (props) => <Hexagon colors={['#33c4b3', '#33c4b3']} start={['50%', '0%']} end={['50%', '100%']} fill='#fff' {...props} />,
   earnIcon: (props) => <EarnIcon colors={['#33c4b3', '#33c4b3']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
   gamesIcon: (props) => <GamesIcon colors={['#33c4b3', '#33c4b3']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
@@ -457,9 +457,9 @@ export default {
   exchangeIconBottom: (props) => <ExchangeIconDark {...props} />,
   mallIconBottom: (props) => <MallIconDark {...props} />,
   profileIconBottom: (props) => <ProfileIconDark {...props} />,
-  homeIcon: (props) => <HomeIconDark fill='#81D8D0' {...props} />,
+  homeIcon: (props) => <HomeIconDark fill='#62C0B3' {...props} />,
   qrBox: (props) => <QrBox colors={['#15bdd8', '#15bdd8']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
-  qrLabel: (props) => <QrLabel colors={['#81D8D0', '#81D8D0']} start={['50%', '0%']} end={['50%', '100%']} fill='#fff' {...props} />,
+  qrLabel: (props) => <QrLabel colors={['#62C0B3', '#62C0B3']} start={['50%', '0%']} end={['50%', '100%']} fill='#fff' {...props} />,
   rubyIcon: (props) => <RubyIcon fill='#d6404c' {...props} />,
   ethereumIcon: (props) => <EthereumIcon fill='#d6404c' {...props} />,
   creditCardIcon: (props) => <CreditCardIcon fill='#d6404c' {...props} />,
@@ -474,10 +474,10 @@ export default {
   contactUs: (props) => <ContactUs fill='#000' {...props} />,
   luckyDrawMachine: (props) => (
     <LuckyDrawMachine
-      colors={['#81D8D0', '#81D8D0']}
+      colors={['#62C0B3', '#62C0B3']}
       start={['50%', '0%']}
       end={['50%', '100%']}
-      colors2={['#81D8D0', '#81D8D0']}
+      colors2={['#62C0B3', '#62C0B3']}
       start2={['50%', '0%']}
       end2={['50%', '100%']}
       {...props}
@@ -503,15 +503,15 @@ export default {
   dice6: (props) => <Dice6 {...props} />,
   referralUserIcon: (props) => <ReferralUserIcon colors={['#ff5b7f', '#fc9970']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
   searchIcon: (props) => <SearchIcon fill='#191660' {...props} />,
-  dropdownIcon: (props) => <DropdownIcon fill='#81D8D0' {...props} />,
-  starIcon: (props) => <StarIcon colors={['#81D8D0', '#81D8D0']} start={['50%', '0%']} end={['50%', '100%']} fill='url(#prefix__a)' {...props} />,
+  dropdownIcon: (props) => <DropdownIcon fill='#62C0B3' {...props} />,
+  starIcon: (props) => <StarIcon colors={['#62C0B3', '#62C0B3']} start={['50%', '0%']} end={['50%', '100%']} fill='url(#prefix__a)' {...props} />,
   heartIcon: (props) => (
-    <HeartIcon colors={['#81D8D0', '#81D8D0']} start={['50%', '0%']} end={['50%', '100%']} stroke='#81D8D0' fill='url(#prefix__a)' {...props} />
+    <HeartIcon colors={['#62C0B3', '#62C0B3']} start={['50%', '0%']} end={['50%', '100%']} stroke='#62C0B3' fill='url(#prefix__a)' {...props} />
   ),
   directionIcon: (props) => <DirectionIcon fill='#ba1c2a' stroke='#ba1c2a' {...props} />,
   filterIcon: (props) => <FilterIcon stroke='#fff' {...props} />,
-  exchangeIcon: (props) => <ExchangeIcon fill='#81D8D0' {...props} />,
-  exchangeMoneyIcon: (props) => <ExchangeMoneyIcon colors={['#81D8D0', '#81D8D0']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
+  exchangeIcon: (props) => <ExchangeIcon fill='#62C0B3' {...props} />,
+  exchangeMoneyIcon: (props) => <ExchangeMoneyIcon colors={['#62C0B3', '#62C0B3']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
   creditCardPaymentIcon: (props) => <CreditCardPaymentIcon colors={['#00e6b4', '#18c9e3']} start={['50%', '0%']} end={['50%', '100%']} {...props} />,
   bankPaymentIcon: (props) => <BankIcon colors={['#00e6b4', '#18c9e3']} start={['50%', '0%']} end={['50%', '100%']} fill='#fff' {...props} />,
   paypalPaymentIcon: (props) => <PaypalIcon stroke='#0ad8c9' {...props} />,
@@ -520,20 +520,20 @@ export default {
   ethereumPaymentIcon: (props) => (
     <EthereumPaymentIcon colors={['#00e6b4', '#18c9e3']} start={['50%', '0%']} end={['50%', '100%']} fill='#fff' {...props} />
   ),
-  historyIcon: (props) => <HistoryIcon fill='#81D8D0' {...props} />,
+  historyIcon: (props) => <HistoryIcon fill='#62C0B3' {...props} />,
   arrowUp: (props) => <ArrowUp fill='#191660' {...props} />,
   arrowDown: (props) => <ArrowDown fill='#191660' {...props} />,
-  profileIcon: (props) => <ProfileIcon fill='#81D8D0' {...props} />,
-  mallIcon: (props) => <MallIcon fill='#81D8D0' {...props} />,
-  deleteIcon: (props) => <DeleteIcon stroke='#81D8D0' {...props} />,
+  profileIcon: (props) => <ProfileIcon fill='#62C0B3' {...props} />,
+  mallIcon: (props) => <MallIcon fill='#62C0B3' {...props} />,
+  deleteIcon: (props) => <DeleteIcon stroke='#62C0B3' {...props} />,
   merchantsIconBottom: (props) => (
-    <MerchantsIcon fill='#81D8D0' colors={['#81D8D0', '#81D8D0']} start={['50%', '0%']} end={['50%', '100%']} {...props} />
+    <MerchantsIcon fill='#62C0B3' colors={['#62C0B3', '#62C0B3']} start={['50%', '0%']} end={['50%', '100%']} {...props} />
   ),
 
   // Other colors
   shadowColor: '#000',
   shadowOpacity: 0.4,
-  bgInfo: '#81D8D0',
+  bgInfo: '#62C0B3',
   labelColor: 'rgba(25,22,96,0.6)',
   keypadTextColor: '#092058',
   membershipLabel: 'rgba(25,22,96,1)',
@@ -550,7 +550,7 @@ export default {
   buttonTinyHeight: 20,
   buttonMargin: 10,
   buttonSmallMargin: 5,
-  buttonToggleOnColor: '#81D8D0',
+  buttonToggleOnColor: '#62C0B3',
   buttonToggleOffColor: '#7D90AA',
 
   // Others

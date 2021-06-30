@@ -79,18 +79,15 @@ class MerchantDetailScreen extends React.Component {
   }
 
   _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION)
+    const { status } = await Location.requestForegroundPermissionsAsync()
     if (status !== 'granted') {
-      // Request permissions
-      const { status, permissions } = await Permissions.askAsync(Permissions.LOCATION)
-      if (status === 'granted') {
-      } else {
-        return
-      }
+      return
     }
 
-    const location = await Location.getCurrentPositionAsync({})
-    this.setState({ currentLocation: location.coords })
+    try {
+      const location = await Location.getCurrentPositionAsync({})
+      this.setState({ currentLocation: location.coords })
+    } catch (error) {}
   }
 
   onSelectionChanged = (item, index) => {

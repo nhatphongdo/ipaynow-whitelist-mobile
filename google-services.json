@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "328322712910",
+    "project_id": "ripple-1b7cc",
+    "storage_bucket": "ripple-1b7cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328322712910:android:bba75f268e186df0b6ca1f",
+        "android_client_info": {
+          "package_name": "com.ipaynow.reward.ripple"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "328322712910-mmvqrc3pmcrvi2gq192m9hb14hs3jjuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD59y2oVgqMeLe_RKdUTVDRS4O1_vGO6Zo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "328322712910-mmvqrc3pmcrvi2gq192m9hb14hs3jjuv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

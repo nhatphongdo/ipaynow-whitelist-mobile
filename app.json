@@ -1,13 +1,10 @@
 {
   "expo": {
-    "name": "test.io",
-    "slug": "test-reward",
+    "name": "Ripple Wallet",
+    "slug": "ripple-reward-wallet",
+    "owner": "with-danny",
     "privacy": "unlisted",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,15 +16,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "packagerOpts": {
       "config": "metro.config.js"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.test.reward",
+      "bundleIdentifier": "com.ipaynow.reward.ripple",
       "icon": "./assets/icon.ios.png",
       "buildNumber": "2",
       "infoPlist": {
@@ -36,27 +31,23 @@
         "NSCameraUsageDescription": "We use camera to capture QR code.",
         "NSPhotoLibraryUsageDescription": "We use photo library to choose your images.",
         "NSFaceIDUsageDescription": "We use FaceID to authenticate the application and transactions.",
-        "LSApplicationQueriesSchemes": [
-          "comgooglemaps",
-          "citymapper",
-          "uber",
-          "lyft",
-          "waze"
-        ]
+        "LSApplicationQueriesSchemes": ["comgooglemaps", "citymapper", "uber", "lyft", "waze"]
       },
       "config": {
         "googleMapsApiKey": "AIzaSyBXzqDhJBMbGaZAX5mzabOH13PumgSc2bk"
       }
     },
     "android": {
-      "package": "com.test.reward",
+      "package": "com.ipaynow.reward.ripple",
       "versionCode": 2,
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.test.reward",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.ipaynow.reward.ripple",
+      "googleServicesFile": "./google-services.json",
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyBXzqDhJBMbGaZAX5mzabOH13PumgSc2bk"
         }
       }
-    }
+    },
+    "description": ""
   }
 }

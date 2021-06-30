@@ -272,11 +272,11 @@ class DepositScreen extends React.Component {
     return (
       <Screen
         title={translate('DEPOSIT')}
-        right={
-          <Button onPress={this.onHelp}>
-            <Help height={ThemeService.getThemeStyle().variables.headerHeight - 10} />
-          </Button>
-        }
+        // right={
+        //   <Button onPress={this.onHelp}>
+        //     <Help height={ThemeService.getThemeStyle().variables.headerHeight - 10} />
+        //   </Button>
+        // }
       >
         <Container style={styles.container}>
           <Content style={styles.container} contentContainerStyle={styles.contentContainer}>

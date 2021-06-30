@@ -35,7 +35,7 @@ class MerchantsScreen extends React.Component {
     merchants: [null, null, null, null, null],
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this._bootstrapAsync()
   }
 
@@ -49,37 +49,34 @@ class MerchantsScreen extends React.Component {
   }
 
   _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION_FOREGROUND)
-    if (status !== 'granted') {
-      // Request permissions
-      const { status, permissions } = await Permissions.askAsync(Permissions.LOCATION_FOREGROUND)
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync()
       if (status === 'granted') {
-      } else {
-        const countryData = (await getAllCountries(FlagType.EMOJI, AVAILABLE_LANGUAGES[this.props.settings.language].countryPicker))
-          .filter((c) => c.cca2 === 'US')
-          .pop()
-        this.setState(
-          {
-            cca2: 'US',
-            country: countryData.name,
-          },
-          this.loadMerchants
-        )
-        return
+        const location = await Location.getCurrentPositionAsync()
+        console.log(location)
+        const address = await Location.reverseGeocodeAsync(location.coords)
+        if (address.length >= 1) {
+          this.setState(
+            {
+              cca2: address[0].isoCountryCode,
+              country: address[0].country,
+            },
+            this.loadMerchants
+          )
+          return
+        }
       }
-    }
-
-    const location = await Location.getCurrentPositionAsync({})
-    const address = await Location.reverseGeocodeAsync(location.coords)
-    if (address.length >= 1) {
-      this.setState(
-        {
-          cca2: address[0].isoCountryCode,
-          country: address[0].country,
-        },
-        this.loadMerchants
-      )
-    }
+    } catch (error) {}
+    const countryData = (await getAllCountries(FlagType.EMOJI, AVAILABLE_LANGUAGES[this.props.settings.language].countryPicker))
+      .filter((c) => c.cca2 === 'US')
+      .pop()
+    this.setState(
+      {
+        cca2: 'US',
+        country: countryData.name,
+      },
+      this.loadMerchants
+    )
   }
 
   _keyExtractor = (item, index) => index.toString()

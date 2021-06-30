@@ -753,7 +753,7 @@ class SendScreen extends React.Component {
               <Input multiline stretch alignCenter spaceLeft spaceRight editable={false} value={this.state.contactWalletAddress} />
               <Button spaceTop spaceBottom thirdary onPress={this.onComplete} disabled={this.state.saving}>
                 {!this.state.saving && <StyledText>{translate('Complete')}</StyledText>}
-                {this.state.saving && <Spinner color='#81D8D0' />}
+                {this.state.saving && <Spinner color='#62C0B3' />}
               </Button>
             </View>
           )}

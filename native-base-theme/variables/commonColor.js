@@ -128,7 +128,7 @@ export default {
   checkboxTickColor: '#fff',
 
   // Color
-  brandPrimary: platform === PLATFORM.IOS ? '#81D8D0' : '#3F51B5',
+  brandPrimary: platform === PLATFORM.IOS ? '#62C0B3' : '#3F51B5',
   brandInfo: '#62B1F6',
   brandSuccess: '#5cb85c',
   brandDanger: '#d9534f',
@@ -228,7 +228,7 @@ export default {
   listItemPadding: platform === PLATFORM.IOS ? 10 : 12,
   listNoteColor: '#808080',
   listNoteSize: 13,
-  listItemSelected: platform === PLATFORM.IOS ? '#81D8D0' : '#3F51B5',
+  listItemSelected: platform === PLATFORM.IOS ? '#62C0B3' : '#3F51B5',
 
   // Progress Bar
   defaultProgressColor: '#E4202D',

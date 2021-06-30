@@ -383,12 +383,12 @@
   "Edit": "Sửa",
   "Select wallet": "Chọn ví",
   "Copyright": "Bản quyền",
-  "A decentralized loyalty wallet": "Một thị trường halal phi tập trung với phần thưởng",
+  "A decentralized loyalty wallet": "Một ví blockchain phi tập trung với điểm thưởng",
   "There are {0} {1} consumed by participants": "Giải thưởng: {0} {1}",
   "CANCEL MERCHANT": "HUỶ ĐĂNG KÝ NGƯỜI BÁN HÀNG",
   "INFO": "THÔNG TIN",
   "Withdraw": "Rút lại",
   "Please wait We are sending your HDN back": "Vui lòng chờ. Chúng tôi đang gởi lại USDT vào ví của bạn.",
   "Exchange Sell Withdraw": "Rút lại bởi người bán",
-  "Total USDT staked is: {0}": "Tổng cộng USDT được góp: <strong>{0}</strong>"
+  "Total USDT staked is: {0}": "Tổng cộng Điểm được góp: <strong>{0}</strong>"
 }

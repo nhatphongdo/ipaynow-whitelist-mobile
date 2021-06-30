@@ -85,7 +85,7 @@ class ProfileScreen extends React.Component {
       hardwareAuthenticationTypes: [],
       hardwareAuthenticationEnabled: false,
 
-      countryPickerVisible: false
+      countryPickerVisible: false,
     }
   }
 
@@ -134,47 +134,44 @@ class ProfileScreen extends React.Component {
       }
     }
 
-    let { status } = await Permissions.askAsync(Permissions.LOCATION_FOREGROUND)
+    const { status } = await Location.requestForegroundPermissionsAsync()
     if (status !== 'granted') {
-      // Request permissions
-      const { status, permissions } = await Permissions.askAsync(Permissions.LOCATION_FOREGROUND)
-      if (status === 'granted') {
-      } else {
-        return
-      }
+      return
     }
 
-    const location = await Location.getCurrentPositionAsync({})
-    const address = await Location.reverseGeocodeAsync(location.coords)
-    if (address.length >= 1) {
-      if (this.state.vendorCountry) {
-        this.setState({
-          location: {
-            coords: location.coords,
-            address: address[0],
-          },
-          vendorPin: this.state.vendorPin.length === 0 ? [location.coords.latitude, location.coords.longitude] : this.state.vendorPin,
-        })
+    try {
+      const location = await Location.getCurrentPositionAsync({})
+      const address = await Location.reverseGeocodeAsync(location.coords)
+      if (address.length >= 1) {
+        if (this.state.vendorCountry) {
+          this.setState({
+            location: {
+              coords: location.coords,
+              address: address[0],
+            },
+            vendorPin: this.state.vendorPin.length === 0 ? [location.coords.latitude, location.coords.longitude] : this.state.vendorPin,
+          })
+        } else {
+          this.setState({
+            location: {
+              coords: location.coords,
+              address: address[0],
+            },
+            vendorCountry: address[0].isoCountryCode,
+            country: address[0].country,
+            vendorPin: this.state.vendorPin.length === 0 ? [location.coords.latitude, location.coords.longitude] : this.state.vendorPin,
+          })
+        }
       } else {
         this.setState({
           location: {
             coords: location.coords,
-            address: address[0],
+            address: null,
           },
-          vendorCountry: address[0].isoCountryCode,
-          country: address[0].country,
           vendorPin: this.state.vendorPin.length === 0 ? [location.coords.latitude, location.coords.longitude] : this.state.vendorPin,
         })
       }
-    } else {
-      this.setState({
-        location: {
-          coords: location.coords,
-          address: null,
-        },
-        vendorPin: this.state.vendorPin.length === 0 ? [location.coords.latitude, location.coords.longitude] : this.state.vendorPin,
-      })
-    }
+    } catch (error) {}
   }
 
   onEnableScroll = (value) => {
@@ -611,11 +608,11 @@ class ProfileScreen extends React.Component {
     return (
       <Screen
         title={translate('PROFILE')}
-        right={
-          <Button style={styles.contactUsButton} onPress={this.onContactUs}>
-            <ContactUs height={15} />
-          </Button>
-        }
+        // right={
+        //   <Button style={styles.contactUsButton} onPress={this.onContactUs}>
+        //     <ContactUs height={15} />
+        //   </Button>
+        // }
       >
         <Container style={styles.container}>
           <Content style={styles.container} contentContainerStyle={styles.contentContainer} scrollEnabled={this.state.enableScrollViewScroll}>
@@ -766,9 +763,14 @@ class ProfileScreen extends React.Component {
                   {this.state.isMerchant && (
                     <Item stackedLabel spaceTop transparent>
                       <Label>{translate('Country')}</Label>
-                      <Button smallSpaceTop shadow style={styles.countryPicker} onPress={() => {
-                        this.setState({ countryPickerVisible: true })
-                      }}>
+                      <Button
+                        smallSpaceTop
+                        shadow
+                        style={styles.countryPicker}
+                        onPress={() => {
+                          this.setState({ countryPickerVisible: true })
+                        }}
+                      >
                         <CountryPicker
                           onSelect={(value) => {
                             this.setState({ vendorCountry: value.cca2.toLowerCase(), country: value.name })
@@ -905,7 +907,7 @@ class ProfileScreen extends React.Component {
                   {this.state.isMerchant && (
                     <Button spaceTop thirdary flexFull onPress={this.onMerchantCancel} disabled={this.state.merchantSaving}>
                       {!this.state.merchantSaving && <StyledText>{translate('CANCEL MERCHANT')}</StyledText>}
-                      {this.state.merchantSaving && <Spinner color='#81D8D0' />}
+                      {this.state.merchantSaving && <Spinner color='#62C0B3' />}
                     </Button>
                   )}
                 </AnimatableView>

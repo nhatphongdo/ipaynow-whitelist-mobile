@@ -383,12 +383,12 @@
   "Edit": "Edit",
   "Select wallet": "Select wallet",
   "Copyright": "Copyright",
-  "A decentralized loyalty wallet": "A decentralized halal marketplace with rewards",
+  "A decentralized loyalty wallet": "A decentralized blockchain wallet with reward points",
   "There are {0} {1} consumed by participants": "Draw Prize: {0} {1}",
   "CANCEL MERCHANT": "CANCEL MERCHANT",
   "INFO": "INFO",
   "Withdraw": "Withdraw",
   "Please wait We are sending your HDN back": "Please wait. We are sending your USDT back.",
   "Exchange Sell Withdraw": "Withdrawn by seller",
-  "Total USDT staked is: {0}": "Total USDT staked is: <strong>{0}</strong>"
+  "Total USDT staked is: {0}": "Total Points staked: <strong>{0}</strong>"
 }

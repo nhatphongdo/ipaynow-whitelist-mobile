@@ -451,7 +451,7 @@ class StoreScreen extends React.Component {
               </StyledText>
               <Button spaceTop spaceBottom thirdary onPress={this.onComplete} disabled={this.state.completing}>
                 {!this.state.completing && <StyledText>{translate('Close')}</StyledText>}
-                {this.state.completing && <Spinner color='#81D8D0' />}
+                {this.state.completing && <Spinner color='#62C0B3' />}
               </Button>
             </View>
           )}
