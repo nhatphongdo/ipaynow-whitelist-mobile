@@ -553,23 +553,58 @@ class SendScreen extends React.Component {
               </View>
               <View row spaceTop center>
                 <Label>{translate('Wallet')}</Label>
-                <Picker
-                  shadow
-                  largeSpaceLeft
-                  mode='dialog'
-                  iosHeader={translate('Select wallet')}
-                  iosIcon={<DropdownIcon />}
-                  textStyle={{ textAlign: 'left' }}
-                  headerStyle={ThemeService.getThemeStyle().pickerHeaderStyle}
-                  headerTitleStyle={ThemeService.getThemeStyle().pickerHeaderTitleStyle}
-                  itemStyle={ThemeService.getThemeStyle().pickerItemStyle}
-                  selectedValue={this.state.wallet}
-                  onValueChange={this.onWalletChange.bind(this)}
-                >
-                  {[USDT, ETH].map((item, index) => (
-                    <Picker.Item key={index} label={item} value={item} />
-                  ))}
-                </Picker>
+                {Platform.OS === 'android' && (
+                  <View
+                    largeSpaceLeft
+                    style={{
+                      borderRadius: ThemeService.getThemeStyle().variables.buttonBorderRadius,
+                      backgroundColor: {
+                        'colorful-light': '#191660',
+                        'colorful-dark': '#d5a3ff',
+                        'simple-light': '#ffffff',
+                        'simple-dark': '#15bdd8',
+                      }['simple-light'],
+                      flexDirection: 'row',
+                      elevation: 6,
+                      width: 120,
+                      minHeight: ThemeService.getThemeStyle().variables.buttonHeight,
+                    }}
+                  >
+                    <Picker
+                      mode='dialog'
+                      style={{
+                        flex: 1,
+                        marginHorizontal: ThemeService.getThemeStyle().variables.buttonHorizontalPadding,
+                      }}
+                      selectedValue={this.state.wallet}
+                      onValueChange={this.onWalletChange.bind(this)}
+                    >
+                      {[USDT, ETH].map((item, index) => (
+                        <Picker.Item key={index} label={item} value={item} />
+                      ))}
+                    </Picker>
+                  </View>
+                )}
+                {Platform.OS === 'ios' && (
+                  <Picker
+                    shadow
+                    largeSpaceLeft
+                    mode='dialog'
+                    style={{ width: 120 }}
+                    iosHeader={translate('Select wallet')}
+                    iosIcon={<DropdownIcon />}
+                    textStyle={{ textAlign: 'left' }}
+                    headerStyle={ThemeService.getThemeStyle().pickerHeaderStyle}
+                    headerTitleStyle={ThemeService.getThemeStyle().pickerHeaderTitleStyle}
+                    itemStyle={ThemeService.getThemeStyle().pickerItemStyle}
+                    selectedValue={this.state.wallet}
+                    onValueChange={this.onWalletChange.bind(this)}
+                  >
+                    {[USDT, ETH].map((item, index) => (
+                      <Picker.Item key={index} label={item} value={item} />
+                    ))}
+                  </Picker>
+                )}
               </View>
               <Item stackedLabel underline spaceTop transparent>
                 <Label>{`${translate('Amount')} (${this.state.currency})`}</Label>

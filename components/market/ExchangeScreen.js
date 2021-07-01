@@ -421,7 +421,6 @@ class ExchangeScreen extends React.Component {
 
     // Get transaction
     const receipt = await this.props.getTransactionReceipt(this.state.transaction.hash)
-    console.log(receipt)
 
     if (receipt.status === 1) {
       // Stop

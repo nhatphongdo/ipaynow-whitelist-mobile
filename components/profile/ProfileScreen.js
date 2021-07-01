@@ -849,24 +849,58 @@ class ProfileScreen extends React.Component {
                   {this.state.isMerchant && (
                     <Item stackedLabel spaceTop transparent>
                       <Label>{translate('Category')}</Label>
-                      <Picker
-                        smallSpaceTop
-                        shadow
-                        flexFull
-                        mode='dialog'
-                        iosHeader={translate('Select category')}
-                        iosIcon={<DropdownIcon />}
-                        textStyle={{ textAlign: 'left' }}
-                        headerStyle={ThemeService.getThemeStyle().pickerHeaderStyle}
-                        headerTitleStyle={ThemeService.getThemeStyle().pickerHeaderTitleStyle}
-                        itemStyle={ThemeService.getThemeStyle().pickerItemStyle}
-                        selectedValue={this.state.vendorCategory}
-                        onValueChange={this.onCategoryChange.bind(this)}
-                      >
-                        {this.state.categories.map((item, index) => (
-                          <Picker.Item key={index} label={item[this.props.settings.language.toLowerCase()]} value={item.name} />
-                        ))}
-                      </Picker>
+                      {Platform.OS === 'android' && (
+                        <View
+                          smallSpaceTop
+                          style={{
+                            borderRadius: ThemeService.getThemeStyle().variables.buttonBorderRadius,
+                            backgroundColor: {
+                              'colorful-light': '#191660',
+                              'colorful-dark': '#d5a3ff',
+                              'simple-light': '#ffffff',
+                              'simple-dark': '#15bdd8',
+                            }['simple-light'],
+                            flex: 1,
+                            flexDirection: 'row',
+                            elevation: 6,
+                            minHeight: ThemeService.getThemeStyle().variables.buttonHeight,
+                          }}
+                        >
+                          <Picker
+                            mode='dialog'
+                            style={{
+                              flex: 1,
+                              marginHorizontal: ThemeService.getThemeStyle().variables.buttonHorizontalPadding,
+                            }}
+                            selectedValue={this.state.vendorCategory}
+                            onValueChange={this.onCategoryChange.bind(this)}
+                          >
+                            {this.state.categories.map((item, index) => (
+                              <Picker.Item key={index} label={item[this.props.settings.language.toLowerCase()]} value={item.name} />
+                            ))}
+                          </Picker>
+                        </View>
+                      )}
+                      {Platform.OS === 'ios' && (
+                        <Picker
+                          smallSpaceTop
+                          shadow
+                          flexFull
+                          mode='dialog'
+                          iosHeader={translate('Select category')}
+                          iosIcon={<DropdownIcon />}
+                          textStyle={{ textAlign: 'left' }}
+                          headerStyle={ThemeService.getThemeStyle().pickerHeaderStyle}
+                          headerTitleStyle={ThemeService.getThemeStyle().pickerHeaderTitleStyle}
+                          itemStyle={ThemeService.getThemeStyle().pickerItemStyle}
+                          selectedValue={this.state.vendorCategory}
+                          onValueChange={this.onCategoryChange.bind(this)}
+                        >
+                          {this.state.categories.map((item, index) => (
+                            <Picker.Item key={index} label={item[this.props.settings.language.toLowerCase()]} value={item.name} />
+                          ))}
+                        </Picker>
+                      )}
                     </Item>
                   )}
                   {this.state.isMerchant && (
@@ -964,45 +998,113 @@ class ProfileScreen extends React.Component {
                   </Button>
                   <Item stackedLabel spaceTop transparent>
                     <Label>{translate('Language')}</Label>
-                    <Picker
-                      smallSpaceTop
-                      shadow
-                      flexFull
-                      mode='dialog'
-                      iosHeader={translate('Select language')}
-                      iosIcon={<DropdownIcon />}
-                      textStyle={{ textAlign: 'left' }}
-                      headerStyle={ThemeService.getThemeStyle().pickerHeaderStyle}
-                      headerTitleStyle={ThemeService.getThemeStyle().pickerHeaderTitleStyle}
-                      itemStyle={ThemeService.getThemeStyle().pickerItemStyle}
-                      selectedValue={this.props.settings.language}
-                      onValueChange={this.onLanguageChange.bind(this)}
-                    >
-                      {languages.map((item, index) => (
-                        <Picker.Item key={index} label={translate(AVAILABLE_LANGUAGES[item].name)} value={item} />
-                      ))}
-                    </Picker>
+                    {Platform.OS === 'android' && (
+                      <View
+                        smallSpaceTop
+                        style={{
+                          borderRadius: ThemeService.getThemeStyle().variables.buttonBorderRadius,
+                          backgroundColor: {
+                            'colorful-light': '#191660',
+                            'colorful-dark': '#d5a3ff',
+                            'simple-light': '#ffffff',
+                            'simple-dark': '#15bdd8',
+                          }['simple-light'],
+                          flex: 1,
+                          flexDirection: 'row',
+                          elevation: 6,
+                          minHeight: ThemeService.getThemeStyle().variables.buttonHeight,
+                        }}
+                      >
+                        <Picker
+                          mode='dialog'
+                          style={{
+                            flex: 1,
+                            marginHorizontal: ThemeService.getThemeStyle().variables.buttonHorizontalPadding,
+                          }}
+                          selectedValue={this.props.settings.language}
+                          onValueChange={this.onLanguageChange.bind(this)}
+                        >
+                          {languages.map((item, index) => (
+                            <Picker.Item key={index} label={translate(AVAILABLE_LANGUAGES[item].name)} value={item} />
+                          ))}
+                        </Picker>
+                      </View>
+                    )}
+                    {Platform.OS === 'ios' && (
+                      <Picker
+                        smallSpaceTop
+                        shadow
+                        flexFull
+                        mode='dialog'
+                        iosHeader={translate('Select language')}
+                        iosIcon={<DropdownIcon />}
+                        textStyle={{ textAlign: 'left' }}
+                        headerStyle={ThemeService.getThemeStyle().pickerHeaderStyle}
+                        headerTitleStyle={ThemeService.getThemeStyle().pickerHeaderTitleStyle}
+                        itemStyle={ThemeService.getThemeStyle().pickerItemStyle}
+                        selectedValue={this.props.settings.language}
+                        onValueChange={this.onLanguageChange.bind(this)}
+                      >
+                        {languages.map((item, index) => (
+                          <Picker.Item key={index} label={translate(AVAILABLE_LANGUAGES[item].name)} value={item} />
+                        ))}
+                      </Picker>
+                    )}
                   </Item>
                   <Item stackedLabel spaceTop transparent>
                     <Label>{translate('Currency')}</Label>
-                    <Picker
-                      smallSpaceTop
-                      shadow
-                      flexFull
-                      mode='dialog'
-                      iosHeader={translate('Select preferred currency')}
-                      iosIcon={<DropdownIcon />}
-                      textStyle={{ textAlign: 'left' }}
-                      headerStyle={ThemeService.getThemeStyle().pickerHeaderStyle}
-                      headerTitleStyle={ThemeService.getThemeStyle().pickerHeaderTitleStyle}
-                      itemStyle={ThemeService.getThemeStyle().pickerItemStyle}
-                      selectedValue={this.props.settings.currency}
-                      onValueChange={this.onCurrencyChange.bind(this)}
-                    >
-                      {currencies.map((item, index) => (
-                        <Picker.Item key={index} label={translate(SUPPORTED_CURRENCIES[item].name)} value={item} />
-                      ))}
-                    </Picker>
+                    {Platform.OS === 'android' && (
+                      <View
+                        smallSpaceTop
+                        style={{
+                          borderRadius: ThemeService.getThemeStyle().variables.buttonBorderRadius,
+                          backgroundColor: {
+                            'colorful-light': '#191660',
+                            'colorful-dark': '#d5a3ff',
+                            'simple-light': '#ffffff',
+                            'simple-dark': '#15bdd8',
+                          }['simple-light'],
+                          flex: 1,
+                          flexDirection: 'row',
+                          elevation: 6,
+                          minHeight: ThemeService.getThemeStyle().variables.buttonHeight,
+                        }}
+                      >
+                        <Picker
+                          mode='dialog'
+                          style={{
+                            flex: 1,
+                            marginHorizontal: ThemeService.getThemeStyle().variables.buttonHorizontalPadding,
+                          }}
+                          selectedValue={this.props.settings.currency}
+                          onValueChange={this.onCurrencyChange.bind(this)}
+                        >
+                          {currencies.map((item, index) => (
+                            <Picker.Item key={index} label={translate(SUPPORTED_CURRENCIES[item].name)} value={item} />
+                          ))}
+                        </Picker>
+                      </View>
+                    )}
+                    {Platform.OS === 'ios' && (
+                      <Picker
+                        smallSpaceTop
+                        shadow
+                        flexFull
+                        mode='dialog'
+                        iosHeader={translate('Select preferred currency')}
+                        iosIcon={<DropdownIcon />}
+                        textStyle={{ textAlign: 'left' }}
+                        headerStyle={ThemeService.getThemeStyle().pickerHeaderStyle}
+                        headerTitleStyle={ThemeService.getThemeStyle().pickerHeaderTitleStyle}
+                        itemStyle={ThemeService.getThemeStyle().pickerItemStyle}
+                        selectedValue={this.props.settings.currency}
+                        onValueChange={this.onCurrencyChange.bind(this)}
+                      >
+                        {currencies.map((item, index) => (
+                          <Picker.Item key={index} label={translate(SUPPORTED_CURRENCIES[item].name)} value={item} />
+                        ))}
+                      </Picker>
+                    )}
                   </Item>
                   {false && (
                     <Item stackedLabel spaceTop transparent>

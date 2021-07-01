@@ -53,7 +53,6 @@ class MerchantsScreen extends React.Component {
       const { status } = await Location.requestForegroundPermissionsAsync()
       if (status === 'granted') {
         const location = await Location.getCurrentPositionAsync()
-        console.log(location)
         const address = await Location.reverseGeocodeAsync(location.coords)
         if (address.length >= 1) {
           this.setState(
@@ -114,7 +113,7 @@ class MerchantsScreen extends React.Component {
     const styles = this.props.style
     const MerchantsIcon = ThemeService.getThemeStyle().variables.merchantsIcon
 
-    const categories = [translate('ALL')].concat(this.state.categories.map((item) => item[this.props.settings.language].toUpperCase()))
+    const categories = [translate('ALL')].concat(this.state.categories.map((item) => (item[this.props.settings.language] || item.name).toUpperCase()))
 
     return (
       <Screen title={translate('MERCHANTS')}>
