@@ -241,6 +241,9 @@ export function formatCurrency(number, culture = 'en-US', currencyCode = '', inc
   } else if (['eth', 'hdn'].indexOf(currencyCode.toLowerCase()) >= 0) {
     // Crypto uses 5 digits decimal
     money = formatNumber(number, omitFractionsIfNotExist ? '0,0.[00000]' : '0,0.00000')
+  } else if (['reward'].indexOf(currencyCode.toLowerCase()) >= 0) {
+    // Crypto uses 3 digits decimal
+    money = formatNumber(number, omitFractionsIfNotExist ? '0,0.[000]' : '0,0.000')
   } else {
     // Default, 2 digits decimal
     money = formatNumber(number, omitFractionsIfNotExist ? '0,0.[00]' : '0,0.00')
@@ -373,7 +376,7 @@ export const sign = (ourPrivateKey, partnerPublicKey, message) =>
     var signature = crypt.signature(ourPrivateKey, message)
 
     // Encrypt message with RECEIVERS public RSA key and attach the signature
-    encrypted = crypt.encrypt(partnerPublicKey, message, signature)
+    const encrypted = crypt.encrypt(partnerPublicKey, message, signature)
     resolve(encrypted)
   })
 
