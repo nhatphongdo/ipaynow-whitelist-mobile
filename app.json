@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Ripple Wallet",
-    "slug": "ripple-reward-wallet",
+    "name": "iSWOP",
+    "slug": "iSWOP-wallet",
     "owner": "with-danny",
     "privacy": "unlisted",
     "platforms": ["ios", "android", "web"],
