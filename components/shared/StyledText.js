@@ -16,7 +16,7 @@ const BOLD = [
 const ITALIC = ['italic', 'i']
 const PATTERN = /<((b|i|bold|italic|strong|light|thin|black|color|size)(\b[^>]*))>(.*?)<\/\2>/i
 
-findFontName = (bold, italic, style) => {
+const findFontName = (bold, italic, style) => {
   let name = 'exo'
   if (bold) {
     bold = bold.toLowerCase()
@@ -50,7 +50,7 @@ class StyledText extends React.Component {
   }
 
   onTextLayout = (event) => {
-    if (Platform.OS === 'ios' || this.props.adjustsFontSizeToFit !== true || !this.props.numberOfLines === 0) {
+    if (Platform.OS === 'ios' || this.props.adjustsFontSizeToFit !== true || this.props.numberOfLines === 0) {
       return
     }
 

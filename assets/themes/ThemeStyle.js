@@ -1315,13 +1315,13 @@ export default (themeName) => {
         // color: { "colorful-light": "#191660", "colorful-dark": "#fff", "simple-light": "#191660", "simple-dark": "#191660" }[themeName]
       },
       interest: {
-        fontFamily: variables.fontFamily,
+        fontFamily: variables.fontFamilyMedium,
         fontSize: variables.fontSizeBase * 0.8,
         color: variables.brandPrimary,
         // color: { "colorful-light": "#ffaeb5", "colorful-dark": "#d6404c", "simple-light": "#ffaeb5", "simple-dark": "#ffaeb5" }[themeName]
       },
       selectedInterest: {
-        fontFamily: variables.fontFamilyMedium,
+        fontFamily: variables.fontFamilyBold,
         color: variables.inverseTextColor,
         // color: { "colorful-light": "#ba1c2a", "colorful-dark": "#f9d4d7", "simple-light": "#ba1c2a", "simple-dark": "#ba1c2a" }[themeName]
       },
@@ -1366,13 +1366,13 @@ export default (themeName) => {
         // color: { "colorful-light": "#191660", "colorful-dark": "#fff", "simple-light": "#191660", "simple-dark": "#191660" }[themeName]
       },
       interest: {
-        fontFamily: variables.fontFamily,
+        fontFamily: variables.fontFamilyMedium,
         fontSize: variables.fontSizeBase * 0.8,
         color: variables.brandPrimary,
         // color: { "colorful-light": "#ffaeb5", "colorful-dark": "#d6404c", "simple-light": "#ffaeb5", "simple-dark": "#ffaeb5" }[themeName]
       },
       selectedInterest: {
-        fontFamily: variables.fontFamilyMedium,
+        fontFamily: variables.fontFamilyBold,
         color: variables.inverseTextColor,
         // color: { "colorful-light": "#ba1c2a", "colorful-dark": "#f9d4d7", "simple-light": "#ba1c2a", "simple-dark": "#ba1c2a" }[themeName]
       },
