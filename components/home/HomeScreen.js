@@ -7,6 +7,7 @@ import moment from 'moment'
 import * as Notifications from 'expo-notifications'
 import * as Permissions from 'expo-permissions'
 import * as WebBrowser from 'expo-web-browser'
+import store from '../../stores'
 import ThemeService from '../../services/ThemeService'
 import { translate } from '../../constants/Languages'
 import Screen from '../shared/Screen'
@@ -76,6 +77,7 @@ class HomeScreen extends React.Component {
     }
 
     if (!Socket.isConnected()) {
+      Socket.setStore(store)
       await Socket.connect()
     }
 
