@@ -5,7 +5,7 @@
     "owner": "with-danny",
     "privacy": "unlisted",
     "platforms": ["ios", "android", "web"],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -24,7 +24,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.ipaynow.reward.ripple",
       "icon": "./assets/icon.ios.png",
-      "buildNumber": "1.0.1",
+      "buildNumber": "1.0.2",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "We use your location to detect the currency, language and place for shopping.",
         "NSLocationAlwaysUsageDescription": "We use your location to detect the currency, language and place for shopping.",
@@ -39,7 +39,7 @@
     },
     "android": {
       "package": "com.ipaynow.reward.ripple",
-      "versionCode": 2,
+      "versionCode": 3,
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.ipaynow.reward.ripple",
       "googleServicesFile": "./google-services.json",
       "config": {

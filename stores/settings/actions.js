@@ -88,3 +88,20 @@ export const loadSettings = () => {
     }
   };
 };
+
+export const getSetting = () => {
+  return async (dispatch, getState) => {
+    try {
+      const state = await Storage.getItem(STORAGE_SETTINGS, getState().settings)
+      await dispatch(setSetting(state))
+      return state
+    } catch (err) {
+      if (err.response) {
+        console.log(err.response.data)
+      } else {
+        console.log(err)
+      }
+      return getState().settings
+    }
+  }
+}

@@ -19,7 +19,7 @@ import { initPinCode } from './stores/pincode/actions'
 import { getCryptoWallet } from './stores/wallet/actions'
 import { initDatabase, clear } from './stores/storage/actions'
 import { updateRates } from './stores/rates/actions'
-import { loadSettings } from './stores/settings/actions'
+import { loadSettings, getSetting } from './stores/settings/actions'
 import { register, login, saveAccount, loadAccount } from './stores/account/actions'
 import { generateKeyPair } from './common/helper'
 import { translate } from './constants/Languages'
@@ -269,7 +269,11 @@ class App extends React.Component {
     this.setState({ progress: 5 })
 
     // Reset data
-    // await store.dispatch(clear())
+    const settings = await store.dispatch(getSetting())
+    if (settings.firstTime) {
+      // Clear
+      await store.dispatch(clear())
+    }
 
     // Load data
     await store.dispatch(loadSettings())

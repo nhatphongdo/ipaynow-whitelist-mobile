@@ -84,6 +84,7 @@ class RestoreWalletScreen extends React.Component {
     }
 
     this.props.setSetting({
+      firstTime: false,
       secretWordsConfirmed: true,
     })
 

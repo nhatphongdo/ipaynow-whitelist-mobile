@@ -5,6 +5,7 @@ import { CLEARED } from "../storage/constants";
 
 const INITIAL_STATE = {
   // Local
+  firstTime: true,
   language: "en",
   culture: AVAILABLE_LANGUAGES.en.culture,
   currency: "USD",

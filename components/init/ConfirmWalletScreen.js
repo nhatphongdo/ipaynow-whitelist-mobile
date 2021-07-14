@@ -130,6 +130,7 @@ class ConfirmWalletScreen extends React.Component {
       }
 
       this.props.setSetting({
+        firstTime: false,
         secretWordsConfirmed: confirmed === true ? true : false,
       })
 
